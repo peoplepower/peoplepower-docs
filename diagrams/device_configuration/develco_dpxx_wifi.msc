@@ -1,0 +1,78 @@
+# Device Configuration - Develco DPXX Wi-Fi
+# - Configuring Develco DPXX Wi-Fi
+# - Wi-Fi configuration is part of the Device Onboarding sequence, and may also be done from the device UI.  Apps provide the same UI in both instances.
+# - For list of all API request that take place when presenting this device UI, see 'device_ui/develco_dpxx'.
+
+msc {
+	hscale = "2";
+
+	user [label="User", textcolour="maroon", arctextcolour="maroon"],
+	app [label="App", textcolour="maroon", arctextcolour="maroon"],
+	server [label="PPC Server", textcolour="navy", arctextcolour="navy"],
+	device [label="Device", textcolour="orange", arctextcolour="orange"];
+	|||;
+	user note device [label="Develco DPXX Wi-Fi Device Configuration", textbgcolor="black", textcolor="white"];
+	|||;
+
+	# Restore session
+	user => app [label="Launch App"];
+	app note app [label="Session restored"];
+	app << app [label="Show Dashboard"];
+	|||;
+
+	# Open Devices List
+	user => app [label="Select 'Devices' tab"];
+	app => server [label="GET List of Devices:\n- locationId: $locationId\n- checkPersistent: true"];
+	app << server [label="Response:\n- devices: [Device]"];
+	app << app [label="Show Devices list"];
+	|||;
+
+	# Open Device UI
+	user => app [label="Select 'Smart Home Center'"];
+	app note app [label="See 'device_ui/develco_dpxx' for API references."];
+	app << app [label="Show Device UI"];
+	|||;
+
+	# Open Wi-Fi configuration
+	user => app [label="Select 'Wi-Fi"];
+	app note server [label="The app must notify the device to refresh nearby SSIDs.  We do this now once to give it a head start"];
+	app => server [label="PUT Send Commands:\n- locationId: $locationId\n- data: {'devices': [{'deviceId': $deviceId, 'commandType': 4, 'commandTimeout': 60, 'params': [{'name': 'wifiSsidValues', 'value': '1'}]}]}"];
+	server => device [label="Forward Command to refresh parameters"];
+	app << server [label="Response:\n- resultCode: 0\n- commands: [Command]"];
+	device >> device [label="Refresh parameters"];
+	server << device [label="Send new measurements"];
+	app << app [label="Show Wi-Fi configuration"];
+	|||;
+
+	# Display discovered SSIDs
+	app => server [label="GET Current Measurements:\n- deviceId: $deviceId\n- locationId: $locationId"];
+	app << server [label="Response:\n- measurements: [DeviceMeasurement]"];
+	app note server [label="Periodically refresh discovered SSIDs."];
+	app => server [label="PUT Send Commands:\n- locationId: $locationId\n- data: {'devices': [{'deviceId': $deviceId, 'commandType': 4, 'commandTimeout': 60, 'params': [{'name': 'wifiSsidValues', 'value': '1'}]}]}"];
+	server => device [label="Forward Command to refresh parameters"];
+	app << server [label="Response:\n- resultCode: 0\n- commands: [Command]"];
+	device >> device [label="Refresh parameters"];
+	server << device [label="Send new measurements"];
+	app << app [label="Show discovered SSIDs from parameter 'wifiSsidValues', and associate signal strength with 'wifiSignalValues'.\nIf the device has the 'wifiSsid' parameter set, show this value and mark as the currently enabled one.\nAdditionally, show a field for custom input to handle hidden a SSID."];
+	|||;
+
+	# Set new SSID
+	user => app [label="Select a displayed SSID"];
+	app << app [label="Show Wi-Fi password UI"];
+	user note app [label="Check device parameter wifiSecurityValues, if this SSID has a security value of 'none' then no password is required.  If anything else, require the user to input their password"];
+	user => app [label="Input SSID password"];
+	user => app [label="Select 'Done'"];
+	app << app [label="Show processing message, this can take a few minutes."];
+	app => server [label="PUT Send a Command:\n- locationId: $locationId\n- deviceId: $deviceId\n- data: {'commandType': 0, 'commandTimeout': 60, 'params': [\n{'name': 'wifiSsid', 'value': 'SSID'}, \n{'name': 'wifiPassword', 'value': 'Password'}, \n{'name': 'wifiSecurity', 'value': 'SSID Security'}]}"];
+	server => device [label="Forward Command to set Wi-Fi"];
+	app << server [label="Response:\n- resultCode: 0\n- commands: [Command]"];
+	device >> device [label="Set Wi-Fi"];
+	server << device [label="Send new measurements"];
+	app note device [label="Wait a little while for the configuration to take effect.  Might take a minute or two."];
+	app => server [label="GET Current Measurements:\n- deviceId: $deviceId\n- locationId: $locationId"];
+	app << server [label="Response:\n- measurements: [DeviceMeasurement]"];
+	app << app [label="Check validity of new setting.  Success means parameter 'wifiSsid' has the same value as the one set, and 'wifiConnected' has a value of 1 (true)."];
+	app << app [label="Success"];
+
+	user note device [label="Done", textbgcolor="black", textcolor="white"];
+}

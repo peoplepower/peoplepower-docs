@@ -1,0 +1,95 @@
+# Device Onboarding - Develco DPXX
+# - Connecting and registering a Develco DPXX
+# - Wi-Fi Configuration is part of our Device Onboarding logic.  See 'app_schema/wifi' and 'device_configuration/develco_dpxx_wifi'.
+
+msc {
+	hscale = "2";
+
+	user [label="User", textcolour="maroon", arctextcolour="maroon"],
+	app [label="App", textcolour="maroon", arctextcolour="maroon"],
+	server [label="PPC Server", textcolour="navy", arctextcolour="navy"],
+	device [label="Device", textcolour="orange", arctextcolour="orange"];
+	|||;
+	user note device [label="Develco DPXX Device Onboarding", textbgcolor="black", textcolor="white"];
+	|||;
+
+	# Restore session
+	user => app [label="Launch App"];
+	app note app [label="Session restored"];
+	app << app [label="Show Dashboard"];
+	|||;
+
+	# Open Add Devices menu
+	user => app [label="Select '+'"];
+	app << app [label="Show Add Items menu"];
+	|||;
+	user => app [label="Select 'Add Devices'"];
+	app => server [label="GET Device Models:\n- brand: $brand"];
+	app << server [label="Response:\n- categories: [Category]"];
+	app << app [label="Show Add Devices menu"];
+	|||;
+
+	# Select Device
+	user => app [label="Select 'Smart Home Center'"];
+	app => server [label="GET Stories:\n- brand: $brand\n- modelId: $modelId"];
+	app << server [label="Response:\n- stories: [Story]"];
+	|||;
+
+ 	# Show Connection Story
+	app << app [label="Show 'Connection' story:\n- storyType: 1"];
+	user => device [label="Connect device to power"];
+	device => device [label="Power on and connect to cellular provider"];
+	device => server [label="Connect to deviceio server"];
+	|||;
+
+	# Scan QR
+	user => app [label="Select 'Scan QR'"];
+	app << app [label="Open QR Scanner"];
+	|||;
+	user => app [label="Position screen over QR code on device"];
+	app => device [label="Scan QR code"];
+	|||;
+	app << app [label="Process QR code:\n- example: '[SN: 02000001000102AA ...]'"];
+	app note app [label="For this device, the SN is the Device ID"];
+	|||;
+
+	# Register device
+	app => server [label="POST Register Device:\n- deviceId: $deviceId\n- locationId: $locationId"];
+	app << server [label="Response:\n- deviceId: $deviceId\n- deviceTypeId: $deviceTypeId\n- host: $host\n- port: $port\n- useSsl: $useSsl"];
+	|||;
+	server => device [label="Associate location ID"];
+	server << device [label="Begin providing measurements"];
+	|||;
+	app => server [label="PUT Update a Device:\n- deviceId: #deviceId\n- locationId: $locationId\n- newDevice: true"];
+	app << server [label="Response:\n- resultCode: 0"];
+	|||;
+	app note server [label="Wait for new device. Loop every 10 seconds."];
+	app => server [label="GET devices:\n -locationId: $locationId"];
+	app << server [label="Response:\n -devices: [Device]"];
+	|||;
+	app << app [label="Check response for new device:\n- Device.newDevice == true\n- Device.connected == true"];
+	app note server [label="New device found"];
+	|||;
+
+ 	# Show Connection Success Story
+	app << app [label="Show 'Connection Success' story:\n- storyType: 2"];
+	app note app [label="Wi-Fi configuration may be done now that the device is online.  See 'app_schema/wifi'"];
+	user => app [label="Select 'Next'"];
+	|||;
+
+	# Show Device Onboarding Configuration Screens
+	app => app [label="Show 'Device Name' UI"];
+	user => app [label="Input device name, or leave as default"];
+	user => app [label="Select 'Next'"];
+	app => server [label="PUT Update a Device:\n- desc: $textfield.text"];
+	app << server [label="Response:\n- resultCode: 0"];
+	|||;
+
+	# Show Installation Help Story
+	app => app [label="Show 'Installation' story:\n- storyType: 4"];
+	user => app [label="Select 'Done'"];
+	app => app [label="Dismiss Device Onboarding UI"];
+	|||;
+
+	user note device [label="Done", textbgcolor="black", textcolor="white"];
+}

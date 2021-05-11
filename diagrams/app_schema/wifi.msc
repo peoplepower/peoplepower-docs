@@ -1,0 +1,25 @@
+# App Schema - Wi-Fi
+# - Wi-Fi App Schema
+# - The app may be opened directly to the Device Wi-Fi Configuration screen with a supported url schema.
+# - This App Schema is used in coordination with 'device_onboarding/develco_dpxx' and 'device_configuration/develco_dpxx_wifi'.
+# - This chart assumes the app is providing the url, but it may also be provided in an external application.
+# - If the user is not logged in, then prompt them to log in first, and then continue processing the url.
+
+msc {
+	hscale = "2";
+
+	user [label="User", textcolour="maroon", arctextcolour="maroon"],
+	app [label="App", textcolour="maroon", arctextcolour="maroon"];
+	|||;
+	user note app [label="Wi-Fi App Schema", textbgcolor="black", textcolor="white"];
+	|||;
+
+	# Restore session
+	user => app [label="Open Url:\n- url: $appschema://wifi?device_id=$deviceId&location_id=$locationId"];
+	app note app [label="Session restored"];
+	app << app [label="Show Wi-Fi Configuration"];
+	app note app [label="See 'device_configuration/develco_dpxx_wifi', section 'Open Wi-Fi configuration', for next steps"];
+	|||;
+
+	user note app [label="Done", textbgcolor="black", textcolor="white"];
+}

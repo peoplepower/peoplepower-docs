@@ -1,0 +1,47 @@
+# Device UI - Develco DPXX
+# - Develco DPXX Device UI
+# - While displaying the Device UI the app should call all refresh API every 10 seconds.
+
+msc {
+	hscale = "2";
+
+	user [label="User", textcolour="maroon", arctextcolour="maroon"],
+	app [label="App", textcolour="maroon", arctextcolour="maroon"],
+	server [label="PPC Server", textcolour="navy", arctextcolour="navy"],
+	device [label="Device", textcolour="orange", arctextcolour="orange"];
+	|||;
+	user note device [label="Develco DPXX Wi-Fi Device Configuration", textbgcolor="black", textcolor="white"];
+	|||;
+
+	# Restore session
+	user => app [label="Launch App"];
+	app note app [label="Session restored"];
+	app << app [label="Show Dashboard"];
+	|||;
+
+	# Open Devices List
+	user => app [label="Select 'Devices' tab"];
+	app => server [label="GET List of Devices:\n- locationId: $locationId\n- checkPersistent: true"];
+	app << server [label="Response:\n- devices: [Device]"];
+	app << app [label="Show Devices list"];
+	|||;
+
+	# Open Device UI
+	user => app [label="Select 'Smart Home Center'"];
+	app => server [label="GET List of Devices:\n- locationId: $locationId\n- checkPersistent: true"];
+	app << server [label="Response:\n- devices: [Device]"];
+	app => server [label="GET Current Measurements:\n- deviceId: $deviceId\n- locationId: $locationId"];
+	app << server [label="Response:\n- measurements: [DeviceMeasurement]"];
+	app => server [label="GET Device Properties:\n- deviceId: $deviceId\n- locationId: $locationId"];
+	app << server [label="Response:\n- properties: [DeviceProperty]"];
+	app note server [label="The Device Model declares a list of parameters that must be refreshed manually.  Each is included in a single command."];
+	app => server [label="PUT Send Commands:\n- locationId: $locationId\n- data: {'devices': [{'deviceId': $deviceId, 'commandType': 4, 'commandTimeout': 60, 'params': $DeviceModel.refreshParameters}]}"];
+	server => device [label="Forward Command to refresh parameters"];
+	app << server [label="Response:\n- resultCode: 0\n- commands: [Command]"];
+	device >> device [label="Refresh parameters"];
+	server << device [label="Send new measurements"];
+	app << app [label="Show Device UI"];
+	|||;
+
+	user note device [label="Done", textbgcolor="black", textcolor="white"];
+}

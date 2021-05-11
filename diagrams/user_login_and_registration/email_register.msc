@@ -1,0 +1,34 @@
+# User Login and Registration - Email Registration
+# - Registering a new user using an email
+
+msc {
+	hscale  = "2";
+
+	user [label="User", textcolour="maroon", arctextcolour="maroon"],
+	app [label="App", textcolour="maroon", arctextcolour="maroon"],
+	server [label="PPC Server", textcolour="navy", arctextcolour="navy"];
+	|||;
+	user note server [label="Email Registration", textbgcolor="black", textcolor="white"];
+	|||;
+	user => app [label="Launch App"];
+	app << app [label="Show Login/Register"];
+	|||;
+	user => app [label="Select Register"];
+	app << app [label="Show Register"];
+	|||;
+	user => app [label="Enter Email: $email"];
+	user => app [label="Enter Password: $password"];
+	user => app [label="Select Register"];
+	|||;
+	app => server [label="GET Operation Token:\n- type: 1"];
+	app << server [label="Response:\n- token: $token\n- tokenType: $tokenType\n- validFrom: $validFrom\n- expire: $expire"];
+	|||;
+	app >> app [label="Wait for operation token to be valid"];
+	|||;
+	app => server [label="POST user:\n- operationToken: $token\n- username: $email\n- email: $email\n- password: $password\n- appName: $appName\n- location: {'name': 'Home'}"];
+	app << server [label="Response:\n- userId: $userId\n- locationId: $locationId\n- key: $key\n- keyExpire: $keyExpire"];
+	|||;
+	app >> app [label="Show Dashboard"];
+	|||;
+	user note server [label="Done", textbgcolor="black", textcolor="white"];
+}

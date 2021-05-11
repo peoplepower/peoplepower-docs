@@ -1,0 +1,45 @@
+# User Login and Registration - Username Email Login
+# - Logging in an existing user with a username + password
+
+msc {
+	hscale  = "2";
+
+	user [label="User", textcolour="maroon", arctextcolour="maroon"],
+	app [label="App", textcolour="maroon", arctextcolour="maroon"],
+	server [label="PPC Server", textcolour="navy", arctextcolour="navy"];
+	|||;
+	user note server [label="Username Registration", textbgcolor="black", textcolor="white"];
+	|||;
+	user => app [label="Launch App"];
+	app << app [label="Show Splash"];
+	|||;
+	user => app [label="Select Get Started"];
+	app << app [label="Show Get Started"];
+	|||;
+	user => app [label="Enter Username: $username"];
+	user => app [label="Select Next"];
+	|||;
+	app => server [label="GET Operation Token:\n- type: 1"];
+	app << server [label="Response:\n- token: $token\n- tokenType: $tokenType\n- validFrom: $validFrom\n- expire: $expire"];
+	|||;
+	app >> app [label="Wait for operation token to be valid"];
+	|||;
+	app => server [label="POST user:\n- operationToken: $token\n- username: $username\n- appName: $appName"];
+	app << server [label="Response:\n- resultCode: 20"];
+	|||;
+	app >> app [label="Show Enter Passcode"];
+	|||;
+	user >> app [label="Select Use Password"];
+	|||;
+	app >> app [label="Show Enter Password"];
+	|||;
+	user => app [label="Input password"];
+	user => app [label="Select Next"];
+	|||;
+	app => server [label="GET Login by username:\n- username: $username\n- password: $password\n- expiry: -1\n- appName: $appName"];
+	app << server [label="Response:\n- key: $key\n- keyExpire: $keyExpire"];
+	|||;
+	app >> app [label="Show Dashboard"];
+	|||;
+	user note server [label="Done", textbgcolor="black", textcolor="white"];
+}

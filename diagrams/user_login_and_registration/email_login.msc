@@ -1,0 +1,29 @@
+# User Login and Registration - Email Login
+# - Logging in an existing user with an email
+
+msc {
+	hscale  = "2";
+
+	user [label="User", textcolour="maroon", arctextcolour="maroon"],
+	app [label="App", textcolour="maroon", arctextcolour="maroon"],
+	server [label="PPC Server", textcolour="navy", arctextcolour="navy"];
+	|||;
+	user note server [label="Email Login", textbgcolor="black", textcolor="white"];
+	|||;
+	user => app [label="Launch App"];
+	app << app [label="Show Login/Register"];
+	|||;
+	user => app [label="Select Sign In"];
+	app << app [label="Show Sign In"];
+	|||;
+	user => app [label="Enter Email: $email"];
+	user => app [label="Enter Password: $password"];
+	user => app [label="Select Sign In"];
+	|||;
+	app => server [label="GET Login by username:\n- username: $email\n- password: $password\n- expiry: -1\n- appName: $appName"];
+	app << server [label="Response:\n- key: $key\n- keyExpire: $keyExpire"];
+	|||;
+	app >> app [label="Show Dashboard"];
+	|||;
+	user note server [label="Done", textbgcolor="black", textcolor="white"];
+}
