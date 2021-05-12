@@ -8,7 +8,7 @@
 
 ## Classes
 
-* [Apps](apps/README.md)
+* [Apps](diagrams/apps/README.md)
 
 ## What's included
 
