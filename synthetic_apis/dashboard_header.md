@@ -70,6 +70,8 @@ Best practice is to show the question for the quantified feedback first with a t
 
 Data Stream Address : `update_dashboard_header`
 
+The dashboard header is typically managed internally by bots, but allows an external data stream message so multiple bots can influence the content that is shown on the dashboard.
+
 #### Content
 You can provide the content you see in the state variable below.
 * Populating the data stream message content will create or update the dashboard. The highest priority dashboard header content will be selected for display.
@@ -180,3 +182,7 @@ Anything marked "Internal Usage" is not meant to be used by the application UI's
         "percent": <0-100 weight>
     }
 ```
+
+## References
+* `com.ppc.BotProprietary/signals/dashboard.py`
+* `com.ppc.Microservices/intelligence/dashboard/location_dashboardheader_microservice.py`
