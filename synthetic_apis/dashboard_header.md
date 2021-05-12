@@ -5,7 +5,7 @@ The dashboard header presents at-a-glance information to the user, describing ho
 Under the hood inside the dashboard microservices, the dashboard header is directly tied to the "home health metrics" which help prioritize this home against other homes for human attention needed. These metrics contain a priority (category) and a number from 0-100% that identifies how "well" the home is doing. Lower numbers are bad, and like a weight, lower numbers will float up to the surface when prioritizing homes against each other in a specific category.
 
 
-## Properties
+### Properties
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 | name | String | App-generated unique identifying name for this object, to later update or delete it. |
@@ -20,7 +20,7 @@ Under the hood inside the dashboard microservices, the dashboard header is direc
 | resolution | JSON Object | See the Resolution Data Structure table |
 | feedback | JSON Object | See the Feedback Data Structure table |
 
-## Priority
+### Priority
 | Dashboard Priority | Definition         | Color Recommendation | Description |
 | ------------------ | ------------------ | -------------------- | ------------------
 | 0                  | Empty              | Light gray           | Generally ignore this location, this isn't a paying user and not where we should be spending our time. |
@@ -31,7 +31,7 @@ Under the hood inside the dashboard microservices, the dashboard header is direc
 | 5                  | Subjective Warning | Orange               | Something seems off with the behavioral patterns or trends of the occupants of this home, human attention is needed to see if it is really a problem. |
 | 6                  | Critical Alert     | Red                  | A critical alert is happening live in this home. Immediate attention needed. |
 
-## Resolution Data Structure
+### Resolution Data Structure
 If populated in the dashboard header, the `resolution` object allows the app to send user-selectable information back into the bot.
 
 | Property | Type | Description |
@@ -47,7 +47,7 @@ If populated in the dashboard header, the `resolution` object allows the app to 
 | {response_option}.icon_font | String | Icon font for the icon on the dashboard when the user selects this option. |
 | {response_option}.content | JSON Dictionary | When the user selects this option, merge this key/value dictionary content with the `resolution.content` content to form the content for a data stream message, to be delivered back to the location and its bots via data stream message to the `datastream_address` address. |
 
-## Feedback Data Structure
+### Feedback Data Structure
 Asking for user feedback is optional, but very useful to see how our bots and services are doing. The bots decide whether they want the mobile app to ask for feedback after the user selects some response option in the app. Note that if an alert is handled via SMS or some other mechanism, the bots may ask for feedback independently over SMS, and this has its own probability associated with it.
 
 If the `feedback` object exists in the dashboard header content, we only ask for feedback when the user selects a response option from the `resolution` object.
@@ -72,7 +72,7 @@ Data Stream Address : `update_dashboard_header`
 
 The dashboard header is typically managed internally by bots, but allows an external data stream message so multiple bots can influence the content that is shown on the dashboard.
 
-#### Content
+### Content
 You can provide the content you see in the state variable below.
 * Populating the data stream message content will create or update the dashboard. The highest priority dashboard header content will be selected for display.
 * Leaving the data stream message content blank will refresh the dashboard, and do nothing else.
