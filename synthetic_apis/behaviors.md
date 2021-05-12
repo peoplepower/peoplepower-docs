@@ -25,10 +25,12 @@ Bots will be notified with a `device_metadata_updated(...)` event that cause the
 
 ## **Output** : 'behaviors' state variable
 
-Properties:
+#### Properties
+
 | Property    | Description |
 | ----------- | ----------- |
 | Device Type | Each object is referenced by device type. When you add a new type of device, the bot will ensure behaviors are defined for it, and you can pull those behaviors out of the `behaviors` state variable based on the device type. |
+| id          | This is the integer to inject into the device instance's `goalId` as the user applies this behavior to this device. See the Icon Font list in the README.md |
 | icon_font   | The default font is from fontawesome.com 'regular' unless otherwise specified in an optional "icon_font" field |
 | description | The text description of this behavior for this device. |
 | name        | The title of this behavior |
@@ -36,24 +38,8 @@ Properties:
 | weight      | Lower weights float to the top of the list. |
 | spaces      | Prioritized list of multi-choice multi-select spaces to auto-select for each new sensor. For example, the first motion sensor should be installed in the Kitchen, so it is recommended that the app auto-select the 'Kitchen' space for this motion sensor. Note that a motion sensor can sometimes see multiple spaces, which is why that one is multi-choice multi-select. See the [Get Spaces API](https://iotapps.docs.apiary.io/#reference/locations/location-spaces/get-spaces) for a list of spaces to render in the app. |
 
-Icon fonts:
-```
-com.ppc.Bot/utilities/utilities.py
-
-# Use http://FontAwesome.com to discover FontAwesome icons
-ICON_FONT_FONTAWESOME_REGULAR = "far"
-ICON_FONT_FONTAWESOME_BOLD = "fab"
-ICON_FONT_FONTAWESOME_LIGHT = "fal"
-ICON_FONT_FONTAWESOME_SOLID = "fas"
-ICON_FONT_PEOPLEPOWER_REGULAR = "iotr"
-ICON_FONT_PEOPLEPOWER_LIGHT = "iotl"
-ICON_FONT_WEATHER_REGULAR = "wir"
-ICON_FONT_WEATHER_LIGHT = "wil"
-```
-
-    
    
-JSON Content:
+#### JSON Content
 
 ```
 {

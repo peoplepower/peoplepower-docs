@@ -54,7 +54,8 @@ Many times, state variables may contain extra JSON information that simply helps
 + [Multi-stream Messages](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/multistream.md)
 
 #### User Interfaces
-+ [Dashboard](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dashboard.md)
++ [Dashboard Header](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dashboard_header.md)
++ [Dashboard Status](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dashboard_status.md)
 + [Services and Alerts](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/services.md)
 + [Daily Report](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dailyreport.md)
 + [Trends](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/trends.md)
@@ -73,3 +74,17 @@ Many times, state variables may contain extra JSON information that simply helps
 + [Demand Response](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/demandresponse.md)
 + [Time-of-Use Pricing](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/toupricing.md)
 
+#### Icon fonts
+```
+com.ppc.Bot/utilities/utilities.py
+
+# Use http://FontAwesome.com to discover FontAwesome icons
+ICON_FONT_FONTAWESOME_REGULAR = "far"
+ICON_FONT_FONTAWESOME_BOLD = "fab"
+ICON_FONT_FONTAWESOME_LIGHT = "fal"
+ICON_FONT_FONTAWESOME_SOLID = "fas"
+ICON_FONT_PEOPLEPOWER_REGULAR = "iotr"
+ICON_FONT_PEOPLEPOWER_LIGHT = "iotl"
+ICON_FONT_WEATHER_REGULAR = "wir"
+ICON_FONT_WEATHER_LIGHT = "wil"
+```
