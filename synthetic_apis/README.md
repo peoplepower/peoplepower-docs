@@ -74,17 +74,18 @@ Many times, state variables may contain extra JSON information that simply helps
 + [Demand Response](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/demandresponse.md)
 + [Time-of-Use Pricing](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/toupricing.md)
 
-#### Icon fonts
-```
-com.ppc.Bot/utilities/utilities.py
+#### Icons
++ [FontAwesome icon fonts](https://fontawesome.com)
++ [People Power icon fonts](https://webmedia.peoplepowerco.com/icons/index.html)
 
-# Use http://FontAwesome.com to discover FontAwesome icons
-ICON_FONT_FONTAWESOME_REGULAR = "far"
-ICON_FONT_FONTAWESOME_BOLD = "fab"
-ICON_FONT_FONTAWESOME_LIGHT = "fal"
-ICON_FONT_FONTAWESOME_SOLID = "fas"
-ICON_FONT_PEOPLEPOWER_REGULAR = "iotr"
-ICON_FONT_PEOPLEPOWER_LIGHT = "iotl"
-ICON_FONT_WEATHER_REGULAR = "wir"
-ICON_FONT_WEATHER_LIGHT = "wil"
-```
+| icon_font value | Description |
+| --------------- | ----------- |
+| far             | FontAwesome - Regular |
+| fab             | FontAwesome - Bold |
+| fal             | FontAwesome - Light |
+| fas             | FontAwesome - Solid |
+| iotr            | People Power - Regular |
+| iotl            | People Power - Light |
+| wir             | People Power Weather - Regular |
+| wil             | People Power Weather - Light |
+
