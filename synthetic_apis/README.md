@@ -21,9 +21,11 @@
 + [Bot-driven Rules](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/rules.md)
 + [Vayyar Home](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/vayyar.md)
 
+<!---
 #### Energy Management
 + [Demand Response](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/demandresponse.md)
 + [Time-of-Use Pricing](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/toupricing.md)
+--->
 
 ## About
 Synthetic APIs are provided by the *bot application layer*, on top of the platform. Synthetic APIs effectively allow bot and UI developers to invent new application features beyond what the AI+IoT platform offers alone. You can create your own application APIs on this platform, with bots.
