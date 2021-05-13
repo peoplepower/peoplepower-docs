@@ -3,7 +3,7 @@
 ## Synthetic API Libraries
 
 #### Infrastructure
-+ [Multi-stream Messages](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/multistream.md)
++ [Multistream Messages](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/multistream.md)
 
 #### User Interfaces
 + [Dashboard Header](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dashboard_header.md)
