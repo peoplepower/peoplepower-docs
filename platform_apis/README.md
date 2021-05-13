@@ -11,6 +11,11 @@ These Application APIs are primarily synchronous RESTful APIs, and WebSocket alt
 
 In addition, there are several APIs toward the beginning of the documentation for devices, allowing them to understand which of the device servers they should communicate with in a cloud deployment composed of multiple device servers.
 
+## WebSockets API
++ [WebSockets](https://github.com/peoplepower/peoplepower-docs/blob/master/platform_apis/websocket.md)
+
+Use WebSockets in some time-critical experiences (such as updating the UI with bot-driven [Synthetic APIs](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis) or displaying alerts on an administrative console), instead of polling with RESTful APIs.
+
 ## Administrative API
 http://iotadmins.docs.apiary.io
 
