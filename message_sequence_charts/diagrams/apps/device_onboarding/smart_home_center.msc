@@ -1,6 +1,6 @@
-# Device Onboarding - Develco DPXX
-# - Connecting and registering a Develco DPXX
-# - Wi-Fi Configuration is part of our Device Onboarding logic.  See 'app_schema/wifi' and 'device_configuration/develco_dpxx_wifi'.
+# Device Onboarding - Smart Home Center
+# - Connecting and registering a Smart Home Center
+# - Wi-Fi Configuration is part of our Device Onboarding logic.  See 'app_schema/wifi' and 'device_configuration/smart_home_center_wifi'.
 
 msc {
 	hscale = "2";
@@ -10,7 +10,7 @@ msc {
 	server [label="PPC Server", textcolour="navy", arctextcolour="navy"],
 	device [label="Device", textcolour="orange", arctextcolour="orange"];
 	|||;
-	user note device [label="Develco DPXX Device Onboarding", textbgcolor="black", textcolor="white"];
+	user note device [label="Smart Home Center Device Onboarding", textbgcolor="black", textcolor="white"];
 	|||;
 
 	# Open Add Devices menu

@@ -2,13 +2,13 @@
 
 ## Table of contents
 
-* [Develco DPXX](#develco-dpxx)
+* [Smart Home Center](#smart-home-center)
 
 ## Diagrams
 
-### Develco DPXX
+### Smart Home Center
 
-![png](./develco_dpxx.png)
+![png](./smart_home_center.png)
 
 #### APIs
 

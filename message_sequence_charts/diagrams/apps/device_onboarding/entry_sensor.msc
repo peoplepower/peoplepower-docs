@@ -1,5 +1,5 @@
-# Device Onboarding - Develco Entry Sensor
-# - Connecting and registering a Develco Entry Sensor
+# Device Onboarding - Entry Sensor
+# - Connecting and registering a Entry Sensor
 
 msc {
 	hscale = "2";
@@ -10,7 +10,7 @@ msc {
 	device [label="Device", textcolour="orange", arctextcolour="orange"],
 	proxy [label="Proxy", textcolour="brown", arctextcolour="brown"];
 	|||;
-	user note proxy [label="Develco Entry Sensor Device Onboarding", textbgcolor="black", textcolor="white"];
+	user note proxy [label="Entry Sensor Device Onboarding", textbgcolor="black", textcolor="white"];
 	|||;
 
 	# Open Add Devices menu

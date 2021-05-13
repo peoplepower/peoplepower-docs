@@ -1,5 +1,5 @@
-# Device UI - Develco DPXX
-# - Develco DPXX Device UI
+# Device UI - Smart Home Center
+# - Smart Home Center Device UI
 # - While displaying the Device UI the app should call all refresh API every 10 seconds.
 
 msc {
@@ -10,7 +10,7 @@ msc {
 	server [label="PPC Server", textcolour="navy", arctextcolour="navy"],
 	device [label="Device", textcolour="orange", arctextcolour="orange"];
 	|||;
-	user note device [label="Develco DPXX Wi-Fi Device Configuration", textbgcolor="black", textcolor="white"];
+	user note device [label="Smart Home Center Wi-Fi Device Configuration", textbgcolor="black", textcolor="white"];
 	|||;
 
 	# Open Device UI

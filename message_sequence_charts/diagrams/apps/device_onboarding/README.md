@@ -19,8 +19,8 @@
     * [Connect](#page-style-connect)
     * [Picture](#page-style-picture)
 * [Diagrams](#diagrams)
-    * [Develco DPXX](#develco-dpxx)
-    * [Develco Entry Sensor](#develco-entry-sensor)
+    * [Smart Home Center](#smart-home-center)
+    * [Entry Sensor](#entry-sensor)
 
 ## General Flow
 
@@ -83,7 +83,7 @@ Device Models may require 1 or more pairing type.
 
 For example
 
-* 1 - QR Scan - Uses a device camera, or show if device can't use camera show UI with input to type device ID manually (see [Develco DPXX](#develco-dpxx)).
+* 1 - QR Scan - Uses a device camera, or show if device can't use camera show UI with input to type device ID manually (see [Smart Home Center](#smart-home-center)).
 * 2 - Native - Uses native implementation.  It is the Apps responsibility to include association with specific model IDs.
 * 4 - OAuth 2.0 - Used together with model.oauthAppId to open specific URL for every appId and authorize there, then use Server-side callback to show Web-view to confirm OAuth connection with third-party application.
 * 8 - Zigbee - Used together with dependencyDevicetypes to support proxy/slave device onboarding
@@ -156,7 +156,7 @@ Standard page style with media, subtitle, content, and actions.
 <a id="page-style-picture"></a>
 ### Picture
 
-"Take a Picture" page style with camera capabilities, subtitle, content, and actions. Used to capture and list images during device onboarding (e.g. installation images). See [Develco Entry Sensor](#device-entry-sensor) for more information.
+"Take a Picture" page style with camera capabilities, subtitle, content, and actions. Used to capture and list images during device onboarding (e.g. installation images). See [Entry Sensor](#device-entry-sensor) for more information.
 
 *Identifier*
 
@@ -164,9 +164,9 @@ Standard page style with media, subtitle, content, and actions.
 
 ## Diagrams
 
-### Develco DPXX
+### Smart Home Center
 
-![png](./develco_dpxx.png)
+![png](./smart_home_center.png)
 
 #### APIs
 
@@ -212,9 +212,9 @@ Params:
 Params:
 - locationId: $locationId
 
-### Develco Entry Sensor
+### Entry Sensor
 
-![png](./develco_entry.png)
+![png](./entry_sensor.png)
 
 #### APIs
 

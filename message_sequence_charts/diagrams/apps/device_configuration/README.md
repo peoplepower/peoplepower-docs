@@ -2,15 +2,15 @@
 
 ## Table of contents
 
-* [Develco DPXX Wi-Fi](#develco-dpxx-wifi)
+* [Smart Home Center Wi-Fi](#smart-home-center-wifi)
 
 ## Diagrams
 
-### Develco DPXX Wi-Fi
+### Smart Home Center Wi-Fi
 
-Configuring Wi-Fi for the Develco DPXX device types is done by using device commands to interact with the device.  This requires the device to be connected to the Cloud.
+Configuring Wi-Fi for the Smart Home Center device types is done by using device commands to interact with the device.  This requires the device to be connected to the Cloud.
 
-![png](./develco_dpxx_wifi.png)
+![png](./smart_home_center_wifi.png)
 
 #### APIs
 
@@ -28,7 +28,7 @@ Params:
 
 Params:
 - locationId: $locationId _Current Location ID_
-- deviceId: $deviceId _DPXX Device ID_
+- deviceId: $deviceId _Smart Home Center Device ID_
 - data: `{'commandType': 4, 'commandTimeout': 60, 'params': [{'name': 'wifiSsidValues', 'value': '1'}]}`
 
 *Notify device to connect to Wi-Fi*
