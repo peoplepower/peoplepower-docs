@@ -111,14 +111,14 @@ Params:
 
 *Vayyar Home BLE configuration* 
 
-1 Scan S/N
-2 Register Device
-3 Connect BLE
-4 Configure Wi-Fi
-5 Configure Cloud
-6 Check Firmware
-7 Update Firmware
-8 Reboot
+1. Scan S/N
+2. Register Device
+3. Connect BLE
+4. Configure Wi-Fi
+5. Configure Cloud
+6. Check Firmware
+7. Update Firmware
+8. Reboot
 
 #### APIs
 
