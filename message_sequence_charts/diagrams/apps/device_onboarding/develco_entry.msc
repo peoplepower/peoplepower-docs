@@ -13,12 +13,6 @@ msc {
 	user note proxy [label="Develco Entry Sensor Device Onboarding", textbgcolor="black", textcolor="white"];
 	|||;
 
-	# Restore session
-	user => app [label="Launch App"];
-	app note app [label="Session restored"];
-	app << app [label="Show Dashboard"];
-	|||;
-
 	# Open Add Devices menu
 	user => app [label="Select '+'"];
 	app << app [label="Show Add Items menu"];

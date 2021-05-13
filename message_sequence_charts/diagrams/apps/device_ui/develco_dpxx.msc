@@ -13,19 +13,6 @@ msc {
 	user note device [label="Develco DPXX Wi-Fi Device Configuration", textbgcolor="black", textcolor="white"];
 	|||;
 
-	# Restore session
-	user => app [label="Launch App"];
-	app note app [label="Session restored"];
-	app << app [label="Show Dashboard"];
-	|||;
-
-	# Open Devices List
-	user => app [label="Select 'Devices' tab"];
-	app => server [label="GET List of Devices:\n- locationId: $locationId\n- checkPersistent: true"];
-	app << server [label="Response:\n- devices: [Device]"];
-	app << app [label="Show Devices list"];
-	|||;
-
 	# Open Device UI
 	user => app [label="Select 'Smart Home Center'"];
 	app => server [label="GET List of Devices:\n- locationId: $locationId\n- checkPersistent: true"];
