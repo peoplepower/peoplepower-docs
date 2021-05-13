@@ -13,7 +13,7 @@ The client API interface allows for
         * [Add Person](#add-person)
     * [Community](#community)
 * [Account](#account)
-* [Settings]
+* [Settings](#settings)
 * [About](#about)
 * [Support](#support)
 * [Locations](#locations)
