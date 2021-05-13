@@ -1,5 +1,36 @@
 # Synthetic APIs
 
+## Synthetic API Libraries
+
+#### Infrastructure
++ [Multi-stream Messages](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/multistream.md)
+
+#### User Interfaces
++ [Dashboard Header](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dashboard_header.md)
++ [Dashboard Status](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dashboard_status.md)
++ [Services and Alerts](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/services.md)
++ [Daily Report](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dailyreport.md)
++ [Trends](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/trends.md)
++ [Tasks](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/tasks.md)
+
+#### User Communications
++ [Notify](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/notify.md)
++ [Narrate](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/narrate.md)
+
+#### Devices and Automations
++ [Behaviors](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/behaviors.md)
++ [Bot-driven Rules](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/rules.md)
++ [Vayyar Home](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/vayyar.md)
+
+#### Energy Management
++ [Demand Response](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/demandresponse.md)
++ [Time-of-Use Pricing](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/toupricing.md)
+
+#### Icons
++ [FontAwesome icon fonts](https://fontawesome.com)
++ [People Power icon fonts](https://webmedia.peoplepowerco.com/icons/index.html)
+
+## About
 Synthetic APIs are provided by the *bot application layer*, on top of the platform. Synthetic APIs effectively allow bot and UI developers to invent new application features beyond what the AI+IoT platform offers alone. You can create your own application APIs on this platform, with bots.
 
 These asynchronous APIs offered by bot application developers leverage `data stream messages` to communicate data into the bot, and `state` variables to communicate responses back from the bot. 
@@ -47,36 +78,7 @@ Bots can create `state` variables to provide data back out to applications or vo
 
 Many times, state variables may contain extra JSON information that simply helps bots manage the objects contained within those variables.
 
-
-## Synthetic API Libraries
-
-#### Infrastructure
-+ [Multi-stream Messages](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/multistream.md)
-
-#### User Interfaces
-+ [Dashboard Header](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dashboard_header.md)
-+ [Dashboard Status](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dashboard_status.md)
-+ [Services and Alerts](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/services.md)
-+ [Daily Report](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dailyreport.md)
-+ [Trends](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/trends.md)
-+ [Tasks](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/tasks.md)
-
-#### User Communications
-+ [Notify](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/notify.md)
-+ [Narrate](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/narrate.md)
-
-#### Devices and Automations
-+ [Behaviors](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/behaviors.md)
-+ [Bot-driven Rules](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/rules.md)
-+ [Vayyar Home](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/vayyar.md)
-
-#### Energy Management
-+ [Demand Response](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/demandresponse.md)
-+ [Time-of-Use Pricing](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/toupricing.md)
-
 #### Icons
-+ [FontAwesome icon fonts](https://fontawesome.com)
-+ [People Power icon fonts](https://webmedia.peoplepowerco.com/icons/index.html)
 
 | icon_font value | Description |
 | --------------- | ----------- |
@@ -88,4 +90,6 @@ Many times, state variables may contain extra JSON information that simply helps
 | iotl            | People Power - Light |
 | wir             | People Power Weather - Regular |
 | wil             | People Power Weather - Light |
+
+
 
