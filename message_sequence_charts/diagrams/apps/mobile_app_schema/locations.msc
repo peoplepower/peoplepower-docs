@@ -1,0 +1,17 @@
+# App Schema - Locations
+# - Locations App Schema
+
+msc {
+	hscale = "2";
+
+	user [label="User", textcolour="maroon", arctextcolour="maroon"],
+	platform [label="Platform", textcolour="navy", arctextcolour="navy"],
+	app [label="App", textcolour="maroon", arctextcolour="maroon"];
+	|||;
+	user note app [label="Locations App Schema", textbgcolor="black", textcolor="white"];
+	|||;
+
+	
+
+	user note app [label="Done", textbgcolor="black", textcolor="white"];
+}

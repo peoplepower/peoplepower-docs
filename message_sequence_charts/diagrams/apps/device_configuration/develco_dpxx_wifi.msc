@@ -14,41 +14,17 @@ msc {
 	user note device [label="Develco DPXX Wi-Fi Device Configuration", textbgcolor="black", textcolor="white"];
 	|||;
 
-	# Restore session
-	user => app [label="Launch App"];
-	app note app [label="Session restored"];
-	app << app [label="Show Dashboard"];
-	|||;
-
-	# Open Devices List
-	user => app [label="Select 'Devices' tab"];
-	app => server [label="GET List of Devices:\n- locationId: $locationId\n- checkPersistent: true"];
-	app << server [label="Response:\n- devices: [Device]"];
-	app << app [label="Show Devices list"];
-	|||;
-
-	# Open Device UI
-	user => app [label="Select 'Smart Home Center'"];
-	app note app [label="See 'device_ui/develco_dpxx' for API references."];
-	app << app [label="Show Device UI"];
-	|||;
-
 	# Open Wi-Fi configuration
 	user => app [label="Select 'Wi-Fi"];
-	app note server [label="The app must notify the device to refresh nearby SSIDs.  We do this now once to give it a head start"];
-	app => server [label="PUT Send Commands:\n- locationId: $locationId\n- data: {'devices': [{'deviceId': $deviceId, 'commandType': 4, 'commandTimeout': 60, 'params': [{'name': 'wifiSsidValues', 'value': '1'}]}]}"];
-	server => device [label="Forward Command to refresh parameters"];
-	app << server [label="Response:\n- resultCode: 0\n- commands: [Command]"];
-	device >> device [label="Refresh parameters"];
-	server << device [label="Send new measurements"];
+	user note app [label="May be accessed for `device_ui/develco_dpxx` or `mobile_app_schema/wifi`"];
 	app << app [label="Show Wi-Fi configuration"];
 	|||;
 
 	# Display discovered SSIDs
 	app => server [label="GET Current Measurements:\n- deviceId: $deviceId\n- locationId: $locationId"];
 	app << server [label="Response:\n- measurements: [DeviceMeasurement]"];
-	app note server [label="Periodically refresh discovered SSIDs."];
-	app => server [label="PUT Send Commands:\n- locationId: $locationId\n- data: {'devices': [{'deviceId': $deviceId, 'commandType': 4, 'commandTimeout': 60, 'params': [{'name': 'wifiSsidValues', 'value': '1'}]}]}"];
+	app note server [label="The app must notify the device to refresh nearby SSIDs."];
+	app => server [label="PUT Send a Command:\n- locationId: $locationId\n- deviceId: $deviceId\n- data: {'commandType': 4, 'commandTimeout': 60, 'params': [{'name': 'wifiSsidValues', 'value': '1'}]}"];
 	server => device [label="Forward Command to refresh parameters"];
 	app << server [label="Response:\n- resultCode: 0\n- commands: [Command]"];
 	device >> device [label="Refresh parameters"];
@@ -68,6 +44,9 @@ msc {
 	app << server [label="Response:\n- resultCode: 0\n- commands: [Command]"];
 	device >> device [label="Set Wi-Fi"];
 	server << device [label="Send new measurements"];
+
+	# Validate settings
+	app << app [label="Return to previous screen and wait for new settings."];
 	app note device [label="Wait a little while for the configuration to take effect.  Might take a minute or two."];
 	app => server [label="GET Current Measurements:\n- deviceId: $deviceId\n- locationId: $locationId"];
 	app << server [label="Response:\n- measurements: [DeviceMeasurement]"];

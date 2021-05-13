@@ -6,7 +6,7 @@ Each component includes additional documentation on included APIs and processes.
 
 ## Table of contents
 
-* [App Schema](app_schema/README.md)
+* [App Schema](mobile_app_schema/README.md)
 * [Device Configuration](device_configuration/README.md)
 * [Device Onboarding](device_onboarding/README.md)
 * [Device UI](device_ui/README.md)

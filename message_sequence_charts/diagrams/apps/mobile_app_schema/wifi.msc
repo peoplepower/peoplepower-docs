@@ -9,13 +9,15 @@ msc {
 	hscale = "2";
 
 	user [label="User", textcolour="maroon", arctextcolour="maroon"],
+	platform [label="Platform", textcolour="navy", arctextcolour="navy"],
 	app [label="App", textcolour="maroon", arctextcolour="maroon"];
 	|||;
 	user note app [label="Wi-Fi App Schema", textbgcolor="black", textcolor="white"];
 	|||;
 
-	# Restore session
-	user => app [label="Open Url:\n- url: $appschema://wifi?device_id=$deviceId&location_id=$locationId"];
+	# Open schema url
+	user => platform [label="Open Url:\n- url: $appschema://wifi?device_id=$deviceId&location_id=$locationId"];
+	platform => app [label="Launch app with url"];
 	app note app [label="Session restored"];
 	app << app [label="Show Wi-Fi Configuration"];
 	app note app [label="See 'device_configuration/develco_dpxx_wifi', section 'Open Wi-Fi configuration', for next steps"];
