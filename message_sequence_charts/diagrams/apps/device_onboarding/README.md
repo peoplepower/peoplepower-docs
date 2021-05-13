@@ -4,6 +4,7 @@
 
 * [Develco DPXX](#develco-dpxx)
 * [Develco Entry Sensor](#develco-entry-sensor)
+* [Vayyar Home](#vayyar-home)
 
 ## Diagrams
 
@@ -98,6 +99,60 @@ Params:
 
 Params:
 - goalId: $goal.id
+
+*Update device name*
+
+Params:
+- desc: $textfield.text
+
+### Vayyar Home
+
+![png](./vayyar_home.png)
+
+*Vayyar Home BLE configuration* 
+
+1 Scan S/N
+2 Register Device
+3 Connect BLE
+4 Configure Wi-Fi
+5 Configure Cloud
+6 Check Firmware
+7 Update Firmware
+8 Reboot
+
+#### APIs
+
+##### [GET Device Models](https://iotapps.docs.apiary.io/#reference/creating-products/device-models/get-device-models)
+
+*Gather device models*
+
+Params:
+- brand: $brand
+
+##### [GET Stories](https://iotapps.docs.apiary.io/#reference/creating-products/stories/get-stories)
+
+*Gather device model stories*
+
+Params:
+- brand: $brand
+- modelId: $modelId
+
+##### [POST Register Device](https://iotapps.docs.apiary.io/#reference/devices/manage-devices/register-a-device)
+
+*Register device*
+
+Params:
+- deviceId: $deviceId
+- locationId: $locationId
+
+##### [GET devices](https://iotapps.docs.apiary.io/#reference/devices/manage-devices/get-a-list-of-devices)
+
+*Refresh devices*
+
+Params:
+ -locationId: $locationId
+
+##### [PUT Update a Device](https://iotapps.docs.apiary.io/#reference/devices/manage-single-device/update-a-device)
 
 *Update device name*
 
