@@ -16,7 +16,7 @@ Under the hood inside the dashboard microservices, the dashboard header is direc
 | icon_font | String | See the Icon Font list in the README.md |
 | call | Boolean | True to show the Emergency Call button, which would allow a user to call people who have the alert texting permission 'I live here' or call the Emergency Call Center |
 | ecc | Boolean | True to show the Emergency Call Center as an option to call inside the menu that comes up for the Emergency Call button |
-| updated_ms | int | Timestamp in milliseconds when this dashboard header was updated |
+| updated_ms | int | Timestamp in milliseconds when this dashboard header was updated. Use this absolute time to render UI information like "38 seconds ago" or "2 hours ago" on the dashboard of the app. |
 | resolution | JSON Object | See the Resolution Data Structure table |
 | feedback | JSON Object | See the Feedback Data Structure table |
 
