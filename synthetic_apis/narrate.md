@@ -29,3 +29,5 @@ Data Stream Address : `narrate`
 
 The content of this data stream message is any combination of the **Properties** above, as if you are calling the `narrate()` method in our bot architecture and passing in arguments.
 
+## References
+* `com.ppc.Microservices/intelligence/narrative/location_narrative_microservice.py`

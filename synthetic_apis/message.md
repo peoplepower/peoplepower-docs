@@ -60,3 +60,5 @@ Data Stream Address : `message`
 
 The content of this data stream message is any combination of the **Properties** above, as if you are calling the `notify()` method in our bot architecture and passing in arguments.
 
+## References
+* `com.ppc.Microservices/intelligence/messaging/location_messaging_microservice.py`
