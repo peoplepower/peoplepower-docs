@@ -18,11 +18,11 @@ Within the download you'll find the following directories and files. You'll see 
 diagrams/
 │
 ├── class/
-│	│
-│	└── component/
+│   │
+│   └── component/
 │       │
-│	    ├── sequence.eps
-│	    └── sequence.msc
+│       ├── sequence.eps
+│       └── sequence.msc
 │	
 ├── generateDiagrams.sh
 │
