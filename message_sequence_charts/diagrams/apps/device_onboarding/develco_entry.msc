@@ -60,8 +60,10 @@ msc {
 	|||;
 
 	# Show Device Onboarding Configuration Screens
-	app note device [label="For more information regarding Bot UIs, see external documentation."];
-	app => app [label="Show 'Select Behavior' Bot UI"];
+	app note device [label="Behaviors are provided by a synthetic API. For more information Synthetic APIs - Behaviors."];
+	app => server [label="GET State:\n- locationId: $locationId\n- name: 'behaviors'"];
+	app << server [label="Response:\n- [State Data]"];
+	app => app [label="Show 'Select Behaviors'"];
 	user => app [label="Select behavior"];
 	user => app [label="Select 'Next'"];
 	app => server [label="PUT Update a Device:\n- goalId: $goal.id"];
@@ -76,6 +78,13 @@ msc {
 
 	# Show Installation Help Story
 	app => app [label="Show 'Installation' story:\n- storyType: 4"];
+	app => server [label="GET Files:\n- locationId: $locationId\n- deviceId: $deviceId\n- type: 3 (device images)"];
+	app << server [label="Response:\n- [Files]"];
+	app << app [label="Display device images"];
+	user => app [label="Select Take Picture"];
+	app => app [label="Take picture (of device)"];
+	app => server [label="POST Upload File Content:\n- locationId: $locationId\n- deviceId: $deviceId\n- name: 'Install'\n- type: 3 (device images)\n- data: ImageData"];
+	app << server [label="Response:\n- resultCode: 0"];
 	user => app [label="Select 'Done'"];
 	app => app [label="Dismiss Device Onboarding UI"];
 	|||;
