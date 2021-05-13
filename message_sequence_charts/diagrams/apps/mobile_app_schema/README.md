@@ -1,6 +1,6 @@
 # Mobile App Schema
 
-The client API interface allows for 
+The client API interface allows for presenting specific screens from a url, provided either by this app or a separate app.
 
 ## Table of contents
 
