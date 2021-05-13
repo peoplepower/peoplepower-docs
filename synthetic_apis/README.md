@@ -14,7 +14,7 @@
 + [Tasks](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/tasks.md)
 
 #### User Communications
-+ [Notify](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/notify.md)
++ [Message](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/message.md)
 + [Narrate](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/narrate.md)
 
 #### Devices and Automations
