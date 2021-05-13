@@ -4,6 +4,8 @@ The client API interface allows for presenting specific screens from a url, prov
 
 ## Table of contents
 
+* [Global Variables](#global-variables)
+* [Dynamic Variables](#dynamic-variables)
 * [Main](#main)
     * [Devices](#devices)
         * [Add Devices](#add-devices)
@@ -26,6 +28,39 @@ The client API interface allows for presenting specific screens from a url, prov
 * [Wi-Fi](#wi-fi)
 * [OS](#os)
     * [Add Contact](#add-contact)
+
+## Global Variables
+
+These may be used with any client API.
+
+*Query Parameters*
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| api_key  | String | _Optional_ Designate user account by key.  If none provided, current user is used, if any. |
+| location_id | Int | _Optional_ Designate location. If none provided, current or first location ID is used |
+
+
+## Dynamic Query Variables
+
+Some query variables may be set as placeholders, and require the application to provide the correct context in their place.  For example, you may see a url like `${appUrlScheme}://main/devices?device_id=${deviceId}`.  The application layer should replace both the ${appUrlScheme} and ${deviceId} to the appropriate values (like `presencefamily://main/devices?device_id=ABC123`).
+
+Dynamic Query Variables may be nested, and replacement prioritization should follow the sequence of the list of available variables below.  For example, you may see a url like `https://skills-store.amazon.com/deeplink/dp/${system.${appName}-ask_smart_home}`.  The application layer should first replace `${appName}` and then replace `${system.presencefamily-ask_smart_home}` to from the final url (like `https://skills-store.amazon.com/deeplink/dp/B01HISB2SU`).
+
+Below is a list of our current dynamic query variables:
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| appUrlScheme | String | Replaced with app scheme like "presencefamily" |
+| appName | String | Replaced with app name like “presencefamily” |
+| webappUrl | String | Replaced with web app url like "https://app.peoplepowerfamily.com" |
+| tempKey | String | Replaced with user's temp key.  The app should refresh the temp key before replacement. |
+| appStoreUrl | String | Replaced by the applications app store / place store url (iOS/Android platforms should provided different endpoints) |
+| locationId | Int | Replaced with user's current location id. Used within the context of navigating from our mobile app to the web app. Used within the context of adding contacts to the OS, the app should incorporate the location’s name, smsPhone, and the location’s organization name. |
+| deviceId | String | Used within the context of our storybook OOBEs, the app should replace with the current device id being set up. |
+| userId | Int | Used within the context of adding contacts to the OS, the app should incorporate the user’s firstName, lastName, phone, and email. |
+| organizationId | Int | Used within the context of adding contacts to the OS, the app should incorporate the organization’s name, contactName1, contactPhone1, and contactEmail1. |
+| system.property_name | String | Allows inclusion of any system property value.  For example, `${system.mms_number}` is replaced by the value of the system property named `mms_number`. If no value is available then the path parameter is ignored. |
 
 ## Diagrams
 
