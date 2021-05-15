@@ -75,6 +75,8 @@ There can be only 4 subregions maximum. Their ID's are 0, 1, 2, or 3.
 
 #### Delete Subregion Example
 
+Data Stream Address : `delete_vayyar_subregion`
+
 If you want to delete all subregions for a given device, simply do not pass in a `subregion_id`.
 
 ```
@@ -99,6 +101,8 @@ State Variable : `vayyar_room`
 ### Get the available Subregion Behaviors
 
 State Variable : `vayyar_subregion_behaviors`
+
+The device has to be associated with the correct location before you set the subregion, because the subregion requires context to be stored in non-volatile memory that is only associated with the location. If you move the device to a different location, you need to set the subregions again.
 
 #### Subregion Behavior Properties
 
@@ -248,7 +252,7 @@ State Variable : `vayyar_subregion_behaviors`
       "icon": "loveseat",
       "icon_font": "far",
       "length_cm": 114,
-      "title": "Living Room Chair",
+      "title": "Large Chair",
       "width_cm": 135
     },
     {
@@ -261,7 +265,7 @@ State Variable : `vayyar_subregion_behaviors`
       "icon": "chair",
       "icon_font": "far",
       "length_cm": 52,
-      "title": "Dining Room Chair",
+      "title": "Small Chair",
       "width_cm": 48
     },
     {
