@@ -86,6 +86,16 @@ If you want to delete all subregions for a given device, simply do not pass in a
 
 ## Outputs
 
+### Get the room boundaries
+
+State Variable : `vayyar_room`
+
+#### `vayyar_room` Example
+
+```
+
+```
+
 ### Get the available Subregion Behaviors
 
 State Variable : `vayyar_subregion_behaviors`
@@ -301,3 +311,7 @@ State Variable : `vayyar_subregion_behaviors`
   ]
 }
 ```
+
+## References
+* `com.ppp.BotProprietary/signals/vayyar.py`
+* `com.ppc.Microservices/intelligence/vayyar`
