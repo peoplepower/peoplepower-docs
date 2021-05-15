@@ -8,6 +8,16 @@ The device itself receives a behavior, using the standard `behaviors` state vari
 
 Subregions require context, provided by the `vayyar_subregion_behaviors` state variable. Subregion descriptions will also describe what rooms they're compatible with (for example, you won't put a bed in the bathroom), the recommended size of that subregion (we know the size of a king size bed), and whether the subregion size is flexible. 
 
+**Inputs:**
+* [Set the Room Boundaries](#set-the-room-boundaries)
+* [Set a Subregion](#set-a-subregion)
+* [Delete a Subregion](#delete-a-subregion)
+
+**Outputs:**
+* [Get the Room Boundaries](#get-the-room-boundaries)
+* [Get the Available Subregion Behaviors](#get-the-available-subregion-behaviors)
+
+
 ## Inputs
 
 ### Set the Room Boundaries
@@ -73,7 +83,7 @@ There can be only 4 subregions maximum. Their ID's are 0, 1, 2, or 3.
 }
 ```
 
-#### Delete Subregion Example
+### Delete a Subregion
 
 Data Stream Address : `delete_vayyar_subregion`
 
@@ -95,7 +105,18 @@ State Variable : `vayyar_room`
 #### `vayyar_room` Example
 
 ```
-
+{
+    "device_id": {
+        "x_min": x_min,
+        "x_max": x_max,
+        "y_min": y_min,
+        "y_max": y_max,
+        "z_min": z_min,
+        "z_max": z_max,
+        "update_ms": update_ms
+    },
+    ...
+}
 ```
 
 ### Get the available Subregion Behaviors
