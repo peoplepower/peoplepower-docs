@@ -30,14 +30,58 @@ msc {
 
  	# Show Connection Story
 	app << app [label="Show 'Connection' story:\n- storyType: 1"];
-	app note device [label="Vayyar Home BLE configuration:\n- Scan S/N\n- Register Device\n- Connect BLE\n- Configure Wi-Fi\n- Configure Cloud\n- Check Firmware\n- Update Firmware\n- Reboot"];
 	|||;
-	
+
 	# Wait for device discovery
 	app note server [label="Wait for new device. Loop every 10 seconds."];
 	app => server [label="GET devices:\n -locationId: $locationId"];
-	app << server [label="Response:\n -devices: [Device]"];
+	app << server [label="Response:\n- devices: [Device]"];
 	|||;
+
+	# Power on device and start discovery
+	user => device [label="Connect to power"];
+	user => device [label="Start Pairing"];
+	device << device [label="Broadcast"];
+	user => app [label="Start Discovery"];
+	app << app [label="Scan for peripherals"];
+	|||;
+
+	# Connect and input Wi-Fi
+	app <= device [label="Discovered"];
+	app => device [label="Connect"];
+	app << device [label="Connected"];
+	user => app [label="Input Wi-Fi"];
+	app => device [label="Update Wi-Fi"];
+	app << device [label="Notify with mac and ip address"];
+	|||;
+
+	# Register device
+	app note device [label="$deviceId=mac.base64, $deviceType=2000"];
+	app => server [label="POST Register Device:\n- deviceId: $deviceId\n- deviceType: $deviceType\n- locationId: $locationId"];
+	app << server [label="Response:\n- deviceId: $deviceId\n- deviceTypeId: $deviceTypeId\n- host: $host\n- port: $port\n- useSsl: $useSsl"];
+	|||;
+
+	# Configure Cloud
+	app => device [label="Update cloud settings"];
+	app << device [label="OK"];
+	|||;
+
+	# Update Firmware
+	app note device [label="Device provides properties Bool hasNewVersion and Int updateVersionCode to describe if a new version is available.  The App should update the device if needed."];
+	app => device [label="Check for firmware update"];
+	app << device [label="OK"];
+	app => device [label="Update if needed"];
+	app << device [label="Updated"];
+	|||;
+
+	# Reboot and connnect
+	app => device [label="Reboot"];
+	app << device [label="OK"];
+	device << device [label="Reboot and connect to cloud"];
+	device => server [label="Connect to mqtt"];
+	|||;
+
+	# Device discovered
 	app << app [label="Check response for new device:\n- Device.newDevice == true\n- Device.connected == true"];
 	app note server [label="New device found"];
 	|||;
@@ -58,6 +102,7 @@ msc {
 
 	# Show Installation Help Story
 	app => app [label="Show 'Installation' story:\n- storyType: 4"];
+	user note device [label="Setup region and subregion"];
 	user => app [label="Select 'Done'"];
 	app => app [label="Dismiss Device Onboarding UI"];
 	|||;
