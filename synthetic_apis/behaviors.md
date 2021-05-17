@@ -23,7 +23,9 @@ Advantages of Behaviors:
 
 Bots will be notified with a `device_metadata_updated(...)` event that cause the bot to treat this device differently when its behavior or context changes. It is up to the bots running inside this location to apply the behavior at runtime.
 
-## **Output** : 'behaviors' state variable
+## Output
+
+State Variable : `behaviors`
 
 #### Properties
 

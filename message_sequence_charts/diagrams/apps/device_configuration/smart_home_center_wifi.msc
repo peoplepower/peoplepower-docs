@@ -1,7 +1,7 @@
-# Device Configuration - Develco DPXX Wi-Fi
-# - Configuring Develco DPXX Wi-Fi
+# Device Configuration - Smart Home Center Wi-Fi
+# - Configuring Smart Home Center Wi-Fi
 # - Wi-Fi configuration is part of the Device Onboarding sequence, and may also be done from the device UI.  Apps provide the same UI in both instances.
-# - For list of all API request that take place when presenting this device UI, see 'device_ui/develco_dpxx'.
+# - For list of all API request that take place when presenting this device UI, see 'device_ui/smart_home_center'.
 
 msc {
 	hscale = "2";
@@ -11,12 +11,12 @@ msc {
 	server [label="PPC Server", textcolour="navy", arctextcolour="navy"],
 	device [label="Device", textcolour="orange", arctextcolour="orange"];
 	|||;
-	user note device [label="Develco DPXX Wi-Fi Device Configuration", textbgcolor="black", textcolor="white"];
+	user note device [label="Smart Home Center Wi-Fi Device Configuration", textbgcolor="black", textcolor="white"];
 	|||;
 
 	# Open Wi-Fi configuration
 	user => app [label="Select 'Wi-Fi"];
-	user note app [label="May be accessed for `device_ui/develco_dpxx` or `mobile_app_schema/wifi`"];
+	user note app [label="May be accessed for `device_ui/smart_home_center` or `mobile_app_schema/wifi`"];
 	app << app [label="Show Wi-Fi configuration"];
 	|||;
 

@@ -1,7 +1,7 @@
 # App Schema - Wi-Fi
 # - Wi-Fi App Schema
 # - The app may be opened directly to the Device Wi-Fi Configuration screen with a supported url schema.
-# - This App Schema is used in coordination with 'device_onboarding/develco_dpxx' and 'device_configuration/develco_dpxx_wifi'.
+# - This App Schema is used in coordination with 'device_onboarding/smart_home_center' and 'device_configuration/smart_home_center_wifi'.
 # - This chart assumes the app is providing the url, but it may also be provided in an external application.
 # - If the user is not logged in, then prompt them to log in first, and then continue processing the url.
 
@@ -20,7 +20,7 @@ msc {
 	platform => app [label="Launch app with url"];
 	app note app [label="Session restored"];
 	app << app [label="Show Wi-Fi Configuration"];
-	app note app [label="See 'device_configuration/develco_dpxx_wifi', section 'Open Wi-Fi configuration', for next steps"];
+	app note app [label="See 'device_configuration/smart_home_center_wifi', section 'Open Wi-Fi configuration', for next steps"];
 	|||;
 
 	user note app [label="Done", textbgcolor="black", textcolor="white"];
