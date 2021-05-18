@@ -187,7 +187,7 @@ The device has to be associated with the correct location before you set the sub
       "flexible_cm": false,
       "icon": "bed-alt",
       "icon_font": "far",
-      "id": 4,
+      "context_id": 4,
       "length_cm": 191,
       "title": "Full Bed",
       "width_cm": 135
@@ -235,7 +235,7 @@ The device has to be associated with the correct location before you set the sub
       "flexible_cm": false,
       "icon": "toilet",
       "icon_font": "far",
-      "id": 8,
+      "context_id": 8,
       "length_cm": 120,
       "title": "Toilet",
       "width_cm": 76
