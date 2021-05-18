@@ -56,6 +56,8 @@ There can be only 4 subregions maximum. Their ID's are 0, 1, 2, or 3.
 | -------- | ---- | ----------- |
 | device_id | String | Device ID to apply this subregion to |
 | subregion_id | int | Optional - used primarily for modifying or deleting. 0, 1, 2, or 3 and nothing else. You can specify the next valid integer to insert a new subregion, but out-of-bounds values are ignored. |
+| context_id | int | Context / behavior of this subregion - see the [Subregion Behavior Properties](#subregion-behavior-properties) |
+| name | String | Descriptive name of this subregion, default is the `title` of the subregion context that was selected. |
 | x_min_meters | Float | Required. Looking into the room from the device, this is the left-most side of the sub-region. Remember to the left of Vayyar Home is negative numbers on the x-axis. |
 | x_max_meters | Float | Required.Looking into the room from the device, this is the right-most side of the sub-region. |
 | y_min_meters | Float | Required. Distance from the Vayyar Home to the nearest side of the sub-region. |
@@ -71,6 +73,7 @@ There can be only 4 subregions maximum. Their ID's are 0, 1, 2, or 3.
 {
     "device_id": device_id,
     "subregion_id": subregion_id,
+    "name": descriptive_name,
     "x_min_meters": x_min_meters,
     "x_max_meters": x_max_meters,
     "y_min_meters": y_min_meters,
