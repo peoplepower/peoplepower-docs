@@ -9,7 +9,7 @@
 + [Daily Report](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dailyreport.md)
 + [Trends](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/trends.md)
 + [Tasks](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/tasks.md)
-+ [Emergencies](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/emergencies.md)
++ [Request Assistance](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/request_assistance.md)
 
 #### User Communications
 + [Multistream Messages](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/multistream.md)
