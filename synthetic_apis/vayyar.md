@@ -99,6 +99,44 @@ If you want to delete all subregions for a given device, simply do not pass in a
 }
 ```
 
+### Set Configuration
+
+Data Stream Address : `set_vayyar_config`
+
+```
+# fall_sensitivity
+FALL_SENSITIVITY_LOW = 1
+FALL_SENSITIVITY_NORMAL = 2
+
+# led_mode
+LED_MODE_OFF = 0
+LED_MODE_ON = 1
+
+# telementry_policy
+TELEMETRY_POLICY_OFF = 0
+TELEMETRY_POLICY_ON = 1
+TELEMETRY_POLICY_FALLS_ONLY = 2
+```
+
+#### `set_vayyar_config` Example
+
+All fields are optional except for `device_id`.
+
+```
+{
+    "device_id": "id_MzA6QUU6QTQ6TM6OEY6",
+    "fall_sensitivity": FALL_SENSITIVITY_NORMAL,
+    "alert_delay_s": 15,
+    "led_mode": LED_MODE_ON,
+    "volume": 100,
+    "telemetry_policy": TELEMETRY_POLICY_FALLS_ONLY,
+    "reporting_rate_ms": 10000,
+    "silent_mode": False,
+    "target_change_threshold_m": 0.2
+}
+```
+
+
 ## Outputs
 
 ### Get the room boundaries
