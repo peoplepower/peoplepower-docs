@@ -160,6 +160,90 @@ State Variable : `vayyar_room`
 }
 ```
 
+### Get the defined subregions
+
+State Variable : `vayyar_subregions`
+
+#### `vayyar_subregions` Example
+
+```
+{
+  "value": {
+    "id_MzA6QUU6QTQ6RTI": [
+      {
+        "context_id": 11,
+        "detect_falls": true,
+        "detect_presence": true,
+        "enter_duration_s": 3,
+        "exit_duration_s": 3,
+        "name": "Bathtub / Shower",
+        "subregion_id": 0,
+        "x_max_meters": -0.5,
+        "x_min_meters": -1.285,
+        "y_max_meters": 1.5,
+        "y_min_meters": 0
+      },
+      {
+        "context_id": 10,
+        "detect_falls": true,
+        "detect_presence": true,
+        "enter_duration_s": 3,
+        "exit_duration_s": 3,
+        "name": "Toilet",
+        "subregion_id": 1,
+        "x_max_meters": 0.25,
+        "x_min_meters": -0.5,
+        "y_max_meters": 1.3,
+        "y_min_meters": 0
+      },
+      {
+        "context_id": 13,
+        "detect_falls": true,
+        "detect_presence": true,
+        "enter_duration_s": 3,
+        "exit_duration_s": 3,
+        "name": "Sink",
+        "subregion_id": 2,
+        "x_max_meters": 1.25,
+        "x_min_meters": 0.25,
+        "y_max_meters": 1.3,
+        "y_min_meters": 0
+      }
+    ],
+    "id_MzA6QUU6QTQ6RTI": [
+      {
+        "context_id": 1,
+        "detect_falls": false,
+        "detect_presence": true,
+        "enter_duration_s": 3,
+        "exit_duration_s": 3,
+        "name": "Bed",
+        "subregion_id": 0,
+        "x_max_meters": 0.83,
+        "x_min_meters": -1.1,
+        "y_max_meters": 3.35,
+        "y_min_meters": 1.25
+      }
+    ],
+    "id_MzA6QUU6QTQ6RTM6": [
+      {
+        "context_id": 20,
+        "detect_falls": true,
+        "detect_presence": true,
+        "enter_duration_s": 1,
+        "exit_duration_s": 3,
+        "name": "Office chair",
+        "subregion_id": 0,
+        "x_max_meters": 0.0,
+        "x_min_meters": -1.0,
+        "y_max_meters": 1.52,
+        "y_min_meters": 0.61
+      }
+    ]
+  }
+}
+```
+
 ### Get the available Subregion Behaviors
 
 State Variable : `vayyar_subregion_behaviors`
