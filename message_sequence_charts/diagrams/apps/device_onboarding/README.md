@@ -22,6 +22,7 @@
     * [Smart Home Center](#smart-home-center)
     * [Entry Sensor](#entry-sensor)
     * [Vayyar Home](#vayyar-home)
+    * [D-Link Camera](#d-link-camera)
 
 ## General Flow
 
@@ -306,6 +307,57 @@ Params:
 6. Check Firmware
 7. Update Firmware
 8. Reboot
+
+#### APIs
+
+##### [GET Device Models](https://iotapps.docs.apiary.io/#reference/creating-products/device-models/get-device-models)
+
+*Gather device models*
+
+Params:
+- brand: $brand
+
+##### [GET Stories](https://iotapps.docs.apiary.io/#reference/creating-products/stories/get-stories)
+
+*Gather device model stories*
+
+Params:
+- brand: $brand
+- modelId: $modelId
+
+##### [POST Register Device](https://iotapps.docs.apiary.io/#reference/devices/manage-devices/register-a-device)
+
+*Register device*
+
+Params:
+- deviceId: $deviceId
+- locationId: $locationId
+
+##### [GET devices](https://iotapps.docs.apiary.io/#reference/devices/manage-devices/get-a-list-of-devices)
+
+*Refresh devices*
+
+Params:
+ -locationId: $locationId
+
+##### [PUT Update a Device](https://iotapps.docs.apiary.io/#reference/devices/manage-single-device/update-a-device)
+
+*Update device name*
+
+Params:
+- desc: $textfield.text
+
+### D-Link Camera
+
+![png](./d-link-camera.png)
+
+*D-Link Camera BLE configuration* 
+
+1. Scan / Input S/N
+2. Connect and unlock BLE
+3. Configure Wi-Fi
+4. Configure Nabto
+5. Register Device
 
 #### APIs
 
