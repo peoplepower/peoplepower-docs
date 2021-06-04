@@ -10,6 +10,7 @@
 + [Trends](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/trends.md)
 + [Tasks](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/tasks.md)
 + [Request Assistance](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/request_assistance.md)
++ [User Activity](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/user_activity.md)
 
 #### User Communications
 + [Multistream Messages](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/multistream.md)
