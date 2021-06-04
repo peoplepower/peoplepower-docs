@@ -183,7 +183,8 @@ Anything marked "Internal Usage" is not meant to be used by the application UI's
     }
 ```
 
-### Working Example
+
+# Working Example
 
 A fall is detected. The `dashboard_header` state variable is updated with the JSON content below. As the conversation plays out, this `dashboard_header` state variable will continue to get refreshed with the latest updates.
 
