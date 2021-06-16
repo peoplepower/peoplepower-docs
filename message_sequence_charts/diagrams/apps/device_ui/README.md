@@ -155,6 +155,7 @@ Display information specific to this described Device Model.  All fields are opt
 | ranged | Bool | Describe if the options icon should be gathered for values within a range of the designated option. Icons are gathered based on the next available option.  Values range to the next greatest value. For instance, a "wifiSignal" value of "-70" would retrieve the icon for the option of value "-56" because it is less then the next option value of "-56" but greater then "-71.  And a "brightness" value of "70" would retrieve the icon for the option value to "75" because it is greater then the previous option value of "50" but less then "75". Default `False` |
 | videoProfiles | Array | Describes the video profile url and name of specific camera device models. |
 | appRequiresWiFi | Bool | Require device onboarding and configuration to be done while the App is connected to Wi-Fi. Default `False` |
+| baseModelPrefix | String | Describe the association between similar device models that have the same model id prefix. Used on new device discovery if a new device was found with a similar model ID then we automatically move forward in our OOBE and do not notify the user.
 
 ##### Device List Bindings
 
