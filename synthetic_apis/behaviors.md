@@ -39,7 +39,7 @@ State Variable : `behaviors`
 | suggestions | Prioritized list of suggested names for each new device that selects this behavior. For example, when installing an Entry Sensor on an exit door, it is suggested that the first one be called 'Front Door', while the second Entry Sensor on an exit door be called 'Back/Side Door'. |
 | weight      | Lower weights float to the top of the list. |
 | spaces      | Prioritized list of multi-choice multi-select spaces to auto-select for each new sensor. For example, the first motion sensor should be installed in the Kitchen, so it is recommended that the app auto-select the 'Kitchen' space for this motion sensor. Note that a motion sensor can sometimes see multiple spaces, which is why that one is multi-choice multi-select. See the [Get Spaces API](https://iotapps.docs.apiary.io/#reference/locations/location-spaces/get-spaces) for a list of spaces to render in the app. |
-
+| force_nickname | Optional. Default is False. If True, this tells the app to skip allowing the user to nickname the device and just force the next nickname in the list of suggestions. |
    
 #### JSON Content
 
