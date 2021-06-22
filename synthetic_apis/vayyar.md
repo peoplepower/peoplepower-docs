@@ -57,6 +57,7 @@ There can be only 4 subregions maximum. Their ID's are 0, 1, 2, or 3.
 | device_id | String | Device ID to apply this subregion to |
 | subregion_id | int | Optional - used primarily for modifying or deleting. 0, 1, 2, or 3 and nothing else. You can specify the next valid integer to insert a new subregion, but out-of-bounds values are ignored. |
 | context_id | int | Context / behavior of this subregion - see the [Subregion Behavior Properties](#subregion-behavior-properties) |
+| unique_id | String | UUID to uniquely identify this subregion, auto-defined by the bot. |
 | name | String | Descriptive name of this subregion, default is the `title` of the subregion context that was selected. |
 | x_min_meters | Float | Required. Looking into the room from the device, this is the left-most side of the sub-region. Remember to the left of Vayyar Home is negative numbers on the x-axis. |
 | x_max_meters | Float | Required.Looking into the room from the device, this is the right-most side of the sub-region. |
@@ -172,6 +173,7 @@ State Variable : `vayyar_subregions`
     "id_MzA6QUU6QTQ6RTI": [
       {
         "context_id": 11,
+        "unique_id": "d19978fe-606a-4ebf-8c51-b573b6ed0a23",
         "detect_falls": true,
         "detect_presence": true,
         "enter_duration_s": 3,
@@ -185,6 +187,7 @@ State Variable : `vayyar_subregions`
       },
       {
         "context_id": 10,
+        "unique_id": "2cc5d300-46df-4375-849b-1c4e32ceb466",
         "detect_falls": true,
         "detect_presence": true,
         "enter_duration_s": 3,
@@ -198,6 +201,7 @@ State Variable : `vayyar_subregions`
       },
       {
         "context_id": 13,
+        "unique_id": "9c747dd7-1824-43d7-aeaa-2e4400928dfe",
         "detect_falls": true,
         "detect_presence": true,
         "enter_duration_s": 3,
@@ -213,6 +217,7 @@ State Variable : `vayyar_subregions`
     "id_MzA6QUU6QTQ6RTI": [
       {
         "context_id": 1,
+        "unique_id": "49f9c146-8367-4d4d-ac06-172634473fe6",
         "detect_falls": false,
         "detect_presence": true,
         "enter_duration_s": 3,
@@ -228,6 +233,7 @@ State Variable : `vayyar_subregions`
     "id_MzA6QUU6QTQ6RTM6": [
       {
         "context_id": 20,
+        "unique_id": "3b7fd31c-5c59-462e-b97a-5d99127a94d4",
         "detect_falls": true,
         "detect_presence": true,
         "enter_duration_s": 1,
