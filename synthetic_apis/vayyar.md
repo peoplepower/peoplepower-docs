@@ -56,6 +56,9 @@ There can be only 4 subregions maximum. Their ID's are 0, 1, 2, or 3.
 | -------- | ---- | ----------- |
 | device_id | String | Device ID to apply this subregion to |
 | subregion_id | int | Optional - used primarily for modifying or deleting. 0, 1, 2, or 3 and nothing else. You can specify the next valid integer to insert a new subregion, but out-of-bounds values are ignored. |
+| context_id | int | Context / behavior of this subregion - see the [Subregion Behavior Properties](#subregion-behavior-properties) |
+| unique_id | String | UUID to uniquely identify this subregion, auto-defined by the bot. |
+| name | String | Descriptive name of this subregion, default is the `title` of the subregion context that was selected. |
 | x_min_meters | Float | Required. Looking into the room from the device, this is the left-most side of the sub-region. Remember to the left of Vayyar Home is negative numbers on the x-axis. |
 | x_max_meters | Float | Required.Looking into the room from the device, this is the right-most side of the sub-region. |
 | y_min_meters | Float | Required. Distance from the Vayyar Home to the nearest side of the sub-region. |
@@ -71,6 +74,7 @@ There can be only 4 subregions maximum. Their ID's are 0, 1, 2, or 3.
 {
     "device_id": device_id,
     "subregion_id": subregion_id,
+    "name": descriptive_name,
     "x_min_meters": x_min_meters,
     "x_max_meters": x_max_meters,
     "y_min_meters": y_min_meters,
@@ -96,6 +100,44 @@ If you want to delete all subregions for a given device, simply do not pass in a
 }
 ```
 
+### Set Configuration
+
+Data Stream Address : `set_vayyar_config`
+
+```
+# fall_sensitivity
+FALL_SENSITIVITY_LOW = 1
+FALL_SENSITIVITY_NORMAL = 2
+
+# led_mode
+LED_MODE_OFF = 0
+LED_MODE_ON = 1
+
+# telementry_policy
+TELEMETRY_POLICY_OFF = 0
+TELEMETRY_POLICY_ON = 1
+TELEMETRY_POLICY_FALLS_ONLY = 2
+```
+
+#### `set_vayyar_config` Example
+
+All fields are optional except for `device_id`.
+
+```
+{
+    "device_id": "id_MzA6QUU6QTQ6TM6OEY6",
+    "fall_sensitivity": FALL_SENSITIVITY_NORMAL,
+    "alert_delay_s": 15,
+    "led_mode": LED_MODE_ON,
+    "volume": 100,
+    "telemetry_policy": TELEMETRY_POLICY_FALLS_ONLY,
+    "reporting_rate_ms": 10000,
+    "silent_mode": False,
+    "target_change_threshold_m": 0.2
+}
+```
+
+
 ## Outputs
 
 ### Get the room boundaries
@@ -119,6 +161,95 @@ State Variable : `vayyar_room`
 }
 ```
 
+### Get the defined subregions
+
+State Variable : `vayyar_subregions`
+
+#### `vayyar_subregions` Example
+
+```
+{
+  "value": {
+    "id_MzA6QUU6QTQ6RTI": [
+      {
+        "context_id": 11,
+        "unique_id": "d19978fe-606a-4ebf-8c51-b573b6ed0a23",
+        "detect_falls": true,
+        "detect_presence": true,
+        "enter_duration_s": 3,
+        "exit_duration_s": 3,
+        "name": "Bathtub / Shower",
+        "subregion_id": 0,
+        "x_max_meters": -0.5,
+        "x_min_meters": -1.285,
+        "y_max_meters": 1.5,
+        "y_min_meters": 0
+      },
+      {
+        "context_id": 10,
+        "unique_id": "2cc5d300-46df-4375-849b-1c4e32ceb466",
+        "detect_falls": true,
+        "detect_presence": true,
+        "enter_duration_s": 3,
+        "exit_duration_s": 3,
+        "name": "Toilet",
+        "subregion_id": 1,
+        "x_max_meters": 0.25,
+        "x_min_meters": -0.5,
+        "y_max_meters": 1.3,
+        "y_min_meters": 0
+      },
+      {
+        "context_id": 13,
+        "unique_id": "9c747dd7-1824-43d7-aeaa-2e4400928dfe",
+        "detect_falls": true,
+        "detect_presence": true,
+        "enter_duration_s": 3,
+        "exit_duration_s": 3,
+        "name": "Sink",
+        "subregion_id": 2,
+        "x_max_meters": 1.25,
+        "x_min_meters": 0.25,
+        "y_max_meters": 1.3,
+        "y_min_meters": 0
+      }
+    ],
+    "id_MzA6QUU6QTQ6RTI": [
+      {
+        "context_id": 1,
+        "unique_id": "49f9c146-8367-4d4d-ac06-172634473fe6",
+        "detect_falls": false,
+        "detect_presence": true,
+        "enter_duration_s": 3,
+        "exit_duration_s": 3,
+        "name": "Bed",
+        "subregion_id": 0,
+        "x_max_meters": 0.83,
+        "x_min_meters": -1.1,
+        "y_max_meters": 3.35,
+        "y_min_meters": 1.25
+      }
+    ],
+    "id_MzA6QUU6QTQ6RTM6": [
+      {
+        "context_id": 20,
+        "unique_id": "3b7fd31c-5c59-462e-b97a-5d99127a94d4",
+        "detect_falls": true,
+        "detect_presence": true,
+        "enter_duration_s": 1,
+        "exit_duration_s": 3,
+        "name": "Office chair",
+        "subregion_id": 0,
+        "x_max_meters": 0.0,
+        "x_min_meters": -1.0,
+        "y_max_meters": 1.52,
+        "y_min_meters": 0.61
+      }
+    ]
+  }
+}
+```
+
 ### Get the available Subregion Behaviors
 
 State Variable : `vayyar_subregion_behaviors`
@@ -137,6 +268,12 @@ The device has to be associated with the correct location before you set the sub
 | width_cm | int | Recommended width of the subregion, in centimeters |
 | length_cm | int | Recommended length of the subregion, in centimeters |
 | flexible_cm | Boolean | True if the subregion size is flexible from our recommendations, False if this is a standard size |
+| detect_falls | Boolean | True to recommend falls be detected for this subregion context. |
+| edit_falls | Boolean | True to allow the user to see / edit whether fall detection can be turned on/off for this subregion context. False to prevent the user from seeing / editing whether fall detection can turn on or off for this subregion context. |
+| detect_presence | Boolean | True to recommend detecting presence for this subregion context. |
+| edit_presence | Boolean | True to allow the user to see / edit whether presence detection can be turned on/off for this subregion context. False to prevent the user from seeing / editing whether presence detection can turn on or off for this subregion context. |
+| enter_duration_s | int | Recommended enter duration in seconds to set for this subregion context. |
+| exit_duration_s | int | Recommended exit duration in seconds to set for this subregion context. |
 | compatible_behaviors | List | List of compatible behavior ID's, as defined in the `behaviors` state |
 
 #### `vayyar_subregion_behaviors` Example
@@ -149,6 +286,12 @@ The device has to be associated with the correct location before you set the sub
         0
       ],
       "context_id": 1,
+      "detect_falls": false,
+      "detect_presence": true,
+      "edit_falls": false,
+      "edit_presence": false,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
       "flexible_cm": false,
       "icon": "bed-alt",
       "icon_font": "far",
@@ -161,6 +304,12 @@ The device has to be associated with the correct location before you set the sub
         0
       ],
       "context_id": 2,
+      "detect_falls": false,
+      "detect_presence": true,
+      "edit_falls": false,
+      "edit_presence": false,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
       "flexible_cm": false,
       "icon": "bed-alt",
       "icon_font": "far",
@@ -173,6 +322,12 @@ The device has to be associated with the correct location before you set the sub
         0
       ],
       "context_id": 3,
+      "detect_falls": false,
+      "detect_presence": true,
+      "edit_falls": false,
+      "edit_presence": false,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
       "flexible_cm": false,
       "icon": "bed-alt",
       "icon_font": "far",
@@ -184,10 +339,16 @@ The device has to be associated with the correct location before you set the sub
       "compatible_behaviors": [
         0
       ],
+      "context_id": 4,
+      "detect_falls": false,
+      "detect_presence": true,
+      "edit_falls": false,
+      "edit_presence": false,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
       "flexible_cm": false,
       "icon": "bed-alt",
       "icon_font": "far",
-      "id": 4,
       "length_cm": 191,
       "title": "Full Bed",
       "width_cm": 135
@@ -209,6 +370,12 @@ The device has to be associated with the correct location before you set the sub
         0
       ],
       "context_id": 6,
+      "detect_falls": false,
+      "detect_presence": true,
+      "edit_falls": false,
+      "edit_presence": false,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
       "flexible_cm": false,
       "icon": "bed-empty",
       "icon_font": "far",
@@ -221,6 +388,12 @@ The device has to be associated with the correct location before you set the sub
         0
       ],
       "context_id": 7,
+      "detect_falls": false,
+      "detect_presence": true,
+      "edit_falls": false,
+      "edit_presence": false,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
       "flexible_cm": false,
       "icon": "baby",
       "icon_font": "far",
@@ -232,10 +405,17 @@ The device has to be associated with the correct location before you set the sub
       "compatible_behaviors": [
         1
       ],
+      "context_id": 10,
+      "description": "Include the area in front of the toilet to detect people.",
+      "detect_falls": true,
+      "detect_presence": true,
+      "edit_falls": false,
+      "edit_presence": false,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
       "flexible_cm": false,
       "icon": "toilet",
       "icon_font": "far",
-      "id": 8,
       "length_cm": 120,
       "title": "Toilet",
       "width_cm": 76
@@ -244,7 +424,13 @@ The device has to be associated with the correct location before you set the sub
       "compatible_behaviors": [
         1
       ],
-      "context_id": 9,
+      "context_id": 11,
+      "detect_falls": true,
+      "detect_presence": true,
+      "edit_falls": true,
+      "edit_presence": false,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
       "flexible_cm": false,
       "icon": "bath",
       "icon_font": "far",
@@ -256,7 +442,13 @@ The device has to be associated with the correct location before you set the sub
       "compatible_behaviors": [
         1
       ],
-      "context_id": 10,
+      "context_id": 12,
+      "detect_falls": true,
+      "detect_presence": true,
+      "edit_falls": false,
+      "edit_presence": false,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
       "flexible_cm": true,
       "icon": "shower",
       "icon_font": "far",
@@ -266,9 +458,34 @@ The device has to be associated with the correct location before you set the sub
     },
     {
       "compatible_behaviors": [
+        1
+      ],
+      "context_id": 13,
+      "description": "Include the area in front of the sink to detect people.",
+      "detect_falls": true,
+      "detect_presence": true,
+      "edit_falls": false,
+      "edit_presence": true,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
+      "flexible_cm": true,
+      "icon": "sink",
+      "icon_font": "far",
+      "length_cm": 130,
+      "title": "Sink Area",
+      "width_cm": 1.0
+    },
+    {
+      "compatible_behaviors": [
         2
       ],
-      "context_id": 10,
+      "context_id": 20,
+      "detect_falls": false,
+      "detect_presence": true,
+      "edit_falls": false,
+      "edit_presence": true,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
       "flexible_cm": true,
       "icon": "loveseat",
       "icon_font": "far",
@@ -281,7 +498,13 @@ The device has to be associated with the correct location before you set the sub
         2,
         3
       ],
-      "context_id": 11,
+      "context_id": 21,
+      "detect_falls": false,
+      "detect_presence": true,
+      "edit_falls": false,
+      "edit_presence": true,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
       "flexible_cm": true,
       "icon": "chair",
       "icon_font": "far",
@@ -293,7 +516,13 @@ The device has to be associated with the correct location before you set the sub
       "compatible_behaviors": [
         2
       ],
-      "context_id": 11,
+      "context_id": 22,
+      "detect_falls": false,
+      "detect_presence": true,
+      "edit_falls": false,
+      "edit_presence": true,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
       "flexible_cm": true,
       "icon": "couch",
       "icon_font": "far",
@@ -307,13 +536,19 @@ The device has to be associated with the correct location before you set the sub
         0,
         3
       ],
-      "context_id": 11,
+      "context_id": 100,
       "detail": "Large area in front of an exit door.",
+      "detect_falls": true,
+      "detect_presence": true,
+      "edit_falls": true,
+      "edit_presence": false,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
       "flexible_cm": true,
       "icon": "door-open",
       "icon_font": "far",
       "length_cm": 100,
-      "title": "Exit Perimeter Door Area",
+      "title": "Exit Door Area",
       "width_cm": 152
     },
     {
@@ -326,6 +561,12 @@ The device has to be associated with the correct location before you set the sub
       ],
       "context_id": -1,
       "description": "Select this to prevent false alarms in this area of the room.",
+      "detect_falls": false,
+      "detect_presence": true,
+      "edit_falls": false,
+      "edit_presence": true,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
       "flexible_cm": true,
       "icon": "eye-slash",
       "icon_font": "far",

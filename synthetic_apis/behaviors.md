@@ -39,8 +39,22 @@ State Variable : `behaviors`
 | suggestions | Prioritized list of suggested names for each new device that selects this behavior. For example, when installing an Entry Sensor on an exit door, it is suggested that the first one be called 'Front Door', while the second Entry Sensor on an exit door be called 'Back/Side Door'. |
 | weight      | Lower weights float to the top of the list. |
 | spaces      | Prioritized list of multi-choice multi-select spaces to auto-select for each new sensor. For example, the first motion sensor should be installed in the Kitchen, so it is recommended that the app auto-select the 'Kitchen' space for this motion sensor. Note that a motion sensor can sometimes see multiple spaces, which is why that one is multi-choice multi-select. See the [Get Spaces API](https://iotapps.docs.apiary.io/#reference/locations/location-spaces/get-spaces) for a list of spaces to render in the app. |
+| force_nickname | Optional. Default is False. If True, this tells the app to skip allowing the user to nickname the device and just force the next nickname in the list of suggestions. |
+| subregions | List of compatible and recommended subregions for Vayyar Home behaviors. Defines a list of recommended subregions to create when a person selects this room for Vayyar Home. |
 
-   
+#### Subregion Object
+
+The subregion object is added to the behaviors for Vayyar Home. As the behaviors for Vayyar Home specify the room to install in, the subregions recommend what subregions should be created if the user selects that room. 
+
+After selecting a behavior, the user can be prompted to add a subregion. The subregion object describes the title and icon to show the user on the list of subregions to define, and links to a list of compatible subregion contexts to fulfill that subregion's objective.
+
+| Property | Description |
+| -------- | ----------- |
+| title | Title to suggest to the user to add a subregion, like "Add a bed" |
+| icon | Suggested icon to show nearby the title when prompting a user to add a subregion, like "bed". |
+| icon_font | Icon font package to use, usually 'far' (fontawesome.com regular). |
+| context_id_list | List of compatible context ID's for Vayyar Home that would fulfill this subregion's objectives. See the [Vayyar Home Documentation](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/vayyar.md) `vayyar_subregion_behaviors` for more details.
+
 #### JSON Content
 
 ```
@@ -593,7 +607,135 @@ State Variable : `behaviors`
         "weight": 4
       }
     ],
-    "2000": [],
+    "2000": [
+      {
+        "description": "Place the Vayyar Home in a bathroom. Install the center of the device 5 feet off the ground, and at least 1 foot away from objects on the wall like a towel rack. Do not point the Vayyar Home directly at a mirror across the room.",
+        "force_nickname": true,
+        "icon": "restroom",
+        "icon_font": "far",
+        "id": 1,
+        "name": "Bathroom",
+        "subregions": [
+          {
+            "context_id_list": [
+              10
+            ],
+            "icon": "toilet",
+            "icon_font": "far",
+            "title": "Add a toilet"
+          },
+          {
+            "context_id_list": [
+              11,
+              12
+            ],
+            "icon": "shower",
+            "icon_font": "far",
+            "title": "Add a shower"
+          },
+          {
+            "context_id_list": [
+              13
+            ],
+            "icon": "sink",
+            "icon_font": "far",
+            "title": "Add a sink"
+          }
+        ],
+        "suggestions": [
+          "Bathroom"
+        ],
+        "weight": 0
+      },
+      {
+        "description": "Place the Vayyar Home in a bedroom. Install the center of the device 5 feet off the ground, and at least 1 foot away from objects on the wall.",
+        "force_nickname": true,
+        "icon": "bed",
+        "icon_font": "far",
+        "id": 0,
+        "name": "Bedroom",
+        "subregions": [
+          {
+            "context_id_list": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "icon": "bed-alt",
+            "icon_font": "far",
+            "title": "Add a bed"
+          }
+        ],
+        "suggestions": [
+          "Bedroom"
+        ],
+        "weight": 5
+      },
+      {
+        "description": "Place the Vayyar Home in the living room. Install the center of the device 5 feet off the ground, and at least 1 foot away from objects on the wall.",
+        "force_nickname": true,
+        "icon": "couch",
+        "icon_font": "far",
+        "id": 2,
+        "name": "Living Room",
+        "subregions": [
+          {
+            "context_id_list": [
+              22,
+              20,
+              21
+            ],
+            "icon": "couch",
+            "icon_font": "far",
+            "title": "Add a couch or chair"
+          }
+        ],
+        "suggestions": [
+          "Living Room"
+        ],
+        "weight": 10
+      },
+      {
+        "description": "Place the Vayyar Home in the kitchen. Install the center of the device 5 feet off the ground, and at least 1 foot away from objects on the wall.",
+        "force_nickname": true,
+        "icon": "refrigerator",
+        "icon_font": "far",
+        "id": 3,
+        "name": "Kitchen",
+        "subregions": [
+          {
+            "context_id_list": [
+              22,
+              20,
+              21
+            ],
+            "icon": "couch",
+            "icon_font": "far",
+            "title": "Add a couch or chair"
+          }
+        ],
+        "suggestions": [
+          "Kitchen"
+        ],
+        "weight": 15
+      },
+      {
+        "description": "Place the Vayyar Home in a room or hallway. Install the center of the device 5 feet off the ground, and at least 1 foot away from objects on the wall.",
+        "force_nickname": false,
+        "icon": "home-heart",
+        "icon_font": "far",
+        "id": 4,
+        "name": "Some Other Room...",
+        "suggestions": [
+          "Room"
+        ],
+        "weight": 20
+      }
+    ],
     "9001": [
       {
         "description": "Turn off the lights automatically when everyone leaves the home or you toggle out of HOME mode.  If you come home or toggle into HOME mode in the evening, the lights will turn on for you automatically.",
