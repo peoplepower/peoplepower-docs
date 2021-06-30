@@ -31,14 +31,16 @@ msc {
 
  	# Show Connection Story
 	app << app [label="Show 'Connection' story:\n- storyType: 1"];
-	user => device [label="Connect device to power"];
-	device => device [label="Power on and connect to cellular provider"];
-	device => server [label="Connect to deviceio server"];
-	|||;
 
 	# Scan QR
 	user => app [label="Select 'Scan QR'"];
 	app << app [label="Open QR Scanner"];
+	|||;
+
+	# Connect power
+	user => device [label="Connect device to power"];
+	device => device [label="Power on and connect to cellular provider"];
+	device => server [label="Connect to deviceio server"];
 	|||;
 	user => app [label="Position screen over QR code on device"];
 	app => device [label="Scan QR code"];
