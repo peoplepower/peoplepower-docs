@@ -135,7 +135,7 @@ Only for frontend specific logic to give an idea how that parameter values shoul
 
 #### Device Model
 
-Display information specific to this described Device Model.
+Display information specific to this described Device Model.  All fields are optional.
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
@@ -147,12 +147,15 @@ Display information specific to this described Device Model.
 | customRules | Bool | Supports custom rules. Default `True`. |
 | Location Spaces | Array | Describe if this model supports spaces and what spaces are supported. See [Location Spaces](#location-spaces) |
 | supportsAR | Bool | Describes if this model includes an 3d-model and allows for AR capabilities. See [Augmented Reality](#augmented-reality) |
-| calibrationParams | Array | _Optional_ Key-value pairs, where key equals parameter name and value equals the value to check for. Devices that require a calibration step the device model should provide the required parameter name. |
-| customRules | Bool | _Optional_ Describe if this model should allow creation/management custom rules in Device UI. Default `True` |
-| codes | Bool | _Optional_ Describe if this model should allow creation/management custom rules in Device UI. Default `False` |
-| icon | String | _Optional_ String value to describe the font icon name. |
-| iconFont | String | _Optional_ String value to describe the font icon font name (e.g. "far", "iotr", etc.). |
-| ranged | Bool | _Optional_ Describe if the options icon should be gathered for values within a range of the designated option. Icons are gathered based on the next available option.  Values range to the next greatest value. For instance, a "wifiSignal" value of "-70" would retrieve the icon for the option of value "-56" because it is less then the next option value of "-56" but greater then "-71.  And a "brightness" value of "70" would retrieve the icon for the option value to "75" because it is greater then the previous option value of "50" but less then "75". Default `False` |
+| calibrationParams | Array | Key-value pairs, where key equals parameter name and value equals the value to check for. Devices that require a calibration step the device model should provide the required parameter name. |
+| customRules | Bool | Describe if this model should allow creation/management custom rules in Device UI. Default `True` |
+| codes | Bool | Describe if this model should allow creation/management custom rules in Device UI. Default `False` |
+| icon | String | String value to describe the font icon name. |
+| iconFont | String | String value to describe the font icon font name (e.g. "far", "iotr", etc.). |
+| ranged | Bool | Describe if the options icon should be gathered for values within a range of the designated option. Icons are gathered based on the next available option.  Values range to the next greatest value. For instance, a "wifiSignal" value of "-70" would retrieve the icon for the option of value "-56" because it is less then the next option value of "-56" but greater then "-71.  And a "brightness" value of "70" would retrieve the icon for the option value to "75" because it is greater then the previous option value of "50" but less then "75". Default `False` |
+| videoProfiles | Array | Describes the video profile url and name of specific camera device models. |
+| appRequiresWiFi | Bool | Require device onboarding and configuration to be done while the App is connected to Wi-Fi. Default `False` |
+| baseModelPrefix | String | Describe the association between similar device models that have the same model id prefix. Used on new device discovery if a new device was found with a similar model ID then we automatically move forward in our OOBE and do not notify the user.
 
 ##### Device List Bindings
 
@@ -196,6 +199,15 @@ Describe if this model supports spaces and what spaces are supported.
 - If the `locationSpaces` array is not included, then the device should not allow setting/editing location spaces (or have full list of spaces to choose from)
 - Also part of Device Onboarding
 - Types are defined by Stories API / Bots themselves. See the [Get Spaces API](https://iotapps.docs.apiary.io/#reference/locations/location-spaces/get-spaces) for a list of spaces to render in the App.
+
+##### Video Profiles
+
+Describes the video profile url and name of specific camera device models.
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| name     | String | Video profile name. May be displayed to the user as needed. |
+| path     | String | Video profile path used for video streaming playback. |
 
 ## Diagrams
 

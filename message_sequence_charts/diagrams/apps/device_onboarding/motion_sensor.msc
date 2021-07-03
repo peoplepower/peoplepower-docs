@@ -1,0 +1,105 @@
+# Device Onboarding - Motion Sensor
+# - Connecting and registering a Motion Sensor
+
+msc {
+	hscale = "2";
+
+	user [label="User", textcolour="maroon", arctextcolour="maroon"],
+	app [label="App", textcolour="maroon", arctextcolour="maroon"],
+	server [label="PPC Server", textcolour="navy", arctextcolour="navy"],
+	device [label="Device", textcolour="orange", arctextcolour="orange"],
+	proxy [label="Proxy", textcolour="brown", arctextcolour="brown"];
+	|||;
+	user note proxy [label="Motion Sensor Device Onboarding", textbgcolor="black", textcolor="white"];
+	|||;
+
+	# Open Add Devices menu
+	user => app [label="Select '+'"];
+	app << app [label="Show Add Items menu"];
+	|||;
+	user => app [label="Select 'Add Devices'"];
+	app => server [label="GET Device Models:\n- brand: $brand"];
+	app << server [label="Response:\n- categories: [Category]"];
+	app << app [label="Show Add Devices menu"];
+	|||;
+
+	# Select Device
+	user => app [label="Select 'Motion Sensor'"];
+	app => server [label="GET Stories:\n- brand: $brand\n- modelId: $modelId"];
+	app << server [label="Response:\n- stories: [Story]"];
+	|||;
+
+ 	# Show Connection Story
+	app << app [label="Show 'Connection' story:\n- storyType: 1"];
+	app note proxy [label="Put both device and proxy into pairing mode"];
+	user => device [label="Insert batteries or reset sensor"];
+	device => device [label="Power on and enter pairing mode"];
+	app => server [label="PUT Send a Command:\n- locationId: $locationId\n- deviceId: $proxy.deviceId\n- data: {'commandType': 0, 'commandTimeout': 60, 'params': [\n{'name': 'permitJoining', 'value': '1'}, \n{'name': 'autoAdd', 'value': '1'}]}"];
+	server => proxy [label="Forward Command to set enable pairing"];
+	proxy >> proxy [label="Set Pairing on"];
+	|||;
+
+	# Register device
+	device => proxy [label="Device pairs with proxy"];
+	proxy => server [label="POST Register Device:\n- deviceId: $deviceId\n- locationId: $locationId"];
+	proxy << server [label="Response:\n- deviceId: $deviceId\n- deviceTypeId: $deviceTypeId\n- host: $host\n- port: $port\n- useSsl: $useSsl"];
+	|||;
+	
+	# Wait for device discovery
+	app note server [label="Wait for new device. Loop every 10 seconds."];
+	app => server [label="GET devices:\n -locationId: $locationId"];
+	app << server [label="Response:\n -devices: [Device]"];
+	|||;
+	app << app [label="Check response for new device:\n- Device.newDevice == true\n- Device.connected == true"];
+	app note server [label="New device found"];
+	|||;
+
+ 	# Show Connection Success Story
+	app << app [label="Show 'Connection Success' story:\n- storyType: 2"];
+	user => app [label="Select 'Next'"];
+	|||;
+
+	# Show Device Onboarding Configuration Screens
+	app note device [label="Behaviors are provided by a synthetic API. For more information Synthetic APIs - Behaviors."];
+	app => server [label="GET State:\n- locationId: $locationId\n- name: 'behaviors'"];
+	app << server [label="Response:\n- [State Data]"];
+	app => app [label="Show 'Select Behaviors'"];
+	user => app [label="Select behavior"];
+	user => app [label="Select 'Next'"];
+	app => server [label="PUT Update a Device:\n- goalId: $goal.id"];
+	app << server [label="Response:\n- resultCode: 0"];
+	|||;
+	app note device [label="Location Spaces must be created before a device can be assigned to it.  The behavior or device model may provide a list of suggested location space type and name combinations."];
+	app => server [label="GET Spaces:\n- locationId: $locationId"];
+	app << server [label="Response:\n- [Location Spaces]"];
+	app => app [label="Show 'Select Spaces'"];
+	user => app [label="Select space"];
+	user => app [label="Select 'Next'"];
+	app note device [label="Create a new space for this location if the selected one does not exist."];
+	app => server [label="POST Update Space:\n- space.type: $spaceType\n- space.name: $spaceName"];
+	app << server [label="Response:\n- resultCode: 0\n- spaceId: $spaceId"];
+	app => server [label="PUT Update a Device:\n- spaceId: $spaceId"];
+	app << server [label="Response:\n- resultCode: 0"];
+	|||;
+	app => app [label="Show 'Device Name' UI"];
+	user => app [label="Input device name, or leave as default"];
+	user => app [label="Select 'Next'"];
+	app => server [label="PUT Update a Device:\n- desc: $textfield.text"];
+	app << server [label="Response:\n- resultCode: 0"];
+	|||;
+
+	# Show Installation Help Story
+	app => app [label="Show 'Installation' story:\n- storyType: 4"];
+	app => server [label="GET Files:\n- locationId: $locationId\n- deviceId: $deviceId\n- type: 3 (device images)"];
+	app << server [label="Response:\n- [Files]"];
+	app << app [label="Display device images"];
+	user => app [label="Select Take Picture"];
+	app => app [label="Take picture (of device)"];
+	app => server [label="POST Upload File Content:\n- locationId: $locationId\n- deviceId: $deviceId\n- name: 'Install'\n- type: 3 (device images)\n- data: ImageData"];
+	app << server [label="Response:\n- resultCode: 0"];
+	user => app [label="Select 'Done'"];
+	app => app [label="Dismiss Device Onboarding UI"];
+	|||;
+
+	user note device [label="Done", textbgcolor="black", textcolor="white"];
+}

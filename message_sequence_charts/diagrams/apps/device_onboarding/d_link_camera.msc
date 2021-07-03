@@ -1,0 +1,134 @@
+# Device Onboarding - D-Link Camera
+# - Connecting and registering a D-Link Camera
+#
+# 1. Scan / Input S/N
+# 2. Connect and unlock BLE
+# 3. Configure Wi-Fi
+# 4. Configure Nabto
+# 5. Register Device
+
+msc {
+	hscale = "2";
+
+	user [label="User", textcolour="maroon", arctextcolour="maroon"],
+	app [label="App", textcolour="maroon", arctextcolour="maroon"],
+	server [label="PPC Server", textcolour="navy", arctextcolour="navy"],
+	device [label="Device", textcolour="orange", arctextcolour="orange"],
+	proxy [label="Proxy", textcolour="violet", arctextcolour="violet"],
+	nabto [label="Nabto", textcolour="red", arctextcolour="red"];
+	|||;
+	user note nabto [label="D-Link Camera Device Onboarding", textbgcolor="black", textcolor="white"];
+	|||;
+
+	# Open Add Devices menu
+	user => app [label="Select '+'"];
+	app << app [label="Show Add Items menu"];
+	|||;
+	user => app [label="Select 'Add Devices'"];
+	app => server [label="GET Device Models:\n- brand: $brand"];
+	app << server [label="Response:\n- categories: [Category]"];
+	app << app [label="Show Add Devices menu"];
+	|||;
+
+	# Select Device
+	user => app [label="Select 'D-Link DCS-8302LH'"];
+	user => app [label="Select Proxy Smart Home Center DP2X/4X"];
+	app => server [label="GET Stories:\n- brand: $brand\n- modelId: $modelId"];
+	app << server [label="Response:\n- stories: [Story]"];
+	|||;
+
+ 	# Show Connection Story
+	app << app [label="Show 'Connection' story:\n- storyType: 1"];
+	|||;
+
+	# Wait for device discovery
+	app note server [label="Wait for new device. Loop every 10 seconds."];
+	app => server [label="GET devices:\n -locationId: $locationId"];
+	app << server [label="Response:\n- devices: [Device]"];
+	|||;
+
+	# Power on device and start discovery
+	user => device [label="Connect to power"];
+	device << device [label="Broadcast"];
+	user => app [label="Start Discovery"];
+	app << app [label="Scan for peripherals"];
+	|||;
+
+	# Connect and unock
+	app <= device [label="Discovered"];
+	app => device [label="Connect"];
+	app << device [label="Connected"];
+	user => app [label="Scan / Input Pincode"];
+	app => device [label="Unlock BLE"];
+	app << device [label="BLE unlocked"];
+	|||;
+
+	# Connect Wi-Fi
+	app => server [label="PUT Send a Command:\n- locationId: $locationId\n- deviceId: $proxy.deviceId\n- data: {'commandType': 4, 'commandTimeout': 60, 'params': [\n{'name': 'apSsid'}]}"];
+	app << server [label="Response:\n- resultCode: 0"];
+	server => proxy [label="Request parameters"];
+	proxy << proxy [label="Update Wi-Fi settings"];
+	server << proxy [label="Update parameters"];
+	app => server [label="GET Current Measurements:\n- deviceId: $proxy.deviceId\n- locationId: $locationId"];
+	app << server [label="Response:\n- measurements: [Measurement]"];
+	app => device [label="Connect Wi-Fi"];
+	app << device [label="Wi-Fi connected, notify with IP address"];
+	|||;
+
+	# Configure Nabto Service
+	app => server [label="PUT Send a Command:\n- locationId: $locationId\n- deviceId: $proxy.deviceId\n- data: {'commandType': 0, 'commandTimeout': 60, 'params': [\n{'name': 'nabto.serviceType', 'index': 'DCS-8320LH-1234, 'value': 'rtsp'}, \n{'name': 'nabto.serviceHost', 'index': 'DCS-8320LH-1234, 'value': '192.168.2.2'}, \n{'name': 'nabto.servicePort', 'index': 'DCS-8320LH-1234, 'value': '554'}]}"];
+	app << server [label="Response:\n- resultCode: 0"];
+	server => proxy [label="Add Nabto Service"];
+	proxy << proxy [label="Configure Nabto Service"];
+	server << proxy [label="Update parameters"];
+	app => server [label="GET Current Measurements:\n- deviceId: $proxy.deviceId\n- locationId: $locationId"];
+	app << server [label="Response:\n- measurements: [Measurement]"];
+	|||;
+
+	# Connect Service
+	app => nabto [label="Connect to Nabto service"];
+	nabto => proxy [label="Open tunnel"];
+	device << proxy [label="Open tunnel"];
+	nabto << proxy [label="Opened tunnel at port"];
+	app << nabto [label="Connected to Nabto service at port"];
+	|||;
+
+	# Register device
+	app note device [label="$deviceId=$peripheral.name, $deviceType=7007"];
+	app => server [label="POST Register Device:\n- deviceId: $deviceId\n- deviceType: $deviceType\n- locationId: $locationId"];
+	app << server [label="Response:\n- deviceId: $deviceId\n- deviceTypeId: $deviceTypeId\n- host: $host\n- port: $port\n- useSsl: $useSsl"];
+	|||;
+
+	# Force discovery
+	app => server [label="PUT Update a Device:\n- newDevice: true"];
+	app << server [label="Response:\n- resultCode: 0"];
+	|||;
+
+	# Device discovered
+	app << app [label="Check response for new device:\n- Device.newDevice == true\n- Device.connected == true"];
+	app note server [label="New device found"];
+	|||;
+
+ 	# Show Connection Success Story
+	app << app [label="Show 'Connection Success' story:\n- storyType: 2"];
+	user => app [label="Select 'Next'"];
+	|||;
+
+	# Show Device Onboarding Configuration Screens
+	app note device [label="For more information regarding Bot UIs, see external documentation."];
+	app => app [label="Show 'Device Name' UI"];
+	user => app [label="Input device name, or leave as default"];
+	user => app [label="Select 'Next'"];
+	app => server [label="PUT Update a Device:\n- desc: $textfield.text"];
+	app << server [label="Response:\n- resultCode: 0"];
+	|||;
+
+	# Show Installation Help Story
+	app => app [label="Show 'Installation' story:\n- storyType: 4"];
+	user note device [label="Setup region and subregion"];
+	user => app [label="Select 'Done'"];
+	app => app [label="Dismiss Device Onboarding UI"];
+	|||;
+
+	user note device [label="Done", textbgcolor="black", textcolor="white"];
+}

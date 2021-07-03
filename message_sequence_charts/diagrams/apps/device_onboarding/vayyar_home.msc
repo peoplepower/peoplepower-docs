@@ -1,6 +1,5 @@
-# Device Onboarding - Smart Home Center
-# - Connecting and registering a Smart Home Center
-# - Wi-Fi Configuration is part of our Device Onboarding logic.  See 'app_schema/wifi' and 'device_configuration/smart_home_center_wifi'.
+# Device Onboarding - Vayyar Home
+# - Connecting and registering a Vayyar Home
 
 msc {
 	hscale = "2";
@@ -10,7 +9,7 @@ msc {
 	server [label="PPC Server", textcolour="navy", arctextcolour="navy"],
 	device [label="Device", textcolour="orange", arctextcolour="orange"];
 	|||;
-	user note device [label="Smart Home Center Device Onboarding", textbgcolor="black", textcolor="white"];
+	user note device [label="Vayyar Home Device Onboarding", textbgcolor="black", textcolor="white"];
 	|||;
 
 	# Open Add Devices menu
@@ -24,56 +23,76 @@ msc {
 	|||;
 
 	# Select Device
-	user => app [label="Select 'Smart Home Center'"];
+	user => app [label="Select 'Entry Sensor'"];
 	app => server [label="GET Stories:\n- brand: $brand\n- modelId: $modelId"];
 	app << server [label="Response:\n- stories: [Story]"];
 	|||;
 
  	# Show Connection Story
 	app << app [label="Show 'Connection' story:\n- storyType: 1"];
-
-	# Scan QR
-	user => app [label="Select 'Scan QR'"];
-	app << app [label="Open QR Scanner"];
 	|||;
 
-	# Connect power
-	user => device [label="Connect device to power"];
-	device => device [label="Power on and connect to cellular provider"];
-	device => server [label="Connect to deviceio server"];
+	# Wait for device discovery
+	app note server [label="Wait for new device. Loop every 10 seconds."];
+	app => server [label="GET devices:\n -locationId: $locationId"];
+	app << server [label="Response:\n- devices: [Device]"];
 	|||;
-	user => app [label="Position screen over QR code on device"];
-	app => device [label="Scan QR code"];
+
+	# Power on device and start discovery
+	user => device [label="Connect to power"];
+	user => device [label="Start Pairing"];
+	device << device [label="Broadcast"];
+	user => app [label="Start Discovery"];
+	app << app [label="Scan for peripherals"];
 	|||;
-	app << app [label="Process QR code:\n- example: '[SN: 02000001000102AA ...]'"];
-	app note app [label="For this device, the SN is the Device ID"];
+
+	# Connect and input Wi-Fi
+	app <= device [label="Discovered"];
+	app => device [label="Connect"];
+	app << device [label="Connected"];
+	user => app [label="Input Wi-Fi"];
+	app => device [label="Update Wi-Fi"];
+	app << device [label="Notify with mac and ip address"];
 	|||;
 
 	# Register device
-	app => server [label="POST Register Device:\n- deviceId: $deviceId\n- locationId: $locationId"];
+	app note device [label="$deviceId=mac.base64, $deviceType=2000"];
+	app => server [label="POST Register Device:\n- deviceId: $deviceId\n- deviceType: $deviceType\n- locationId: $locationId"];
 	app << server [label="Response:\n- deviceId: $deviceId\n- deviceTypeId: $deviceTypeId\n- host: $host\n- port: $port\n- useSsl: $useSsl"];
 	|||;
-	server => device [label="Associate location ID"];
-	server << device [label="Begin providing measurements"];
+
+	# Configure Cloud
+	app => device [label="Update cloud settings"];
+	app << device [label="OK"];
 	|||;
-	app => server [label="PUT Update a Device:\n- deviceId: #deviceId\n- locationId: $locationId\n- newDevice: true"];
-	app << server [label="Response:\n- resultCode: 0"];
+
+	# Update Firmware
+	app note device [label="Device provides properties Bool hasNewVersion and Int updateVersionCode to describe if a new version is available.  The App should update the device if needed."];
+	app => device [label="Check for firmware update"];
+	app << device [label="OK"];
+	app => device [label="Update if needed"];
+	app << device [label="Updated"];
 	|||;
-	app note server [label="Wait for new device. Loop every 10 seconds."];
-	app => server [label="GET devices:\n -locationId: $locationId"];
-	app << server [label="Response:\n -devices: [Device]"];
+
+	# Reboot and connnect
+	app => device [label="Reboot"];
+	app << device [label="OK"];
+	device << device [label="Reboot and connect to cloud"];
+	device => server [label="Connect to mqtt"];
 	|||;
+
+	# Device discovered
 	app << app [label="Check response for new device:\n- Device.newDevice == true\n- Device.connected == true"];
 	app note server [label="New device found"];
 	|||;
 
  	# Show Connection Success Story
 	app << app [label="Show 'Connection Success' story:\n- storyType: 2"];
-	app note app [label="Wi-Fi configuration may be done now that the device is online.  See 'app_schema/wifi'"];
 	user => app [label="Select 'Next'"];
 	|||;
 
 	# Show Device Onboarding Configuration Screens
+	app note device [label="For more information regarding Bot UIs, see external documentation."];
 	app => app [label="Show 'Device Name' UI"];
 	user => app [label="Input device name, or leave as default"];
 	user => app [label="Select 'Next'"];
@@ -83,6 +102,7 @@ msc {
 
 	# Show Installation Help Story
 	app => app [label="Show 'Installation' story:\n- storyType: 4"];
+	user note device [label="Setup region and subregion"];
 	user => app [label="Select 'Done'"];
 	app => app [label="Dismiss Device Onboarding UI"];
 	|||;

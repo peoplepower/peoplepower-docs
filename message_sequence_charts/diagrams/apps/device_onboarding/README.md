@@ -21,6 +21,9 @@
 * [Diagrams](#diagrams)
     * [Smart Home Center](#smart-home-center)
     * [Entry Sensor](#entry-sensor)
+    * [Motion Sensor](#motion-sensor)
+    * [Vayyar Home](#vayyar-home)
+    * [D-Link Camera](#d-link-camera)
 
 ## General Flow
 
@@ -156,7 +159,7 @@ Standard page style with media, subtitle, content, and actions.
 <a id="page-style-picture"></a>
 ### Picture
 
-"Take a Picture" page style with camera capabilities, subtitle, content, and actions. Used to capture and list images during device onboarding (e.g. installation images). See [Entry Sensor](#device-entry-sensor) for more information.
+"Take a Picture" page style with camera capabilities, subtitle, content, and actions. Used to capture and list images during device onboarding (e.g. installation images). See [Entry Sensor](#entry-sensor) for more information.
 
 *Identifier*
 
@@ -290,3 +293,209 @@ Params:
 - name: "Install"
 - type: 3 (device images)
 - data: ImageData
+
+### Motion Sensor
+
+![png](./motion_sensor.png)
+
+#### APIs
+
+##### [GET Device Models](https://iotapps.docs.apiary.io/#reference/creating-products/device-models/get-device-models)
+
+*Gather device models*
+
+Params:
+- brand: $brand
+
+##### [GET Stories](https://iotapps.docs.apiary.io/#reference/creating-products/stories/get-stories)
+
+*Gather device model stories*
+
+Params:
+- brand: $brand
+- modelId: $modelId
+
+##### [PUT Send a Command](https://iotapps.docs.apiary.io/#reference/device-measurements/parameters-for-a-specific-device/send-a-command)
+
+*Put proxy into pairing mode*
+
+Params:
+- locationId: $locationId
+- deviceId: $proxy.deviceId
+- data: `{'commandType': 0, 'commandTimeout': 60, 'params': [\n{'name': 'permitJoining', 'value': '1'}, \n{'name': 'autoAdd', 'value': '1'}]}`
+
+##### [GET devices](https://iotapps.docs.apiary.io/#reference/devices/manage-devices/get-a-list-of-devices)
+
+*Refresh devices*
+
+Params:
+- locationId: $locationId
+
+##### [GET State](https://iotapps.docs.apiary.io/#reference/synthetic-apis/states/get-state)
+
+*Gather device type Behaviors*
+
+See Synthetic API [Behaviors](synthetic_apis/behaviors.md) for more information
+
+Params:
+- locationId: $locationId
+- name: 'behaviors'
+
+##### [GET Spaces](https://iotapps.docs.apiary.io/#reference/locations/location-spaces/get-spaces)
+
+*Gather existing location spaces*
+
+Params:
+- locationId: $locationId
+
+##### [POST Space](https://iotapps.docs.apiary.io/#reference/locations/location-spaces/update-space)
+
+*Add or update an existing space*
+
+Params:
+- locationId: $locationId
+- spaceId: $spaceId
+- type: $spaceType
+- name: $spaceName
+
+##### [PUT Update a Device](https://iotapps.docs.apiary.io/#reference/devices/manage-single-device/update-a-device)
+
+*Update device goal, space, and name (See Synthetic API [Behaviors](synthetic_apis/behaviors.md))*
+
+Params:
+- goalId: $goal.id
+
+*Assign device to location space*
+
+Params:
+- spaceId: $spaceId
+
+*Update device name*
+
+Params:
+- desc: $textfield.text
+
+##### [GET Files](https://iotapps.docs.apiary.io/#reference/application-files/files-management/get-files)
+
+*Gather device files*
+
+Params:
+- locationId: $locationId
+- deviceId: $deviceId
+- type: 3 (device images)
+
+##### [POST Upload File Content](https://iotapps.docs.apiary.io/#reference/application-files/files-management/upload-file-content)
+
+*Upload device file*
+
+Params:
+- locationId: $locationId
+- deviceId: $deviceId
+- name: "Install"
+- type: 3 (device images)
+- data: ImageData
+
+### Vayyar Home
+
+![png](./vayyar_home.png)
+
+*Vayyar Home BLE configuration* 
+
+1. Scan S/N
+2. Register Device
+3. Connect BLE
+4. Configure Wi-Fi
+5. Configure Cloud
+6. Check Firmware
+7. Update Firmware
+8. Reboot
+
+#### APIs
+
+##### [GET Device Models](https://iotapps.docs.apiary.io/#reference/creating-products/device-models/get-device-models)
+
+*Gather device models*
+
+Params:
+- brand: $brand
+
+##### [GET Stories](https://iotapps.docs.apiary.io/#reference/creating-products/stories/get-stories)
+
+*Gather device model stories*
+
+Params:
+- brand: $brand
+- modelId: $modelId
+
+##### [POST Register Device](https://iotapps.docs.apiary.io/#reference/devices/manage-devices/register-a-device)
+
+*Register device*
+
+Params:
+- deviceId: $deviceId
+- locationId: $locationId
+
+##### [GET devices](https://iotapps.docs.apiary.io/#reference/devices/manage-devices/get-a-list-of-devices)
+
+*Refresh devices*
+
+Params:
+ -locationId: $locationId
+
+##### [PUT Update a Device](https://iotapps.docs.apiary.io/#reference/devices/manage-single-device/update-a-device)
+
+*Update device name*
+
+Params:
+- desc: $textfield.text
+
+### D-Link Camera
+
+![png](./d-link-camera.png)
+
+*D-Link Camera BLE configuration* 
+
+1. Scan / Input S/N
+2. Connect and unlock BLE
+3. Configure Wi-Fi
+4. Configure Nabto
+5. Register Device
+
+#### APIs
+
+##### [GET Device Models](https://iotapps.docs.apiary.io/#reference/creating-products/device-models/get-device-models)
+
+*Gather device models*
+
+Params:
+- brand: $brand
+
+##### [GET Stories](https://iotapps.docs.apiary.io/#reference/creating-products/stories/get-stories)
+
+*Gather device model stories*
+
+Params:
+- brand: $brand
+- modelId: $modelId
+
+##### [POST Register Device](https://iotapps.docs.apiary.io/#reference/devices/manage-devices/register-a-device)
+
+*Register device*
+
+Params:
+- deviceId: $deviceId
+- locationId: $locationId
+
+##### [GET devices](https://iotapps.docs.apiary.io/#reference/devices/manage-devices/get-a-list-of-devices)
+
+*Refresh devices*
+
+Params:
+ -locationId: $locationId
+
+##### [PUT Update a Device](https://iotapps.docs.apiary.io/#reference/devices/manage-single-device/update-a-device)
+
+*Update device name*
+
+Params:
+- desc: $textfield.text
