@@ -1,0 +1,22 @@
+# Services and Alerts - Services Summary
+# - Summary list of location services and alerts
+
+msc {
+	hscale  = "2";
+
+	user [label="User", textcolour="maroon", arctextcolour="maroon"],
+	app [label="App", textcolour="maroon", arctextcolour="maroon"],
+	server [label="PPC Server", textcolour="navy", arctextcolour="navy"];
+	|||;
+	user note server [label="Services Summary", textbgcolor="black", textcolor="white"];
+	|||;
+	user note server [label="Starting on Dashboard tab", textbgcolor="white", textcolor="black"];
+	user => app [label="Select Services & Alerts"];
+	app => server [label="GET location state:\n- locationId: $locationId\n- name: services"];
+	app << server [label="Response:\n- value: $value"];
+	app => server [label="GET questions:\n- locationId: $locationId"];
+	app << server [label="Response:\n- questions: [Question]"];
+	user note server [label="Display a section for each service.\nShow the service details, along with the `service.questionId` if provided.", textbgcolor="black", textcolor="white"];
+	app << app [label="Show Services & Alerts"];
+	user note server [label="Done", textbgcolor="black", textcolor="white"];
+}

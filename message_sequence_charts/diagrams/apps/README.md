@@ -11,3 +11,4 @@ Each component includes additional documentation on included APIs and processes.
 * [Device Onboarding](device_onboarding/README.md)
 * [Device UI](device_ui/README.md)
 * [User Login and Registration](user_login_and_registration/README.md)
+* [Services and Alerts](services_and_alerts/README.md)
