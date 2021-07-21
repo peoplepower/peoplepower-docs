@@ -19,6 +19,7 @@
 Params:
 - locationId: $locationId
 - name: services
+- name: action_plans
 
 ##### [GET Questions](https://iotapps.docs.apiary.io/#reference/user-communications/questions/get-questions)
 
