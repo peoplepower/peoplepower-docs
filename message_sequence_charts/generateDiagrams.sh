@@ -6,7 +6,7 @@ declare -a subdirectories=(
 )
 
 for dir in "${subdirectories[@]}" ; do
-	for i in diagrams/$dir/*/motion_sensor.msc ; do
+	for i in diagrams/$dir/*/**.msc ; do
 		echo $i
 		mscgen -T eps -i $i
 		mscgen -T png -i $i

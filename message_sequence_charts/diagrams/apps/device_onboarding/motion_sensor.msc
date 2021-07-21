@@ -69,15 +69,12 @@ msc {
 	app => server [label="PUT Update a Device:\n- goalId: $goal.id"];
 	app << server [label="Response:\n- resultCode: 0"];
 	|||;
-	app note device [label="Location Spaces must be created before a device can be assigned to it.  The behavior or device model may provide a list of suggested location space type and name combinations."];
+	app note device [label="The device model declares if location spaces are available for this device.  If the model's displayInfo has the key 'supportsSpaces=True' then the app should present the Spaces Configuration screen.  The app should pre-select displayed spaces as declared by the selected behaviors `spaces` property."];
 	app => server [label="GET Spaces:\n- locationId: $locationId"];
 	app << server [label="Response:\n- [Location Spaces]"];
 	app => app [label="Show 'Select Spaces'"];
 	user => app [label="Select space"];
 	user => app [label="Select 'Next'"];
-	app note device [label="Create a new space for this location if the selected one does not exist."];
-	app => server [label="POST Update Space:\n- space.type: $spaceType\n- space.name: $spaceName"];
-	app << server [label="Response:\n- resultCode: 0\n- spaceId: $spaceId"];
 	app => server [label="PUT Update a Device:\n- spaceId: $spaceId"];
 	app << server [label="Response:\n- resultCode: 0"];
 	|||;
