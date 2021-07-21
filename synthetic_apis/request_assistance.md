@@ -6,9 +6,11 @@ Enable mobile apps and smart speakers to request assistance for the user.
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
-| type | int | Required. Type of assistance request, see the Types table. |
-| agent | int | Preferred. Type of device that is making this request, so we can make a comment about the method used. |
-| user_id | int | Optional. User ID that is making the request, if available. |
+| `type` | int | Required. Type of assistance request, see the Types table. |
+| `agent` | int | Preferred. Type of device that is making this request, so we can make a comment about the method used. |
+| `user_id` | int | Optional. User ID that is making the request, if available. |
+| `latitude` | String | Optional. Latitude for mobile alerts. |
+| `longitude` | String | Optional. Longitude for mobile alerts. |
 
 #### Types
 
@@ -37,6 +39,8 @@ Data Stream Address: `request_assistance`
   "type": 0,
   "agent": 0,
   "user_id": 123456789
+  "latitude": "44.062211",
+  "longitude": "-79.500925"
 }
 ```
 
