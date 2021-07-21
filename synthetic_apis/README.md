@@ -17,6 +17,7 @@
 + [Multistream Messages](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/multistream.md)
 + [Message](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/message.md)
 + [Narrate](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/narrate.md)
++ [Action Plans](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/action_plans.md)
 
 #### Devices and Automations
 + [Behaviors](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/behaviors.md)
