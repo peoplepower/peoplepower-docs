@@ -18,6 +18,7 @@
     * [Info](#page-style-info)
     * [Connect](#page-style-connect)
     * [Picture](#page-style-picture)
+    * [Input](#page-style-input)
 * [Diagrams](#diagrams)
     * [Smart Home Center](#smart-home-center)
     * [Entry Sensor](#entry-sensor)
