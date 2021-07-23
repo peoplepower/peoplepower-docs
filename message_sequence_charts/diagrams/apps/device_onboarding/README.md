@@ -441,7 +441,7 @@ Params:
 
 ### D-Link Camera
 
-![png](./d-link-camera.png)
+![png](./d_link_camera.png)
 
 *D-Link Camera BLE configuration* 
 
