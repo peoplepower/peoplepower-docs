@@ -165,6 +165,17 @@ Standard page style with media, subtitle, content, and actions.
 
 `info`
 
+<a id="page-style-input"></a>
+### Input
+
+In-line text input field. See [Story Page Input Types](../device_ui/README.md#story-page-input-types) for more information.
+
+IMPORTANT: This feature is under development.  Fall back to `info`.
+
+*Identifier*
+
+`input`
+
 ## Diagrams
 
 ### Smart Home Center
