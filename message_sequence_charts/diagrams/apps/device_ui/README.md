@@ -208,6 +208,32 @@ Describes the video profile url and name of specific camera device models.
 | name     | String | Video profile name. May be displayed to the user as needed. |
 | path     | String | Video profile path used for video streaming playback. |
 
+#### Story
+
+Display information specific to this described Story.  All fields are optional.
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| inputs | Array | Array to describe story page inputs. See [Story Page Inputs](#story_page_inputs). |
+
+##### Story Page Inputs
+
+Describe if this story supports in-line inputs.
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| type | String | Type of input. See [Story Page Input Types](#story-page-input-types). |
+| pageIndex | Int | Page index to include the input |
+| inputText | String | Input title text shown along side input |
+
+###### Story Page Input Types
+
+Describe the input characteristics
+
+| Input Type | Description |
+| ---------- | ----------- |
+| deviceName | Input to change the device name.  E.g. shown in connection success story during device onboarding.
+
 ## Diagrams
 
 ### Smart Home Center
