@@ -348,16 +348,6 @@ Params:
 Params:
 - locationId: $locationId
 
-##### [POST Space](https://iotapps.docs.apiary.io/#reference/locations/location-spaces/update-space)
-
-*Add or update an existing space*
-
-Params:
-- locationId: $locationId
-- spaceId: $spaceId
-- type: $spaceType
-- name: $spaceName
-
 ##### [PUT Update a Device](https://iotapps.docs.apiary.io/#reference/devices/manage-single-device/update-a-device)
 
 *Update device goal, space, and name (See Synthetic API [Behaviors](synthetic_apis/behaviors.md))*
@@ -451,7 +441,7 @@ Params:
 
 ### D-Link Camera
 
-![png](./d-link-camera.png)
+![png](./d_link_camera.png)
 
 *D-Link Camera BLE configuration* 
 
