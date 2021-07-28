@@ -17,6 +17,12 @@ In addition, there are several APIs toward the beginning of the documentation fo
 
 Use WebSockets in some time-critical experiences (such as updating the UI with bot-driven [Synthetic APIs](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis) or displaying alerts on an administrative console), instead of polling with RESTful APIs.
 
+## Cloud-to-Cloud Streaming 
+
+[Event Streaming Documentation](https://github.com/peoplepower/peoplepower-docs/blob/master/platform_apis/event_streaming.md)
+
+People Power's platform can stream events, insights, subscriptions, and more to partner platforms.
+
 ## Administrative API
 http://iotadmins.docs.apiary.io
 
