@@ -19,6 +19,7 @@
     * [Connect](#page-style-connect)
     * [Picture](#page-style-picture)
     * [Input](#page-style-input)
+    * [Bundle](#page-style-bundle)
 * [Diagrams](#diagrams)
     * [Smart Home Center](#smart-home-center)
     * [Entry Sensor](#entry-sensor)
@@ -176,6 +177,17 @@ IMPORTANT: This feature is under development.  Fall back to `info`.
 *Identifier*
 
 `input`
+
+<a id="page-style-bundle"></a>
+### Bundle
+
+Display device bundle (e.g. packs) and allow the user to navigate through the device onboarding sequences for each device. See [Story Page Input Types](../device_ui/README.md#story_page_bundles) for more information.
+
+IMPORTANT: This feature is under development.  Fall back to `info`.
+
+*Identifier*
+
+`bundle`
 
 ## Diagrams
 
