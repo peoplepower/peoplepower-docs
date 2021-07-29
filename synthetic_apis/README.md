@@ -3,26 +3,34 @@
 ## Synthetic API Libraries
 
 #### User Interfaces
-+ [Dashboard Header](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dashboard_header.md)
-+ [Dashboard Status](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dashboard_status.md)
-+ [Services and Alerts](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/services.md)
-+ [Insights](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/insights.md)
-+ [Daily Report](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dailyreport.md)
-+ [Trends](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/trends.md)
-+ [Tasks](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/tasks.md)
-+ [Request Assistance](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/request_assistance.md)
-+ [User Activity](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/user_activity.md)
+
+| Synthetic API | Input Addresses | Output Address | Description |
+| ------------- | --------------- | -------------- | ----------- |
+| [Dashboard Header](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dashboard_header.md) | `update_dashboard_header` | `dashboard_header` | #1 thing you need to know about this location. |
+| [Dashboard Status](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dashboard_status.md) | `update_dashboard_content` | `now` | Interesting events that are happening now, or happened recently. | 
+| [Services and Alerts](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/services.md) | | `services` | List of available services and alerts to turn on or off. |
+| [Insights](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/insights.md) | | `insights` | App-friendly summary of current insights in this location (occupancy, sleep, temperature, etc.). |
+| [Daily Report](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/dailyreport.md) | `daily_report_entry` | `dailyreport` | Categorized list of important events that have happened at this location each day. |
+| [Trends](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/trends.md) | `capture_trend_data` and `remove_trend` | `location_properties` containing static overhead information, and `trends` containing dynamic data | Monitor trends across a variety of lifestyle patterns and Activites of Daily Living and identify when those patterns may be trending abnormal. |
+| [Tasks](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/tasks.md) | | | Assign or update a task to another person, or mark an existing task complete. |
+| [Request Assistance](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/request_assistance.md) | `request_assistance` | | Request assistance from the mobile app or smart speaker, including emergency help. | 
+| [User Activity](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/user_activity.md) | `user_activity` | | Share information about what a user is doing in a mobile app with a bot, so the bot can take action and provide timely and relevant feedback and communications. |
 
 #### User Communications
-+ [Multistream Messages](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/multistream.md)
-+ [Message](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/message.md)
-+ [Narrate](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/narrate.md)
-+ [Action Plans](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/action_plans.md)
+
+| Synthetic API | Input Addresses | Output Address | Description |
+| ------------- | --------------- | -------------- | ----------- |
+| [Multistream Messages](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/multistream.md) | `multistream` | | Deliver multiple data stream messages (Synthetic API inputs) simultaneously. |
+| [Message](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/message.md) | `message` | | Communicate with users over push notification, SMS, and email. |
+| [Action Plans](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/action_plans.md) | | `action_plans` | Assist mobile apps with communicating to users about the protocol for resolving problems that require human intervention. |
 
 #### Devices and Automations
-+ [Behaviors](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/behaviors.md)
-+ [Bot-driven Rules](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/rules.md)
-+ [Vayyar Home](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/vayyar.md)
+
+| Synthetic API | Input Addresses | Output Address | Description |
+| ------------- | --------------- | -------------- | ----------- |
+| [Behaviors](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/behaviors.md) | | `behaviors` | Behaviors provide the available user-selectable context for each device. |
+| [Bot-driven Rules](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/rules.md) | | | Bot-driven rules engine. |
+| [Vayyar Home](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/vayyar.md) | `set_vayyar_room`, `set_vayyar_subregion`, `delete_vayyar_subregion`, `set_vayyar_config` | `vayyar_room`, `vayyar_subregions`, `vayyar_subregion_behaviors`| Fully manage Vayyar Home devices to detect falls and occupancy. |
 
 <!---
 #### Energy Management
@@ -44,6 +52,7 @@ Bots receive messages from the outside world (and between microservices running 
 [Data Stream Message API Documentation](https://iotapps.docs.apiary.io/reference/synthetic-apis/data-stream-messages/send-message)
 
 #### Properties of Data Stream Messages
+
 * Bots and apps and other tools capable of making RESTful API calls can send data stream messages.
 * Each data stream message contains an address and arbitrary JSON content.
 * Each bot has to specify which data stream addresses it can receive messages for. Addresses can be populated in the bot's `runtime.json` files.
@@ -62,11 +71,11 @@ In an implementation of a synchronous platform API for POST operations where the
 But this kind of synchronous response isn't possible with a data stream message. Therefore, when object management is needed, a best practice is to have the app generate a unique ID for its own object and pass in this ID with the content. A UUID is an obvious choice for an app-generated unique ID for objects created and stored via Synthetic API.
 
 
-## Outputs: State Variables
+## Outputs: Location State Variables
 
 Bots can create `state` variables to provide data back out to applications or voice UI's. These state variables are stored in a way that can be accessed at any time through a RESTful API call or WebSocket.
 
-[State Variable API Documentation](https://iotapps.docs.apiary.io/#reference/synthetic-apis/states/get-state)
+[Location States API Documentation](https://iotapps.docs.apiary.io/#reference/synthetic-apis/states/get-state)
 
 #### Properties of State Variables
 * Like data stream messages, state variables have an address and arbitrary JSON content.
