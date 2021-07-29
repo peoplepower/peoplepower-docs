@@ -215,6 +215,7 @@ Display information specific to this described Story.  All fields are optional.
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 | inputs | Array | Array to describe story page inputs. See [Story Page Inputs](#story_page_inputs). |
+| deviceBundle | Key:Value | Key value list to describe the different components of this device bundle. See [Story Page Bundles](#story_page_bundles). |
 
 ##### Story Page Inputs
 
@@ -233,6 +234,35 @@ Describe the input characteristics
 | Input Type | Description |
 | ---------- | ----------- |
 | deviceName | Input to change the device name.  E.g. shown in connection success story during device onboarding.
+
+##### Story Page Bundles
+
+Describe if this story supports device bundles.
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| id | String | Identifier for this bundle. Usually maps to the primary device model ID. |
+| desc | String | Description of this device bundle. (e.g. "Family Pack 1") |
+| iconIndexes | Array | Array of integers. Show bundle icons for specific page indexes only. (deprecated) |
+| models | Array | Array of device bundle models included with this bundle. See [Story Page Bundle Device Models](#story_page_bundle_device_models). |
+
+###### Story Page Bundle Device Models
+
+Describes all the device models associated with this device bundle.  The order of this array describes the order at which the app should guide the user through adding devices.
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| modelId | String | Model ID of this device. (deprecated, use "modelIds" instead.) |
+| modelIds | Array | Array of model IDs for this bundle device.  Allows for similar devices to be associated within the bundle. |
+| count| Int | Number of devices needed to fulfill this model requirement |
+| isProxy | Bool | Describes the primary proxy device(s) that will be used to add additional devices within a bundle. |
+| indexes | Array | Array of integers. Page indexes for this model. |
+
+The app should analyze and compare the current number of registered devices with the number of indexes provided by a given device model.  The app should display the specified page index as compared with the number of registered devices when the user selects the specific device. For instance, if the model describes `count=2` and `indexes=[3,4]` and `1` device of this model has been registered, then the app should display story page `4` after selecting the device model to add.
+
+If a device model describes itself with `isProxy=true`, then all device models that do not describe themselves with this value should not be selectable until the proxy devices has been registered.  (e.g. You must add your gateway before the entry sensor.)
+
+The app should always show the first page of the bundle story along with the list of bundle devices to be added.
 
 ## Diagrams
 
