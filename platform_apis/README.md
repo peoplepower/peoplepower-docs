@@ -42,3 +42,10 @@ This is private bot API documentation for bot infrastructure developers. The API
 
 Today, we link bots to subscriptions manually on the backend, and there are no APIs publicly or privately exposed to manage the definitions of these subscriptions. We rely on communications with our server team to define and manage the available subscription services in each organization.
 
+
+## Security Modes and Occupancy Status
+
+[Security Modes and Occupancy Status](https://github.com/peoplepower/peoplepower-docs/blob/master/platform_apis/modes.md)
+
+Explanation on how to configure and interpret the "Location Scene" field to be recognized by existing application layers.
+
