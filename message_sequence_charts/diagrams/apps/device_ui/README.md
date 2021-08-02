@@ -15,6 +15,7 @@
         * [Device Model](#device-model)
         * [Device List Bindings](#device-list-bindings)
         * [Location Spaces](#location-spaces)
+        * [Story](#story)
 * [Diagrams](#diagrams)
     * [Smart Home Center](#smart-home-center)
 
