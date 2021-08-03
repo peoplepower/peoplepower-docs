@@ -20,6 +20,7 @@
     * [Picture](#page-style-picture)
     * [Input](#page-style-input)
     * [Bundle](#page-style-bundle)
+    * [Picker](#page-style-picker)
 * [Diagrams](#diagrams)
     * [Smart Home Center](#smart-home-center)
     * [Entry Sensor](#entry-sensor)
@@ -188,6 +189,17 @@ IMPORTANT: This feature is under development.  Fall back to `info`.
 *Identifier*
 
 `bundle`
+
+<a id="page-style-picker"></a>
+### Picker
+
+List of picker elements displayed below story page content.  Tapping individual items should present user with an input UI element. See [Story Page Input Types](../device_ui/README.md#story_page_picker_sets) for more information.
+
+IMPORTANT: This feature is under development.  Fall back to `info`.
+
+*Identifier*
+
+`picker`
 
 ## Diagrams
 
