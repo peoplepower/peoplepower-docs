@@ -218,6 +218,7 @@ Display information specific to this described Story.  All fields are optional.
 | -------- | ---- | ----------- |
 | inputs | Array | Array to describe story page inputs. See [Story Page Inputs](#story_page_inputs). |
 | deviceBundle | Key:Value | Key value list to describe the different components of this device bundle. See [Story Page Bundles](#story_page_bundles). |
+| pickers | Array | Array to describe story page picker sets. See [Story Page Picker Set](#story_page_picker_sets). |
 
 ##### Story Page Inputs
 
@@ -265,6 +266,33 @@ The app should analyze and compare the current number of registered devices with
 If a device model describes itself with `isProxy=true`, then all device models that do not describe themselves with this value should not be selectable until the proxy devices has been registered.  (e.g. You must add your gateway before the entry sensor.)
 
 The app should always show the first page of the bundle story along with the list of bundle devices to be added.
+
+##### Story Page Picker Sets
+
+Describe if this story supports pickers.
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| id | String | Identifier for this picker set. Application layer responsible for understanding available values |
+| desc | String | Description of this picker set |
+| index | Int | Page index this picker set should be displayed at |
+| pickers | Array | Array of picker definitions for this set. See [Story Page Picker](#story_page_picker) |
+
+###### Story Page Picker
+
+Describe individual story page picker elements.
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| id | String | Identifier for this picker.  Application layer responsible for understanding available values |
+| desc | String | Description text displayed for this picker |
+| placeholder | String | Placeholder text displayed for this picker |
+| type | String | Picker type. Available types: "distance" - meter / feet |
+| min | Int | Minimum distance. Required for "distance" type |
+| max | Int | Minimum distance. Required for "distance" type |
+| iconName | String | Icon name. Optional |
+| iconFont | String | Icon font type. Optional |
+| iconColor | String | Icon hex color. Optional |
 
 ## Diagrams
 
