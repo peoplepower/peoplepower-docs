@@ -20,8 +20,9 @@ Insights are based on available data and not guaranteed to exist in the `insight
 | `sleep.bedtime_ms` | int | Bedtime in unix epoch milliseconds. |
 | `sleep.wakeup_ms` | int | Wakeup time in unix epoch milliseconds. |
 | `security_mode` | String | Mode of the system - HOME (disarmed); AWAY (fully armed); STAY (perimeter armed); TEST (test mode). |
-| `occupancy_status` | String | Occupancy status - PRESENT; ABSENT; SLEEP; VACATION; H2A (going away); A2H (expected home soon); H2S (going to sleep soon); S2H (waking up soon). | 
-| `last_seen` | String | Description of where occupants were last seen. Note the `device_id` and `device_desc` fields will provide extra details about the sensors that last observed activity. |
+| `occupancy.status` | String | Occupancy status - PRESENT; ABSENT; SLEEP; VACATION; H2A (going away); A2H (expected home soon); H2S (going to sleep soon); S2H (waking up soon). | 
+| `occupancy.return_ms` | int | Approximate time in unix epoch ms occupants are expected to return. | 
+| `occupancy.last_seen` | String | Description of where occupants were last seen. Note the `device_id` and `device_desc` fields will provide extra details about the sensors that last observed activity. |
 
 ## Output
 
