@@ -25,7 +25,7 @@ State Variable : `action_plans`
 ```
 {
   "value": {
-    "actions_plans": {
+    "action_plans": {
       "care.bathroomactivity": {
         "allow_dispatch": true,
         "allow_ecc": true,
