@@ -23,6 +23,22 @@ Insights are based on available data and not guaranteed to exist in the `insight
 | `occupancy.status` | String | Occupancy status - PRESENT; ABSENT; SLEEP; VACATION; H2A (going away); A2H (expected home soon); H2S (going to sleep soon); S2H (waking up soon). | 
 | `occupancy.return_ms` | int | Approximate time in unix epoch ms occupants are expected to return. This could be in the past if occupants were expected home earlier. | 
 | `occupancy.last_seen` | String | Description of where occupants were last seen. Note the `device_id` and `device_desc` fields will provide extra details about the sensors that last observed activity. |
+| `sleep.overslept` | bool | If wake up early than expect. |
+| `sleep.underslept` | bool | If sleep over 30 minutes than expect. |
+| `sleep.low_sleep_quality.days` | int | Consecutive days with declining sleep quality. |
+| `sleep.too_many_bathrooms.days` | int | Consecutive nights with lots of visits to the bathroom. |
+| `sleep.low_sleep_quality.warning` | bool | If sleep with low quality in consecutive days. |
+| `sleep.too_many_bathrooms.warning` | bool | If bathroom have lots of visits in consecutive nights. |
+| `device.blindspot.<device_id>` | bool | If location has potential blind spot near <device_name>. |
+| `device.name_behavior_mismatched.<device_id>` | bool | If <device_name> has mismatched name vs. behavior. |
+| `device.low_battery.<device_id>` | int | Device <device_name> with low battery. |
+| `device.cellular.<device_id>` | bool | If gateway <device_name> connected to cellular. |
+| `device.ethernet.<device_id>` | bool | If gateway <device_name> connected to ethernet. |
+| `device.disconnected.<device_id>` | bool | If gateway <device_name> disconnected. |
+| `device.wall_powered.<device_id>` | bool | If gateway <device_name> switched to wall power. |
+| `device.battery_powered.<device_id>` | bool | If gateway <device_name>switched to battery power. |
+| `entry.broken.<device_id>` | bool | If Entry sensor <device_name> is broken. |
+| `device.offline.<device_id>` | bool | If device <device_name> is offline. |
 
 ## Output
 
