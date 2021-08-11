@@ -17,6 +17,18 @@ Insights are based on available data and not guaranteed to exist in the `insight
 | `sleep.sleep_score` | float | Relative sleep score. Deleted when occupants start sleeping. |
 | `sleep.bedtime_score` | float | Consistency of bedtime, a component of the sleep score. A low value indicates the occupants should try to go to bed at a more consistent time. Deleted when occupants start sleeping. |
 | `sleep.wakeup_score` | float | Consistency of wake-up time, a component of the sleep score. A low value indicates the occupants should try to wake up at a more consistent time. Deleted when occupants start sleeping. |
+| `sleep.low_sleep_quality.days` | int | Number of days that occupants have experienced a low sleep quality. |
+| `sleep.low_sleep_quality.warning` | True | Appears when there have been 4+ consecutive days of below-average sleep quality. |
+| `sleep.too_many_bathrooms.days` | int | Number of days that occupants have visited the bathroom 'too many times' at night. |
+| `sleep.too_many_bathrooms.warning` | True | Appears when there have been 2+ consecutive days of too many bathroom visits at night. |
+| `device.blindspot.{device_id}` | True | Appears when there is a blind spot identified near a sensor with this device ID. Indicates a missing entry or motion sensor nearby. |
+| `device.alwaysopen.{device_id}` | True | Appears when the entry sensor with this device ID appears to be always open, and therefore broken (magnet fell off, door is always open, etc.). |
+| `device.name_behavior_mismatched.{device_id}` | True | Appears when the descriptive name of the device does not match the behavior selected for that device. For example, an entry sensor with a behavior for a perimeter door named 'Medicine Cabinet'. |
+| `device.wall_powered.{device_id}` | True | Appears when the gateway is on wall power. |
+| `device.battery_powered.{device_id}` | True | Appears when the gateway with the given device ID is being powered by battery. |
+| `device.cellular.{device_id}` | True | Appears when the gateway with the given device ID is connected to cellular. |
+| `device.ethernet.{device_id}` | True | Appears when the gateway with the given device ID is connected to ethernet. |
+| `device.offline.{device_id}` | True | The device with the given ID is offline. |
 | `security_mode` | String | Mode of the system - HOME (disarmed); AWAY (fully armed); STAY (perimeter armed); TEST (test mode). |
 | `occupancy_status` | String | Occupancy status - PRESENT; ABSENT; SLEEP; VACATION; H2A (going away); A2H (expected home soon); H2S (going to sleep soon); S2H (waking up soon). | 
 | `last_seen` | String | Description of where occupants were last seen. Note the `device_id` and `device_desc` fields will provide extra details about the sensors that last observed activity. |
