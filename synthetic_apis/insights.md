@@ -29,8 +29,10 @@ Insights are based on available data and not guaranteed to exist in the `insight
 | `device.wall_powered.{device_id}` | True | Appears when the gateway is on wall power. |
 | `device.battery_powered.{device_id}` | True | Appears when the gateway with the given device ID is being powered by battery. |
 | `device.cellular.{device_id}` | True | Appears when the gateway with the given device ID is connected to cellular. |
-| `device.ethernet.{device_id}` | True | Appears when the gateway with the given device ID is connected to ethernet. |
+| `device.broadband.{device_id}` | True | Appears when the gateway with the given device ID is connected to broadband internet (WiFi/Ethernet). |
 | `device.offline.{device_id}` | True | The device with the given ID is offline. |
+| `device.low_battery.{device_id}` | int | This device has a low battery. The value is the current battery level from 0-100%. |
+| `device.low_signal.{device_id}` | float | This device appears to have a low wireless signal strength. The value is the average RSSI (receive signal strength indicator). |
 | `security_mode` | String | Mode of the system - HOME (disarmed); AWAY (fully armed); STAY (perimeter armed); TEST (test mode). |
 | `occupancy.status` | String | Occupancy status - PRESENT; ABSENT; SLEEP; VACATION; H2A (going away); A2H (expected home soon); H2S (going to sleep soon); S2H (waking up soon). | 
 | `occupancy.return_ms` | int | Approximate time in unix epoch ms occupants are expected to return. This could be in the past if occupants were expected home earlier. | 
