@@ -11,6 +11,7 @@ Insights are based on available data and not guaranteed to exist in the `insight
 | Insight ID              | Value Type | Description | 
 | ----------------------- | ---------- | ----------- |
 | `ambient_temperature_c` | float      | The ambient temperature in Celsius. The fastest update interval is once every 5 minutes. Motion sensors with temperature sensing capabilities will update this value based on where occupants were last observed. If no motion is detected recently, the value will fall back to a reading from a connected thermostat, if available. |
+| `ambient_temperature.zscore` | float | Z-score of ambient temperature based on the previous 15-day hourly history. |
 | `sleep.wake_prediction_ms` | int | Predicted wake-up time in unix epoch milliseconds. Could be in the past if occupants have not woken up yet. |
 | `sleep.sleep_prediction_ms` | int | Predicted go-to-sleep time in unix epoch milliseconds. Could be in the past if occupants have not gone to sleep yet. | 
 | `sleep.duration_ms` | int | Recent sleep duration in milliseconds - gets erased when we're starting to go to sleep again. |
