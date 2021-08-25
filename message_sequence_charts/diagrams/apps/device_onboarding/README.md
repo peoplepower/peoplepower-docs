@@ -105,13 +105,13 @@ Two options of result:
 <a id="oobe-device-reconnection"></a>
 #### Step 3.3 - Show OOBE Reconnect story
 
-Only show this step if story.storyType = 5 exist for selected model.id.
-Show if user clicked on "That didn't work" link. See examples in PDFs. From Reconnect story you can go back to start over the OOBE Connection story (story.storyType = 2) if it exist.
+Only show this step if story.storyType = 3 exist for selected model.id.
+Show if user clicked on "That didn't work" link. See examples in PDFs. From Reconnect story you can go back to start over the OOBE Connection story (story.storyType = 1) if it exist.
 
 <a id="oobe-success"></a>
 ### Step 4 - Show OOBE Success story
 
-Only show this step if story.storyType = 3 exist for selected model.id. Typically, this is single page with "Next" button. See API mapping in PDFs.
+Only show this step if story.storyType = 2 exist for selected model.id. Typically, this is single page with "Next" button. See API mapping in PDFs.
 
 <a id="oobe-device-configuration"></a>
 ### Step 5 - Get into standard device setup
