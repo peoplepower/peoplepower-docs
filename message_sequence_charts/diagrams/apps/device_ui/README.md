@@ -144,12 +144,11 @@ Display information specific to this described Device Model.  All fields are opt
 | serialNumberPrefix | String | Used to identify input strings (e.g. QR Scanning) and map specific logic |
 | deviceListBindings | Array | Configure displacement and representation type for device parameter. See [Device List Bindings](#device-list-bindings) |
 | parameters | Array | Device Parameter display information. Precedes Device Parameter `displayInfo` properties. See [Device Model Parameter](#device-model-parameter) |
-| customRules | Bool | Supports custom rules. Default `True`. |
 | Location Spaces | Array | Describe if this model supports spaces and what spaces are supported. See [Location Spaces](#location-spaces) |
 | supportsAR | Bool | Describes if this model includes an 3d-model and allows for AR capabilities. See [Augmented Reality](#augmented-reality) |
 | calibrationParams | Array | Key-value pairs, where key equals parameter name and value equals the value to check for. Devices that require a calibration step the device model should provide the required parameter name. |
 | customRules | Bool | Describe if this model should allow creation/management custom rules in Device UI. Default `True` |
-| codes | Bool | Describe if this model should allow creation/management custom rules in Device UI. Default `False` |
+| codes | Bool | Describe if this model should allow creation/management user codes in Device UI. Default `False` |
 | icon | String | String value to describe the font icon name. |
 | iconFont | String | String value to describe the font icon font name (e.g. "far", "iotr", etc.). |
 | ranged | Bool | Describe if the options icon should be gathered for values within a range of the designated option. Icons are gathered based on the next available option.  Values range to the next greatest value. For instance, a "wifiSignal" value of "-70" would retrieve the icon for the option of value "-56" because it is less then the next option value of "-56" but greater then "-71.  And a "brightness" value of "70" would retrieve the icon for the option value to "75" because it is greater then the previous option value of "50" but less then "75". Default `False` |
