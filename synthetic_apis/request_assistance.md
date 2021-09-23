@@ -16,7 +16,7 @@ Enable mobile apps and smart speakers to request assistance for the user.
 
 | `type` value | Description |
 | ------------ | ----------- |
-| 0 | Direct Emergency - alert the Trusted Circle and escalate to professional monitoring simultaneously.  |
+| 0 | Direct Emergency "Supernova" - alert the Trusted Circle and escalate to professional monitoring simultaneously.  |
 | 1 | Standard Emergency - alert the Trusted Circle for 2 minutes before escalating to professional monitoring, decreases false alarms. |
 | 2 | Request assistance from people who live here. |
 | 3 | Request assistance from anyone in the Trusted Circle. |

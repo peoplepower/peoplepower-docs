@@ -17,6 +17,12 @@ In addition, there are several APIs toward the beginning of the documentation fo
 
 Use WebSockets in some time-critical experiences (such as updating the UI with bot-driven [Synthetic APIs](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis) or displaying alerts on an administrative console), instead of polling with RESTful APIs.
 
+## Cloud-to-Cloud Streaming 
+
+[Event Streaming Documentation](https://github.com/peoplepower/peoplepower-docs/blob/master/platform_apis/event_streaming.md)
+
+People Power's platform can stream events, insights, subscriptions, and more to partner platforms.
+
 ## Administrative API
 http://iotadmins.docs.apiary.io
 
@@ -35,4 +41,11 @@ http://iotbots.docs.apiary.io
 This is private bot API documentation for bot infrastructure developers. The APIs documented in this private area are implemented as software APIs inside the `botengine`. The documentation also describes the management and lifecycles of a bot.
 
 Today, we link bots to subscriptions manually on the backend, and there are no APIs publicly or privately exposed to manage the definitions of these subscriptions. We rely on communications with our server team to define and manage the available subscription services in each organization.
+
+
+## Security Modes and Occupancy Status
+
+[Security Modes and Occupancy Status](https://github.com/peoplepower/peoplepower-docs/blob/master/platform_apis/modes.md)
+
+Explanation on how to configure and interpret the "Location Scene" field to be recognized by existing application layers.
 

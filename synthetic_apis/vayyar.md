@@ -29,9 +29,9 @@ Data Stream Address : `set_vayyar_room`
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 | device_id | String | Device ID to apply these room boundaries to. |
-| x_left_meters | Float | Looking into the room from the device, this is the distance from the center of the device to the left wall of the room in meters. This is a negative number, and if a positive number is given, then it will be turned into a negative number. |
-| x_right_meters | Float | Looking into the room from the device, this is the distance from the center of the device to the right wall of the room in meters. This is a positive number, and if a negative number is given, then it will be turned into a positive number. |
-| y_max_meters | Float | Distance from the Vayyar Home to the opposite wall. |
+| x_left_meters | Float | Looking into the room from the device, this is the distance from the center of the device to the left wall of the room in meters. This is a negative number, and if a positive number is given, then it will be turned into a negative number. Valid values range from `-2.0` to `0.0` |
+| x_right_meters | Float | Looking into the room from the device, this is the distance from the center of the device to the right wall of the room in meters. This is a positive number, and if a negative number is given, then it will be turned into a positive number. Valid values range from `0.0` to `2.0` |
+| y_max_meters | Float | Distance from the Vayyar Home to the opposite wall. Valid values range from `1.0` to `4.0` |
 
 #### Set Room Boundary Example
 
@@ -50,6 +50,8 @@ Data Stream Address : `set_vayyar_subregion`
 
 There can be only 4 subregions maximum. Their ID's are 0, 1, 2, or 3.
 
+Applications should ensure subregion width and height are greater then or equal to 0.5 meters.
+
 #### Set Subregion Properties
 
 | Property | Type | Description |
@@ -61,7 +63,7 @@ There can be only 4 subregions maximum. Their ID's are 0, 1, 2, or 3.
 | name | String | Descriptive name of this subregion, default is the `title` of the subregion context that was selected. |
 | x_min_meters | Float | Required. Looking into the room from the device, this is the left-most side of the sub-region. Remember to the left of Vayyar Home is negative numbers on the x-axis. |
 | x_max_meters | Float | Required.Looking into the room from the device, this is the right-most side of the sub-region. |
-| y_min_meters | Float | Required. Distance from the Vayyar Home to the nearest side of the sub-region. |
+| y_min_meters | Float | Required. Distance from the Vayyar Home to the nearest side of the sub-region. Valid values are greater than or equal to `0.3` |
 | y_max_meters | Float | Required. Distance from the Vayyar Home to the farthest side of the sub-region. |
 | detect_falls | Boolean | Optional. True to detect falls in this room, False to avoid detecting fall (default is True). |
 | detect_presence | Boolean | Optional. True to detect people, False to not detect people (default is True). |

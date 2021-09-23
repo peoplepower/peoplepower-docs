@@ -15,6 +15,8 @@ When a problem occurs, an action plan oversees the resolution of the problem. Th
 | `ecc_delay_ms` | Integer | Milliseconds delay between contacting group 2 and then escalating to the Emergency Call Center. |
 | `allow_dispatch` | Boolean | True if this alert could trigger a dispatch from emergency services. |
 | `dispatch_delay_ms` | Integer | Milliseconds delay between contacting the Emergency Call Center without dispatch, and then contacting the Emergency Call Center again with authorization to dispatch. |
+| `ecc_eligible` | Boolean | True if this action plan is eligible for escalation to the Emergency Call Center, regardless of whether the user is subscribed or has their Emergency Call Center turned on or off. |
+| `dispatch_eligible` | Boolean | True if this action plan is eligible for emergency dispatch, regardless of whether the user is subscribed or has their Emergency Call Center turned on or off. |
 
 ## Output
 
@@ -25,7 +27,7 @@ State Variable : `action_plans`
 ```
 {
   "value": {
-    "actions_plans": {
+    "action_plans": {
       "care.bathroomactivity": {
         "allow_dispatch": true,
         "allow_ecc": true,
