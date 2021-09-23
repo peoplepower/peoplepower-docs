@@ -54,6 +54,11 @@ msc {
 	app note server [label="New device found"];
 	|||;
 
+	# Update new device state
+	app => server [label="PUT Update a Device:\n- newDevice: false"];
+	app << server [label="Response:\n- resultCode: 0"];
+	|||;
+
  	# Show Connection Success Story
 	app << app [label="Show 'Connection Success' story:\n- storyType: 2"];
 	user => app [label="Select 'Next'"];
