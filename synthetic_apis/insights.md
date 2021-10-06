@@ -62,14 +62,163 @@ State Variable : `insights`
 
 ```
 {
-  "value": {
-    "ambient_temperature_c": {
-      "description": "Ambient temperature in Celsius",
-      "device_id": "0015BC001A016275",
-      "device_desc": "Office Motion Sensor",
-      "updated_ms": 1625274850077,
-      "value": 24.4
-    }
+  "device.low_battery.00155F00F861FCF5-03B7": {
+    "description": "'Garage Back Door' has a low battery.",
+    "device_desc": "Garage Back Door",
+    "device_id": "00155F00F861FCF5-03B7",
+    "icon": "battery-empty",
+    "icon_font": "far",
+    "title": "Low battery",
+    "updated_ms": 1630956432881,
+    "value": 1
+  },
+  "device.low_battery.FFFFFFFF006b34e8": {
+    "description": "'Front Door' has a low battery.",
+    "device_desc": "Front Door",
+    "device_id": "FFFFFFFF006b34e8",
+    "icon": "battery-empty",
+    "icon_font": "far",
+    "title": "Low battery",
+    "updated_ms": 1630627884736,
+    "value": 10
+  },
+  "device.low_signal.94f3b202008d1500": {
+    "description": "Low wireless signal strength on 'TV'.",
+    "device_desc": "TV",
+    "device_id": "94f3b202008d1500",
+    "icon": null,
+    "icon_font": null,
+    "title": "Low signal strength",
+    "updated_ms": 1632351525676,
+    "value": -89
+  },
+  "device.offline.00155F0074838333-0375": {
+    "description": "Device 'Bathroom' is offline.",
+    "device_desc": "Bathroom",
+    "device_id": "00155F0074838333-0375",
+    "icon": "unlink",
+    "icon_font": "far",
+    "title": "Device Offline",
+    "updated_ms": 1629964522663,
+    "value": true
+  },
+  "device.offline.020000013000042E": {
+    "description": "'Smart Home Center Develco' is disconnected",
+    "device_desc": "Smart Home Center Develco",
+    "device_id": "020000013000042E",
+    "icon": "unlink",
+    "icon_font": "far",
+    "title": "Disconnected",
+    "updated_ms": 1632749668747,
+    "value": true
+  },
+  "device.wall_powered.020000013000042E": {
+    "description": "'Smart Home Center Develco' is on wall power",
+    "device_desc": "Smart Home Center Develco",
+    "device_id": "020000013000042E",
+    "icon": "battery-bolt",
+    "icon_font": "far",
+    "title": "Wall Powered",
+    "updated_ms": 1630020688468,
+    "value": true
+  },
+  "occupancy.last_seen": {
+    "description": "Last seen closing the 'Front Door'.",
+    "device_desc": "Front Door",
+    "device_id": "FFFFFFFF006b34e8",
+    "icon": null,
+    "icon_font": null,
+    "title": "Last seen",
+    "updated_ms": 1633445856657,
+    "value": 0
+  },
+  "occupancy.return_ms": {
+    "description": "Occupants are predicted to return around 8:42 PM on Monday.",
+    "icon": "house-return",
+    "icon_font": "far",
+    "title": "Expected home later",
+    "updated_ms": 1633405346951,
+    "value": 1633432002178.5
+  },
+  "occupancy.status": {
+    "description": "Appears to be away for a long time.",
+    "icon": null,
+    "icon_font": null,
+    "title": "Vacation",
+    "updated_ms": 1633527002299,
+    "value": "VACATION"
+  },
+  "security_mode": {
+    "description": "Security system is armed.",
+    "icon": null,
+    "icon_font": null,
+    "title": "Armed",
+    "updated_ms": 1633446324363,
+    "value": "AWAY"
+  },
+  "sleep.bedtime_ms": {
+    "description": "Appears to have gone to sleep around 11:31 PM on Monday.",
+    "icon": null,
+    "icon_font": null,
+    "title": "Likely asleep",
+    "updated_ms": 1633415519404,
+    "value": 1633415519404
+  },
+  "sleep.bedtime_score": {
+    "description": "15% bedtime consistency score.",
+    "icon": null,
+    "icon_font": null,
+    "title": "Bedtime consistency",
+    "updated_ms": 1633443242664,
+    "value": 15.0
+  },
+  "sleep.duration_ms": {
+    "description": "7.7 hours of sleep.",
+    "icon": "alarm-clock",
+    "icon_font": "far",
+    "title": "Sleep Duration",
+    "updated_ms": 1633443242664,
+    "value": 27723260
+  },
+  "sleep.restlessness_score": {
+    "description": "23% restlessness score while sleeping.",
+    "icon": null,
+    "icon_font": null,
+    "title": "Restlessness",
+    "updated_ms": 1633443242664,
+    "value": 23.0
+  },
+  "sleep.sleep_prediction_ms": {
+    "description": "Expected to go to sleep tonight around 11:24 PM.",
+    "icon": "bed",
+    "icon_font": "far",
+    "title": "Predicted Bedtime",
+    "updated_ms": 1633550600399,
+    "value": 1633587840000
+  },
+  "sleep.sleep_score": {
+    "description": "46% sleep score.",
+    "icon": null,
+    "icon_font": null,
+    "title": "Sleep score",
+    "updated_ms": 1633443242664,
+    "value": 46.0
+  },
+  "sleep.wakeup_ms": {
+    "description": "Woke up around 7:14 AM on Tuesday.",
+    "icon": null,
+    "icon_font": null,
+    "title": "Good morning",
+    "updated_ms": 1633443242664,
+    "value": 1633443242664
+  },
+  "sleep.wakeup_score": {
+    "description": "14% wakeup consistency score.",
+    "icon": null,
+    "icon_font": null,
+    "title": "Wakeup consistency",
+    "updated_ms": 1633443242664,
+    "value": 14.0
   }
 }
 ```
