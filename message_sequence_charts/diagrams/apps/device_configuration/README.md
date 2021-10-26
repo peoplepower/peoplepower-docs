@@ -29,7 +29,7 @@ Params:
 Params:
 - locationId: $locationId _Current Location ID_
 - deviceId: $deviceId _Smart Home Center Device ID_
-- data: `{'commandType': 4, 'commandTimeout': 60, 'params': [{'name': 'wifiSsidValues', 'value': '1'}]}`
+- data: `{'commandType': 0, 'commandTimeout': 60, 'params': [{'name': 'wifiSsidValues', 'value': '1'}]}`
 
 *Notify device to connect to Wi-Fi*
 Params:

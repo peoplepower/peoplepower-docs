@@ -24,7 +24,7 @@ msc {
 	app => server [label="GET Current Measurements:\n- deviceId: $deviceId\n- locationId: $locationId"];
 	app << server [label="Response:\n- measurements: [DeviceMeasurement]"];
 	app note server [label="The app must notify the device to refresh nearby SSIDs."];
-	app => server [label="PUT Send a Command:\n- locationId: $locationId\n- deviceId: $deviceId\n- data: {'commandType': 4, 'commandTimeout': 60, 'params': [{'name': 'wifiSsidValues', 'value': '1'}]}"];
+	app => server [label="PUT Send a Command:\n- locationId: $locationId\n- deviceId: $deviceId\n- data: {'commandType': 0, 'commandTimeout': 60, 'params': [{'name': 'wifiSsidValues', 'value': '1'}]}"];
 	server => device [label="Forward Command to refresh parameters"];
 	app << server [label="Response:\n- resultCode: 0\n- commands: [Command]"];
 	device >> device [label="Refresh parameters"];
