@@ -32,6 +32,8 @@ Data Stream Address : `set_vayyar_room`
 | x_left_meters | Float | Looking into the room from the device, this is the distance from the center of the device to the left wall of the room in meters. This is a negative number, and if a positive number is given, then it will be turned into a negative number. Valid values range from `-2.0` to `0.0` |
 | x_right_meters | Float | Looking into the room from the device, this is the distance from the center of the device to the right wall of the room in meters. This is a positive number, and if a negative number is given, then it will be turned into a positive number. Valid values range from `0.0` to `2.0` |
 | y_max_meters | Float | Distance from the Vayyar Home to the opposite wall. Valid values range from `1.0` to `4.0` |
+| mounting_type | int | 0 (default) = wall; 1 = ceiling |
+| sensor_height_m | Float | 1.5 is the default for the wall; Ceiling-mounted devices require this to define the distance from the ceiling to the floor. |
 
 #### Set Room Boundary Example
 
@@ -40,15 +42,14 @@ Data Stream Address : `set_vayyar_room`
     "device_id": device_id,
     "x_left_meters": x_left_meters,
     "x_right_meters": x_right_meters,
-    "y_max_meters": y_max_meters
+    "y_max_meters": y_max_meters,
+    "mounting_type": 0
 }
 ```
 
 ### Set a Subregion
 
 Data Stream Address : `set_vayyar_subregion`
-
-There can be only 4 subregions maximum. Their ID's are 0, 1, 2, or 3.
 
 Applications should ensure subregion width and height are greater then or equal to 0.5 meters.
 
@@ -57,7 +58,8 @@ Applications should ensure subregion width and height are greater then or equal 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 | device_id | String | Device ID to apply this subregion to |
-| subregion_id | int | Optional - used primarily for modifying or deleting. 0, 1, 2, or 3 and nothing else. You can specify the next valid integer to insert a new subregion, but out-of-bounds values are ignored. |
+| unique_id | String | Some unique ID to add / edit / delete. If not defined, it will be assumed this is an add operation and will automatically generate a UUID4 unique ID for this new subregion. |
+| subregion_id | int | Optional - used primarily for modifying or deleting and for backwards compatibility. |
 | context_id | int | Context / behavior of this subregion - see the [Subregion Behavior Properties](#subregion-behavior-properties) |
 | unique_id | String | UUID to uniquely identify this subregion, auto-defined by the bot. |
 | name | String | Descriptive name of this subregion, default is the `title` of the subregion context that was selected. |
@@ -65,6 +67,8 @@ Applications should ensure subregion width and height are greater then or equal 
 | x_max_meters | Float | Required.Looking into the room from the device, this is the right-most side of the sub-region. |
 | y_min_meters | Float | Required. Distance from the Vayyar Home to the nearest side of the sub-region. Valid values are greater than or equal to `0.3` |
 | y_max_meters | Float | Required. Distance from the Vayyar Home to the farthest side of the sub-region. |
+| z_min_meters | Float | Optional. For 3D subregions, this is the minimum z-axis boundary. |
+| z_max_meters | Float | Optional. For 3D subregions, this is the maximum z-axis boundary. |
 | detect_falls | Boolean | Optional. True to detect falls in this room, False to avoid detecting fall (default is True). |
 | detect_presence | Boolean | Optional. True to detect people, False to not detect people (default is True). |
 | enter_duration_s | int | Optional. Number of seconds to wait until Vayyar Home declares someone entered this sub-region (default is 3 seconds). |
@@ -81,6 +85,8 @@ Applications should ensure subregion width and height are greater then or equal 
     "x_max_meters": x_max_meters,
     "y_min_meters": y_min_meters,
     "y_max_meters": y_max_meters,
+    "z_min_meters": z_min_meters,
+    "z_max_meters": z_max_meters,
     "detect_falls": detect_falls,
     "detect_presence": detect_presence,
     "enter_duration_s": enter_duration_s,
@@ -93,7 +99,14 @@ Applications should ensure subregion width and height are greater then or equal 
 
 Data Stream Address : `delete_vayyar_subregion`
 
-If you want to delete all subregions for a given device, simply do not pass in a `subregion_id`.
+Passing in a `unique_id` is preferred, but this Synthetic API will also accept a `subregion_id` for backwards compatibility reasons.
+
+```
+{
+    "device_id": device_id,
+    "unique_id": unique_id
+}
+```
 
 ```
 {
@@ -151,6 +164,8 @@ State Variable : `vayyar_room`
 ```
 {
     "device_id": {
+        "mounting_type": 0,
+        "sensor_height_m": 1.5,
         "x_min": x_min,
         "x_max": x_max,
         "y_min": y_min,
@@ -185,7 +200,9 @@ State Variable : `vayyar_subregions`
         "x_max_meters": -0.5,
         "x_min_meters": -1.285,
         "y_max_meters": 1.5,
-        "y_min_meters": 0
+        "y_min_meters": 0,
+        "z_min_meters": -2,
+        "z_max_meters": 2
       },
       {
         "context_id": 10,
@@ -199,7 +216,9 @@ State Variable : `vayyar_subregions`
         "x_max_meters": 0.25,
         "x_min_meters": -0.5,
         "y_max_meters": 1.3,
-        "y_min_meters": 0
+        "y_min_meters": 0,
+        "z_min_meters": -2,
+        "z_max_meters": 2
       },
       {
         "context_id": 13,
@@ -213,7 +232,9 @@ State Variable : `vayyar_subregions`
         "x_max_meters": 1.25,
         "x_min_meters": 0.25,
         "y_max_meters": 1.3,
-        "y_min_meters": 0
+        "y_min_meters": 0,
+        "z_min_meters": -2,
+        "z_max_meters": 2
       }
     ],
     "id_MzA6QUU6QTQ6RTI": [
@@ -229,7 +250,9 @@ State Variable : `vayyar_subregions`
         "x_max_meters": 0.83,
         "x_min_meters": -1.1,
         "y_max_meters": 3.35,
-        "y_min_meters": 1.25
+        "y_min_meters": 1.25,
+        "z_min_meters": -2,
+        "z_max_meters": 2
       }
     ],
     "id_MzA6QUU6QTQ6RTM6": [
@@ -245,7 +268,9 @@ State Variable : `vayyar_subregions`
         "x_max_meters": 0.0,
         "x_min_meters": -1.0,
         "y_max_meters": 1.52,
-        "y_min_meters": 0.61
+        "y_min_meters": 0.61,
+        "z_min_meters": -2,
+        "z_max_meters": 2
       }
     ]
   }
