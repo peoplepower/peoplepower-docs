@@ -75,6 +75,7 @@ Applications should ensure subregion width and height are greater then or equal 
 | detect_presence | Boolean | Optional. True to detect people, False to not detect people (default is True). |
 | enter_duration_s | int | Optional. Number of seconds to wait until Vayyar Care declares someone entered this sub-region (default is 3 seconds). |
 | exit_duration_s | int | Optional. Number of seconds to wait until Vayyar Care declares the sub-region is unoccupied (default is 3 seconds). |
+| hidden | Boolean | Optional. True if this subregion should be hidden from the end-user's view and only available for professional debugging. |
 
 #### Set Subregion Example
 
@@ -93,7 +94,8 @@ Applications should ensure subregion width and height are greater then or equal 
     "detect_presence": detect_presence,
     "enter_duration_s": enter_duration_s,
     "exit_duration_s": exit_duration_s,
-    "context_id": context
+    "context_id": context,
+    "hidden": False
 }
 ```
 
@@ -199,6 +201,7 @@ State Variable : `vayyar_subregions`
         "enter_duration_s": 3,
         "exit_duration_s": 3,
         "name": "Bathtub / Shower",
+        "hidden": False,
         "subregion_id": 0,
         "x_max_meters": -0.5,
         "x_min_meters": -1.285,
@@ -215,6 +218,7 @@ State Variable : `vayyar_subregions`
         "enter_duration_s": 3,
         "exit_duration_s": 3,
         "name": "Toilet",
+        "hidden": False,
         "subregion_id": 1,
         "x_max_meters": 0.25,
         "x_min_meters": -0.5,
@@ -231,6 +235,7 @@ State Variable : `vayyar_subregions`
         "enter_duration_s": 3,
         "exit_duration_s": 3,
         "name": "Sink",
+        "hidden": False,
         "subregion_id": 2,
         "x_max_meters": 1.25,
         "x_min_meters": 0.25,
@@ -249,6 +254,7 @@ State Variable : `vayyar_subregions`
         "enter_duration_s": 3,
         "exit_duration_s": 3,
         "name": "Bed",
+        "hidden": False,
         "subregion_id": 0,
         "x_max_meters": 0.83,
         "x_min_meters": -1.1,
@@ -267,6 +273,7 @@ State Variable : `vayyar_subregions`
         "enter_duration_s": 1,
         "exit_duration_s": 3,
         "name": "Office chair",
+        "hidden": False,
         "subregion_id": 0,
         "x_max_meters": 0.0,
         "x_min_meters": -1.0,
