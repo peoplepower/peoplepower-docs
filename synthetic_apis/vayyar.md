@@ -1,6 +1,6 @@
-# Synthetic API: Vayyar Home
+# Synthetic API: Vayyar Care
 
-Vayyar Home can sense falls in real-time, and detect occupants in the room.
+Vayyar Care can sense falls in real-time, and detect occupants in the room.
 
 To use the device, we need to specify (a) the boundaries of the room, and (b) subregions within that room to ignore or detect special occupancy status (like a bed).
 
@@ -31,9 +31,10 @@ Data Stream Address : `set_vayyar_room`
 | device_id | String | Device ID to apply these room boundaries to. |
 | x_left_meters | Float | Looking into the room from the device, this is the distance from the center of the device to the left wall of the room in meters. This is a negative number, and if a positive number is given, then it will be turned into a negative number. Valid values range from `-2.0` to `0.0` |
 | x_right_meters | Float | Looking into the room from the device, this is the distance from the center of the device to the right wall of the room in meters. This is a positive number, and if a negative number is given, then it will be turned into a positive number. Valid values range from `0.0` to `2.0` |
-| y_max_meters | Float | Distance from the Vayyar Home to the opposite wall. Valid values range from `1.0` to `4.0` |
+| y_max_meters | Float | Distance from the Vayyar Care to the opposite wall. Valid values range from `1.0` to `4.0` |
 | mounting_type | int | 0 (default) = wall; 1 = ceiling |
 | sensor_height_m | Float | 1.5 is the default for the wall; Ceiling-mounted devices require this to define the distance from the ceiling to the floor. |
+| near_exit | Boolean | True if this Vayyar Care device is located nearest to an exit door. |
 
 #### Set Room Boundary Example
 
@@ -43,7 +44,8 @@ Data Stream Address : `set_vayyar_room`
     "x_left_meters": x_left_meters,
     "x_right_meters": x_right_meters,
     "y_max_meters": y_max_meters,
-    "mounting_type": 0
+    "mounting_type": 0,
+    "near_exit": False
 }
 ```
 
@@ -63,16 +65,16 @@ Applications should ensure subregion width and height are greater then or equal 
 | context_id | int | Context / behavior of this subregion - see the [Subregion Behavior Properties](#subregion-behavior-properties) |
 | unique_id | String | UUID to uniquely identify this subregion, auto-defined by the bot. |
 | name | String | Descriptive name of this subregion, default is the `title` of the subregion context that was selected. |
-| x_min_meters | Float | Required. Looking into the room from the device, this is the left-most side of the sub-region. Remember to the left of Vayyar Home is negative numbers on the x-axis. |
+| x_min_meters | Float | Required. Looking into the room from the device, this is the left-most side of the sub-region. Remember to the left of Vayyar Care is negative numbers on the x-axis. |
 | x_max_meters | Float | Required.Looking into the room from the device, this is the right-most side of the sub-region. |
-| y_min_meters | Float | Required. Distance from the Vayyar Home to the nearest side of the sub-region. Valid values are greater than or equal to `0.3` |
-| y_max_meters | Float | Required. Distance from the Vayyar Home to the farthest side of the sub-region. |
+| y_min_meters | Float | Required. Distance from the Vayyar Care to the nearest side of the sub-region. Valid values are greater than or equal to `0.3` |
+| y_max_meters | Float | Required. Distance from the Vayyar Care to the farthest side of the sub-region. |
 | z_min_meters | Float | Optional. For 3D subregions, this is the minimum z-axis boundary. |
 | z_max_meters | Float | Optional. For 3D subregions, this is the maximum z-axis boundary. |
 | detect_falls | Boolean | Optional. True to detect falls in this room, False to avoid detecting fall (default is True). |
 | detect_presence | Boolean | Optional. True to detect people, False to not detect people (default is True). |
-| enter_duration_s | int | Optional. Number of seconds to wait until Vayyar Home declares someone entered this sub-region (default is 3 seconds). |
-| exit_duration_s | int | Optional. Number of seconds to wait until Vayyar Home declares the sub-region is unoccupied (default is 3 seconds). |
+| enter_duration_s | int | Optional. Number of seconds to wait until Vayyar Care declares someone entered this sub-region (default is 3 seconds). |
+| exit_duration_s | int | Optional. Number of seconds to wait until Vayyar Care declares the sub-region is unoccupied (default is 3 seconds). |
 
 #### Set Subregion Example
 
@@ -172,6 +174,7 @@ State Variable : `vayyar_room`
         "y_max": y_max,
         "z_min": z_min,
         "z_max": z_max,
+        "near_exit": False,
         "update_ms": update_ms
     },
     ...
@@ -302,6 +305,7 @@ The device has to be associated with the correct location before you set the sub
 | enter_duration_s | int | Recommended enter duration in seconds to set for this subregion context. |
 | exit_duration_s | int | Recommended exit duration in seconds to set for this subregion context. |
 | compatible_behaviors | List | List of compatible behavior ID's, as defined in the `behaviors` state |
+| snap_to_wall | Boolean | True if this subregion must be snapped to at least one nearby wall, False if the subregion can be placed anywhere around the room. |
 
 #### `vayyar_subregion_behaviors` Example
 
@@ -323,6 +327,7 @@ The device has to be associated with the correct location before you set the sub
       "icon": "bed-alt",
       "icon_font": "far",
       "length_cm": 204,
+      "snap_to_wall": true,
       "title": "King Bed",
       "width_cm": 193
     },
@@ -341,6 +346,7 @@ The device has to be associated with the correct location before you set the sub
       "icon": "bed-alt",
       "icon_font": "far",
       "length_cm": 214,
+      "snap_to_wall": true,
       "title": "Cal King Bed",
       "width_cm": 183
     },
@@ -359,6 +365,7 @@ The device has to be associated with the correct location before you set the sub
       "icon": "bed-alt",
       "icon_font": "far",
       "length_cm": 204,
+      "snap_to_wall": true,
       "title": "Queen Bed",
       "width_cm": 153
     },
@@ -377,6 +384,7 @@ The device has to be associated with the correct location before you set the sub
       "icon": "bed-alt",
       "icon_font": "far",
       "length_cm": 191,
+      "snap_to_wall": true,
       "title": "Full Bed",
       "width_cm": 135
     },
@@ -385,10 +393,17 @@ The device has to be associated with the correct location before you set the sub
         0
       ],
       "context_id": 5,
+      "detect_falls": false,
+      "detect_presence": true,
+      "edit_falls": false,
+      "edit_presence": false,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
       "flexible_cm": false,
       "icon": "bed-empty",
       "icon_font": "far",
       "length_cm": 204,
+      "snap_to_wall": true,
       "title": "Twin XL Bed",
       "width_cm": 97
     },
@@ -407,6 +422,7 @@ The device has to be associated with the correct location before you set the sub
       "icon": "bed-empty",
       "icon_font": "far",
       "length_cm": 191,
+      "snap_to_wall": true,
       "title": "Twin Bed",
       "width_cm": 97
     },
@@ -425,27 +441,87 @@ The device has to be associated with the correct location before you set the sub
       "icon": "baby",
       "icon_font": "far",
       "length_cm": 132,
+      "snap_to_wall": true,
       "title": "Crib",
       "width_cm": 69
+    },
+    {
+      "compatible_behaviors": [
+        0,
+        2
+      ],
+      "context_id": 8,
+      "detect_falls": false,
+      "detect_presence": false,
+      "edit_falls": false,
+      "edit_presence": false,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
+      "flexible_cm": true,
+      "icon": "lamp-desk",
+      "icon_font": "far",
+      "length_cm": 55,
+      "snap_to_wall": false,
+      "title": "End Table",
+      "width_cm": 55
+    },
+    {
+      "compatible_behaviors": [
+        0
+      ],
+      "context_id": 9,
+      "detect_falls": false,
+      "detect_presence": false,
+      "edit_falls": false,
+      "edit_presence": false,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
+      "flexible_cm": true,
+      "icon": "air-conditioner",
+      "icon_font": "far",
+      "length_cm": 25,
+      "snap_to_wall": false,
+      "title": "CPAP Machine",
+      "width_cm": 25
     },
     {
       "compatible_behaviors": [
         1
       ],
       "context_id": 10,
-      "description": "Include the area in front of the toilet to detect people.",
+      "description": "Include the area surrounding the toilet to detect people.",
       "detect_falls": true,
       "detect_presence": true,
       "edit_falls": false,
       "edit_presence": false,
       "enter_duration_s": 3,
       "exit_duration_s": 3,
-      "flexible_cm": false,
+      "flexible_cm": true,
       "icon": "toilet",
       "icon_font": "far",
       "length_cm": 120,
-      "title": "Toilet",
+      "snap_to_wall": true,
+      "title": "Toilet Area",
       "width_cm": 76
+    },
+    {
+      "compatible_behaviors": [
+        1
+      ],
+      "context_id": 14,
+      "description": "Define the physical toilet to decrease false alarms.",
+      "detect_falls": false,
+      "detect_presence": true,
+      "edit_falls": false,
+      "edit_presence": false,
+      "enter_duration_s": 3,
+      "exit_duration_s": 3,
+      "flexible_cm": true,
+      "icon": "toilet",
+      "icon_font": "far",
+      "length_cm": 75,
+      "title": "Physical Toilet",
+      "width_cm": 50
     },
     {
       "compatible_behaviors": [
@@ -462,6 +538,7 @@ The device has to be associated with the correct location before you set the sub
       "icon": "bath",
       "icon_font": "far",
       "length_cm": 82,
+      "snap_to_wall": true,
       "title": "Bathtub / Shower",
       "width_cm": 152
     },
@@ -480,6 +557,7 @@ The device has to be associated with the correct location before you set the sub
       "icon": "shower",
       "icon_font": "far",
       "length_cm": 91,
+      "snap_to_wall": true,
       "title": "Walk-in Shower",
       "width_cm": 152
     },
@@ -499,8 +577,9 @@ The device has to be associated with the correct location before you set the sub
       "icon": "sink",
       "icon_font": "far",
       "length_cm": 130,
+      "snap_to_wall": true,
       "title": "Sink Area",
-      "width_cm": 1.0
+      "width_cm": 100
     },
     {
       "compatible_behaviors": [
@@ -517,6 +596,7 @@ The device has to be associated with the correct location before you set the sub
       "icon": "loveseat",
       "icon_font": "far",
       "length_cm": 114,
+      "snap_to_wall": false,
       "title": "Large Chair",
       "width_cm": 135
     },
@@ -536,8 +616,9 @@ The device has to be associated with the correct location before you set the sub
       "icon": "chair",
       "icon_font": "far",
       "length_cm": 52,
+      "snap_to_wall": false,
       "title": "Small Chair",
-      "width_cm": 48
+      "width_cm": 50
     },
     {
       "compatible_behaviors": [
@@ -554,29 +635,31 @@ The device has to be associated with the correct location before you set the sub
       "icon": "couch",
       "icon_font": "far",
       "length_cm": 98,
+      "snap_to_wall": false,
       "title": "Sofa / Couch",
       "width_cm": 259
     },
     {
       "compatible_behaviors": [
-        2,
         0,
-        3
+        3,
+        2,
+        4
       ],
-      "context_id": 100,
-      "detail": "Large area in front of an exit door.",
-      "detect_falls": true,
+      "context_id": 23,
+      "detect_falls": false,
       "detect_presence": true,
-      "edit_falls": true,
-      "edit_presence": false,
+      "edit_falls": false,
+      "edit_presence": true,
       "enter_duration_s": 3,
       "exit_duration_s": 3,
       "flexible_cm": true,
-      "icon": "door-open",
+      "icon": "archive",
       "icon_font": "far",
-      "length_cm": 100,
-      "title": "Exit Door Area",
-      "width_cm": 152
+      "length_cm": 80,
+      "snap_to_wall": false,
+      "title": "Table / Desk",
+      "width_cm": 150
     },
     {
       "compatible_behaviors": [
@@ -598,6 +681,7 @@ The device has to be associated with the correct location before you set the sub
       "icon": "eye-slash",
       "icon_font": "far",
       "length_cm": 50,
+      "snap_to_wall": false,
       "title": "Ignore this area",
       "width_cm": 50
     }
