@@ -26,28 +26,56 @@ Data Stream Address : `set_vayyar_room`
 
 #### Set Room Boundary Properties
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| device_id | String | Device ID to apply these room boundaries to. |
-| x_left_meters | Float | Looking into the room from the device, this is the distance from the center of the device to the left wall of the room in meters. This is a negative number, and if a positive number is given, then it will be turned into a negative number. Valid values range from `-2.0` to `0.0` |
-| x_right_meters | Float | Looking into the room from the device, this is the distance from the center of the device to the right wall of the room in meters. This is a positive number, and if a negative number is given, then it will be turned into a positive number. Valid values range from `0.0` to `2.0` |
-| y_max_meters | Float | Distance from the Vayyar Care to the opposite wall. Valid values range from `1.0` to `4.0` |
-| mounting_type | int | 0 (default) = wall; 1 = ceiling |
+| Property | Mounting Type | Value Type | Description |
+| -------- | ------------- | ---------- | ----------- |
+| device_id | | String | Device ID to apply these room boundaries to. |
+| x_min_meters | Wall | Float | Looking into the room from the device, this is the distance from the center of the device to the left wall of the room in meters. This is a negative number, and if a positive number is given, then it will be turned into a negative number. Valid values range from `-2.0` to `0.0` |
+| x_max_meters | Wall | Float | Looking into the room from the device, this is the distance from the center of the device to the right wall of the room in meters. This is a positive number, and if a negative number is given, then it will be turned into a positive number. Valid values range from `0.0` to `2.0` |
+| y_max_meters | Wall | Float | In a wall mount, this is the distance from the Vayyar Care to the opposite wall. Valid values range from `1.0` to `4.0`. |
+| y_min_meters | Wall | Float | Optional (0.3 default). In a wall mount, this is typically 0.3 meters which is just in front of the wall the Vayyar Care is mounted on. |
+| x_left_meters | Wall (deprecated) | Float | Deprecated but still functional. Migrate to `x_min_meters`. Same outcome as defining `x_min_meters`. |
+| x_right_meters | Wall (deprecated) | Float | Deprecated but still functional. Migrate to `x_max_meters`. Same outcome as defining `x_max_meters`. |
+| x_min_meters | Ceiling | Float | In a ceiling mount, this is the distance from the Vayyar Care to the wall in the direction of the cable. Negative numbers only. -2.0 meters maximum. |
+| x_max_meters | Ceiling | Float | In a ceiling mount, this is the distance from the Vayyar Care to the wall in the opposite direction of the cable. Positive numbers only. +2.0 meters maximum. |
+| y_min_meters | Ceiling | Float | In a ceiling mount, this is the distance from the Vayyar Care to the wall toward the right of cable. Negative numbers only. -2.5 meters maximum. |
+| y_max_meters | Ceiling | Float | In a ceiling mount, this is the distance from the Vayyar Care to the wall toward the left of the cable. Positive numbers only. +2.5 meters maximum. |
+| z_min_meters | | Float | Optional. The minimum height to detect, usually 0.0 (the ground). |
+| z_max_meters | | Float | Optional. The maximum height to detect, default is 2.0 meters. If set too high, objects (like vent fans) in the ceiling can cause false positive presence detects. |
+| mounting_type | int | 0 (default) = wall; 1 = ceiling; 2 = 45-degree ceiling |
 | sensor_height_m | Float | 1.5 is the default for the wall; Ceiling-mounted devices require this to define the distance from the ceiling to the floor. |
-| near_exit | Boolean | True if this Vayyar Care device is located nearest to an exit door. |
+| near_exit | Boolean | True if this Vayyar Care device is located nearest to an exit door and can be used to determine occupancy of the living space. |
+
 
 #### Set Room Boundary Example
 
+**Wall Mount Example**
 ```
 {
     "device_id": device_id,
-    "x_left_meters": x_left_meters,
-    "x_right_meters": x_right_meters,
+    "x_min_meters": x_min_meters,
+    "x_max_meters": x_max_meters,
     "y_max_meters": y_max_meters,
     "mounting_type": 0,
     "near_exit": False
 }
 ```
+
+**Ceiling Mount Example**
+```
+{
+    "device_id": device_id,
+    "x_min_meters": x_min_meters,
+    "x_max_meters": x_max_meters,
+    "y_min_meters": y_min_meters,
+    "y_max_meters": y_max_meters,
+    "sensor_height_m": 2.3,
+    "mounting_type": 1,
+    "near_exit": True
+}
+```
+
+![Ceiling mounted coordinates](img/vayyar_ceiling_mount.png)
+
 
 ### Set a Subregion
 
@@ -76,6 +104,7 @@ Applications should ensure subregion width and height are greater then or equal 
 | enter_duration_s | int | Optional. Number of seconds to wait until Vayyar Care declares someone entered this sub-region (default is 3 seconds). |
 | exit_duration_s | int | Optional. Number of seconds to wait until Vayyar Care declares the sub-region is unoccupied (default is 3 seconds). |
 | hidden | Boolean | Optional. True if this subregion should be hidden from the end-user's view and only available for professional debugging. |
+| ai | Boolean | Optional. Set to True if this subregion was AI-generated. |
 
 #### Set Subregion Example
 
