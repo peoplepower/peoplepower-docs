@@ -60,6 +60,8 @@ Data Stream Address : `set_vayyar_room`
 }
 ```
 
+<img src="https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/img/vayyar_wall_mount.jpg" width="600">
+
 **Ceiling Mount Example**
 ```
 {
@@ -74,7 +76,7 @@ Data Stream Address : `set_vayyar_room`
 }
 ```
 
-![Ceiling mounted coordinates](img/vayyar_ceiling_mount.png)
+<img src="https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/img/vayyar_ceiling_mount.png" width="400">
 
 
 ### Set a Subregion
@@ -199,12 +201,12 @@ State Variable : `vayyar_room`
     "device_id": {
         "mounting_type": 0,
         "sensor_height_m": 1.5,
-        "x_min": x_min,
-        "x_max": x_max,
-        "y_min": y_min,
-        "y_max": y_max,
-        "z_min": z_min,
-        "z_max": z_max,
+        "x_min_meters": x_min_meters,
+        "x_max_meters": x_max_meters,
+        "y_min_meters": y_min_meters,
+        "y_max_meters": y_max_meters,
+        "z_min_meters": z_min_meters,
+        "z_max_meters": z_max_meters,
         "near_exit": False,
         "update_ms": update_ms
     },
