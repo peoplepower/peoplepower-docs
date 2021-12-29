@@ -49,6 +49,7 @@ Here's how we extract the data sets:
 | zscore | Float | Z-Score of the current value relative to the historical data set - this is used to describe where the newest value is relative to the standard deviations |
 | display | String | Human-readable display value |
 | updated_ms | int | Timestamp in milliseconds this trend data was last updated |
+| n | int | total number of data points that have gone into a calculation for averages and standard deviations |
 
 
 ## Inputs
@@ -90,283 +91,128 @@ Data Stream Address : `remove_trend`
 ## Output
 
 The output for trends is broken into 2 parts:
-* State Variable : `location_properties`
-* Time-series State Variable : `trends`
+* Metadata: `trends_metadata`
+* Time-series daily trend information : `trends`
+* Average trends over the past 7 days: `trends_recently`
+* Time-series 7-day incremental trend information : `trends_weekly`
 
-The `location_properties` captures the configuration values that are like overhead and remain quite static, to optimize data usage by preventing duplicate data. 
+The `trends_metadata` captures the configuration values that are like overhead and remain quite static, to optimize data usage by preventing duplicate data. 
 
-The `trends` property captures the real data, and is updated often.
-
-### `location_properties` Example
-
-Note that `location_properties` also references other state variables that are available to access.
+### `trends_metadata` Example
 
 Trends related to specific device instances typically references the device ID's in the `trend_id`.
 
 ```
 {
-  "value": {
-    
-    "additional_properties": [
-      "rule_phrases",
-      "social_connector",
-      "sleep_model",
-      "rules",
-      "inactivity_model",
-      "security_state",
-      "sms_invited_list",
-      "sms_alert_invited_list",
-      "sms_control_invited_list",
-      "dashboard",
-      "device_bundles",
-      "behaviors",
-      "tasks",
-      "metrics",
-      "device_bundle",
-      "multistream",
-      "services",
-      "now",
-      "dashboard_header"
-    ],
-    
-    "timeseries_properties": {
-      "trends": 1620889200000
+    "sitting": {
+      "comment": "Time spent sitting today.",
+      "daily": false,
+      "icon": "loveseat",
+      "operation": 2,
+      "parent_id": null,
+      "services": [],
+      "title": "Sitting",
+      "units": "ms",
+      "updated_ms": 1639717200000,
+      "window": 30
     },
-    
-    "trends": {
-      "trend.bathroom_duration": {
-        "comment": "Amount of time in the bathroom today.",
-        "daily": false,
-        "icon": "user-clock",
-        "operation": 2,
-        "services": [
-          "care.bathroomactivity"
-        ],
-        "title": "Bathroom Duration",
-        "units": "ms",
-        "updated_ms": 1620889983312,
-        "window": 30
-      },
-      "trend.bathroom_visits": {
-        "comment": "Number of bathroom visits today.",
-        "daily": false,
-        "icon": "restroom",
-        "operation": 2,
-        "services": [
-          "care.bathroomactivity"
-        ],
-        "title": "Bathroom Visits",
-        "units": "Visits",
-        "updated_ms": 1620889983312,
-        "window": 30
-      },
-      "trend.bedtime": {
-        "comment": "Time occupants went to sleep.",
-        "daily": true,
-        "icon": "bed",
-        "operation": 1,
-        "services": [
-          "care.latenight"
-        ],
-        "title": "Bedtime",
-        "units": "timestamp_ms",
-        "updated_ms": 1620877716962,
-        "window": 30
-      },
-      "trend.sleep_bathroom_visits": {
-        "comment": "Number of bathroom visits at night.",
-        "daily": true,
-        "icon": "house-night",
-        "operation": 1,
-        "services": [
-          "care.bathroomactivity"
-        ],
-        "title": "Bathroom Visits at Night",
-        "units": "Visits",
-        "updated_ms": 1620829074205,
-        "window": 30
-      },
-      "trend.sleep_duration": {
-        "comment": "Amount of sleep.",
-        "daily": true,
-        "icon": "alarm-clock",
-        "operation": 1,
-        "services": [
-          "care.latenight"
-        ],
-        "title": "Sleep Duration",
-        "units": "ms",
-        "updated_ms": 1620829074205,
-        "window": 30
-      },
-      "trend.sleep_movement": {
-        "comment": "Amount of time motion was detected while occupants were believed to be asleep.",
-        "daily": true,
-        "icon": "waveform-path",
-        "operation": 1,
-        "services": [
-          "care.latenight"
-        ],
-        "title": "Movement while Sleeping",
-        "units": "ms",
-        "updated_ms": 1620829074205,
-        "window": 30
-      },
-      "trend.sleep_score": {
-        "comment": "Relative sleep quality score.",
-        "daily": true,
-        "icon": "snooze",
-        "operation": 1,
-        "services": [
-          "care.latenight"
-        ],
-        "title": "Sleep Score",
-        "units": "%",
-        "updated_ms": 1620829074205,
-        "window": 30
-      },
-      "trend.wakeup": {
-        "comment": "Time occupants woke up.",
-        "daily": true,
-        "icon": "bed",
-        "operation": 1,
-        "services": [
-          "care.latenight"
-        ],
-        "title": "Wake Time",
-        "units": "timestamp_ms",
-        "updated_ms": 1620829074205,
-        "window": 30
-      },
-      "trends.00155F00F84539D6-039B": {
-        "comment": "Tracking when 'Medicine Cabinet' opens.",
-        "daily": false,
-        "icon": "pills",
-        "operation": 2,
-        "services": [],
-        "title": "'Medicine Cabinet' Medicine Tracking",
-        "units": "Times",
-        "updated_ms": 1620763719765,
-        "window": 14
-      },
-      "trends.506eda0a006f0d00": {
-        "comment": "Tracking when coffee was made today.",
-        "daily": false,
-        "icon": "coffee",
-        "operation": 2,
-        "services": [],
-        "title": "Coffee",
-        "units": "Times",
-        "updated_ms": 1620852356291,
-        "window": 14
-      },
-      "trends.63a5f00e006f0d00": {
-        "comment": "Tracking when 'Traegar' powers on.",
-        "daily": false,
-        "icon": "plug",
-        "operation": 2,
-        "services": [],
-        "title": "'Traegar' Monitoring",
-        "units": "Times",
-        "updated_ms": 1620434150567,
-        "window": 14
-      },
-      "trends.94f3b202008d1500": {
-        "comment": "Tracking when 'TV' powers on.",
-        "daily": false,
-        "icon": "plug",
-        "operation": 2,
-        "services": [],
-        "title": "'TV' Monitoring",
-        "units": "Times",
-        "updated_ms": 1620885137728,
-        "window": 14
-      },
-      "trends.absent": {
-        "comment": "Time occupants have been away from home today, a possible indicator of exercise or social activity.",
-        "daily": false,
-        "icon": "house-leave",
-        "operation": 2,
-        "services": [],
-        "title": "Time Away from Home",
-        "units": "ms",
-        "updated_ms": 1620903600620,
-        "window": 30
-      },
-      "trends.ambient_31ab6305006f0d00": {
-        "comment": "Ambient Temperature",
-        "daily": false,
-        "icon": "thermometer-half",
-        "operation": 1,
-        "services": [],
-        "title": "'Presence Thermostat' Ambient Temp",
-        "units": "C",
-        "updated_ms": 1620906622075,
-        "window": 14
-      },
-      "trends.cooling_31ab6305006f0d00": {
-        "comment": "Cooling Setpoint",
-        "daily": false,
-        "icon": "air-conditioner",
-        "operation": 1,
-        "services": [],
-        "title": "'Presence Thermostat' Cooling Setpoint",
-        "units": "C",
-        "updated_ms": 1620879832346,
-        "window": 14
-      },
-      "trends.heating_31ab6305006f0d00": {
-        "comment": "Heating Setpoint",
-        "daily": false,
-        "icon": "fireplace",
-        "operation": 1,
-        "services": [],
-        "title": "'Presence Thermostat' Heating Setpoint",
-        "units": "C",
-        "updated_ms": 1620879578894,
-        "window": 14
-      },
-      "trends.movement_duration": {
-        "comment": "An indicator of activity.",
-        "daily": false,
-        "icon": "walking",
-        "operation": 2,
-        "services": [
-          "care.generalinactivity",
-          "care.morninginactivity"
-        ],
-        "title": "Time spent in motion",
-        "units": "ms",
-        "updated_ms": 1620903600620,
-        "window": 30
-      },
-      "trends.movement_score": {
-        "comment": "Relative mobility score.",
-        "daily": false,
-        "icon": "walking",
-        "operation": 3,
-        "services": [
-          "care.generalinactivity",
-          "care.morninginactivity"
-        ],
-        "title": "Mobility Score",
-        "units": "%",
-        "updated_ms": 1620903600620,
-        "window": 30
-      },
-      "trends.present": {
-        "comment": "Time occupants have been awake at home today.",
-        "daily": false,
-        "icon": "home",
-        "operation": 2,
-        "services": [],
-        "title": "Time Awake at Home",
-        "units": "ms",
-        "updated_ms": 1620903600620,
-        "window": 30
-      }
+    "trend.bedtime": {
+      "comment": "Time occupants went to sleep.",
+      "daily": true,
+      "icon": "bed",
+      "operation": 1,
+      "parent_id": null,
+      "services": [
+        "care.latenight"
+      ],
+      "title": "Bedtime",
+      "units": "timestamp_ms",
+      "updated_ms": 1639666016115,
+      "window": 30
+    },
+    "trend.sleep_bathroom_visits": {
+      "comment": "Number of bathroom visits at night.",
+      "daily": true,
+      "icon": "house-night",
+      "operation": 1,
+      "parent_id": null,
+      "services": [
+        "care.bathroomactivity"
+      ],
+      "title": "Bathroom Visits at Night",
+      "units": "Visits",
+      "updated_ms": 1639666016115,
+      "window": 30
+    },
+    "trend.sleep_cycle_score": {
+      "comment": "Relative sleep cycle score.",
+      "daily": true,
+      "icon": "snooze",
+      "operation": 1,
+      "parent_id": null,
+      "services": [
+        "care.latenight"
+      ],
+      "title": "Sleep Cycle Score",
+      "units": "%",
+      "updated_ms": 1639666016115,
+      "window": 30
+    },
+    "trend.sleep_duration": {
+      "comment": "Amount of sleep.",
+      "daily": true,
+      "icon": "alarm-clock",
+      "operation": 1,
+      "parent_id": null,
+      "services": [
+        "care.latenight"
+      ],
+      "title": "Sleep Duration",
+      "units": "ms",
+      "updated_ms": 1639666016115,
+      "window": 30
+    },
+    "trend.wakeup": {
+      "comment": "Time occupants woke up.",
+      "daily": true,
+      "icon": "bed",
+      "operation": 1,
+      "parent_id": null,
+      "services": [
+        "care.latenight"
+      ],
+      "title": "Wake Time",
+      "units": "timestamp_ms",
+      "updated_ms": 1639666016115,
+      "window": 30
+    },
+    "trends.absent": {
+      "comment": "Time occupants have been away from home today, a possible indicator of exercise or social activity.",
+      "daily": false,
+      "icon": "house-leave",
+      "operation": 2,
+      "parent_id": null,
+      "services": [],
+      "title": "Time Away from Home",
+      "units": "ms",
+      "updated_ms": 1639717200000,
+      "window": 30
+    },
+    "trends.movement_score": {
+      "comment": "Relative mobility score.",
+      "daily": false,
+      "icon": "walking",
+      "operation": 3,
+      "parent_id": null,
+      "services": [
+        "care.generalinactivity",
+        "care.morninginactivity"
+      ],
+      "title": "Mobility Score",
+      "units": "%",
+      "updated_ms": 1639717200000,
+      "window": 30
     }
-  }
 }
 ```
 
@@ -550,3 +396,93 @@ The time-series state variable `trends` contains a Dictionary of trends, identif
   }
 }
 ```
+
+### `trends_recently` Example
+
+This shows the average trends over the past 7 days, for comparison with entries from `trends_weekly`.
+
+```
+{
+    "sitting": {
+      "avg": 0.0,
+      "n": 2,
+      "std": 0.0
+    },
+    "trend.bedtime": {
+      "avg": 21.95,
+      "n": 1,
+      "std": 0.0
+    },
+    "trend.sleep_bathroom_visits": {
+      "avg": 0.0,
+      "n": 1,
+      "std": 0.0
+    },
+    "trend.sleep_duration": {
+      "avg": 61326874.0,
+      "n": 1,
+      "std": 0.0
+    },
+    "trend.wakeup": {
+      "avg": 15.0,
+      "n": 1,
+      "std": 0.0
+    },
+    "trends.absent": {
+      "avg": 0.0,
+      "n": 2,
+      "std": 0.0
+    },
+    "trends.movement_score": {
+      "avg": 6.43,
+      "n": 2,
+      "std": 9.1
+    }
+}
+```
+
+
+### `trends_weekly` Example
+
+Exactly the same as `trends_recently` but saved as time-series information many weeks ago.
+
+```
+{
+    "sitting": {
+      "avg": 0.0,
+      "n": 2,
+      "std": 0.0
+    },
+    "trend.bedtime": {
+      "avg": 21.95,
+      "n": 1,
+      "std": 0.0
+    },
+    "trend.sleep_bathroom_visits": {
+      "avg": 0.0,
+      "n": 1,
+      "std": 0.0
+    },
+    "trend.sleep_duration": {
+      "avg": 61326874.0,
+      "n": 1,
+      "std": 0.0
+    },
+    "trend.wakeup": {
+      "avg": 15.0,
+      "n": 1,
+      "std": 0.0
+    },
+    "trends.absent": {
+      "avg": 0.0,
+      "n": 2,
+      "std": 0.0
+    },
+    "trends.movement_score": {
+      "avg": 6.43,
+      "n": 2,
+      "std": 9.1
+    }
+}
+```
+
