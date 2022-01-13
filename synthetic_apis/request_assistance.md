@@ -20,6 +20,7 @@ Enable mobile apps and smart speakers to request assistance for the user.
 | 1 | Standard Emergency - alert the Trusted Circle for 2 minutes before escalating to professional monitoring, decreases false alarms. |
 | 2 | Request assistance from people who live here. |
 | 3 | Request assistance from anyone in the Trusted Circle. |
+| 4 | Request assistance when new gps coordinates are received in the Trusted Circle. |
 
 #### Agents
 
