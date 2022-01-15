@@ -56,6 +56,7 @@ State Variable : `insights`
 | icon_font | Optional icon font package, for example `far` means 'FontAwesome Regular', may be None / Null. |
 | device_id | Optional field used to capture the device ID string of the device producing this insight, if applicable. |
 | device_desc | Optional field used to capture the nickname of the device producing this insight, if applicable. |
+| device_type | Optional field used to capture the device type, if applicable. |
 | updated_ms | Timestamp of the last update to this insight, in unix epoch milliseconds. Can be used to render display information like "5 minutes ago", or simply see if this insight was updated. |
 
 #### Insight JSON Content Example
@@ -66,6 +67,7 @@ State Variable : `insights`
     "description": "'Garage Back Door' has a low battery.",
     "device_desc": "Garage Back Door",
     "device_id": "00155F00F861FCF5-03B7",
+    "device_type": 9114,
     "icon": "battery-empty",
     "icon_font": "far",
     "title": "Low battery",
@@ -76,6 +78,7 @@ State Variable : `insights`
     "description": "'Front Door' has a low battery.",
     "device_desc": "Front Door",
     "device_id": "FFFFFFFF006b34e8",
+    "device_type": 9114,
     "icon": "battery-empty",
     "icon_font": "far",
     "title": "Low battery",
@@ -86,6 +89,7 @@ State Variable : `insights`
     "description": "Low wireless signal strength on 'TV'.",
     "device_desc": "TV",
     "device_id": "94f3b202008d1500",
+    "device_type": 9135,
     "icon": null,
     "icon_font": null,
     "title": "Low signal strength",
@@ -96,6 +100,7 @@ State Variable : `insights`
     "description": "Device 'Bathroom' is offline.",
     "device_desc": "Bathroom",
     "device_id": "00155F0074838333-0375",
+    "device_type": 9138,
     "icon": "unlink",
     "icon_font": "far",
     "title": "Device Offline",
@@ -106,6 +111,7 @@ State Variable : `insights`
     "description": "'Smart Home Center Develco' is disconnected",
     "device_desc": "Smart Home Center Develco",
     "device_id": "020000013000042E",
+    "device_type": 36,
     "icon": "unlink",
     "icon_font": "far",
     "title": "Disconnected",
@@ -116,6 +122,7 @@ State Variable : `insights`
     "description": "'Smart Home Center Develco' is on wall power",
     "device_desc": "Smart Home Center Develco",
     "device_id": "020000013000042E",
+    "device_type": 36,
     "icon": "battery-bolt",
     "icon_font": "far",
     "title": "Wall Powered",
@@ -126,6 +133,7 @@ State Variable : `insights`
     "description": "Last seen closing the 'Front Door'.",
     "device_desc": "Front Door",
     "device_id": "FFFFFFFF006b34e8",
+    "device_type": 9114,
     "icon": null,
     "icon_font": null,
     "title": "Last seen",
