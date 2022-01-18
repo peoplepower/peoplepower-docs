@@ -4,7 +4,7 @@ Trends allow us to understand if the knowledge we're observing now are normal or
 
 ## Properties
 
-#### Location Properties
+#### `trends` Properties
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
@@ -19,6 +19,7 @@ Trends allow us to understand if the knowledge we're observing now are normal or
 | icon_font | String | Icon font to apply to the icon, default is FontAwesome Regular ('far'). |
 | operation | int | Type of operation applied to this data. See the Operations table. |
 | daily | Boolean | True if this trend is captured once per day, False if the trend is captured multiple times per day. |
+| parent_id | String | Trend ID of this trend's parent, may be null. |
 
 #### Operations
 
