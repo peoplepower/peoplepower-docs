@@ -228,6 +228,7 @@ Describe if this story supports in-line inputs.
 | type | String | Type of input. See [Story Page Input Types](#story-page-input-types). |
 | pageIndex | Int | Page index to include the input |
 | inputText | String | Input title text shown along side input |
+| text | String | Optional Input text to override current device name or model name.  Does not override suggested name. |
 
 ###### Story Page Input Types
 
