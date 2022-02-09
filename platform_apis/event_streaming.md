@@ -141,8 +141,8 @@ Streaming device parameters can cause publishing significant amount of data.
   "organizationId": int,        // Organization ID
   "parentOrganizationId": int,  // Parent Organization ID
   "data" : { 
-    "type": byte,               // 3 - Location State, 5 - Location Time-Series State
-    "operation": byte,          // 1 – create, 2 – update, 4 – delete
+    "type": byte,               // 6 - device parameters
+    "operation": byte,          // 1 – create
     "locationId": int,          // location ID 
     "params": [
       {
@@ -155,6 +155,36 @@ Streaming device parameters can cause publishing significant amount of data.
         "updated": boolean      // flag if the value has been updated
       }
     ]
+  }
+}
+```
+
+
+### Bot Errors Streaming
+
+People Power's platform can stream error messages produced by bots during execution.
+
+
+#### Bot Errors JSON Formatting
+
+```
+{ 
+  "timestamp": long int,        // current time in milliseconds
+  "cloudname": string,          // 'SBOX', 'Prod'
+  "organizationId": int,        // Organization ID
+  "parentOrganizationId": int,  // Parent Organization ID
+  "data" : { 
+    "type": byte,               // 7 - bot error
+    "operation": byte,          // 1 – create
+    "botError": {
+      "bundle": string,         // bot's bundle name
+      "version": string,        // bot's version
+      "appInstanceId": int,     // bot instance ID
+      "locationId": int,        // location ID for location bots
+      "organizationId": int,    // organization ID for organization bots
+      "error": string,          // error message
+      "log": string             // bot execution log
+    }
   }
 }
 ```
