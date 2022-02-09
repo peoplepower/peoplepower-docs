@@ -14,8 +14,8 @@ This document will capture information about some of the data formats of informa
 | 6 | [Device Parameters](#device-parameters-streaming) |
 | 7 | [Bot Error](#bot-errors-streaming) |
 
-| Event Streaming Operation | Description |
-| :-----------------------: | ----------- |
+| Operation | Description |
+| :-------: | ----------- |
 | 1 | Create |
 | 2 | Update |
 | 4 | Delete |
@@ -29,6 +29,7 @@ This document will capture information about some of the data formats of informa
   "cloudname": string,          // 'SBOX', 'Prod'
   "organizationId": int,        // Organization ID
   "parentOrganizationId": int,  // Parent Organization ID
+  "locationExternalId": int,    // Location external ID
   "data" : { 
     "type": byte,               // data type
     "operation": byte,          // 1 – create, 2 – update, 4 – delete
@@ -43,7 +44,7 @@ This document will capture information about some of the data formats of informa
 ```
 
 
-### Narrative Event Streaming
+## Narrative Event Streaming
 
 Narratives are time-series information produced by bots. They can be machine-readable (such as analytics) or human-readable.
 
@@ -52,7 +53,7 @@ Note that Narratives can be updated (see the `data.operation` field). The narrat
 See additional Narrative documentation here: https://iotapps.docs.apiary.io/#reference/locations/narratives
 
 | Priority | Description |
-| -------- | ----------- |
+| :------: | ----------- |
 | -1 | Analytic, machine-readable narrative / analytic |
 | 0 | Detail-level logging, human-readable narrative, usually with machine-readable `target` properties. |
 | 1 | Info-level logging, human-readable narrative. Default for human-readable information. |
@@ -68,6 +69,7 @@ See additional Narrative documentation here: https://iotapps.docs.apiary.io/#ref
   "cloudname": string,          // 'SBOX', 'Prod'
   "organizationId": int,        // Organization ID
   "parentOrganizationId": int,  // Parent Organization ID
+  "locationExternalId": int,    // Location external ID
   "data" : { 
     "type": byte,               // 1 - location narrative, 2 - organization narrative
     "operation": byte,          // 1 – create, 2 – update, 4 – delete
@@ -95,7 +97,7 @@ See additional Narrative documentation here: https://iotapps.docs.apiary.io/#ref
 ```
 
 
-### Location State Streaming
+## Location State Streaming
 
 Location State variables are named objects with flexible structure set by bots or user apps for specific location.
 
@@ -113,6 +115,7 @@ See [Synthetic APIs](../synthetic_apis/README.md) for details.
   "cloudname": string,          // 'SBOX', 'Prod'
   "organizationId": int,        // Organization ID
   "parentOrganizationId": int,  // Parent Organization ID
+  "locationExternalId": int,    // Location external ID
   "data" : { 
     "type": byte,               // 3 - Location State, 5 - Location Time-Series State
     "operation": byte,          // 1 – create, 2 – update, 4 – delete
@@ -127,7 +130,7 @@ See [Synthetic APIs](../synthetic_apis/README.md) for details.
 ```
 
 
-### Paid Events Streaming
+## Paid Events Streaming
 
 | Event Type | Description |
 | :--------: | ----------- |
@@ -366,7 +369,7 @@ See [Synthetic APIs](../synthetic_apis/README.md) for details.
 ```
 
 
-### Device Parameters Streaming
+## Device Parameters Streaming
 
 Streaming device parameters can cause publishing significant amount of data.
 
@@ -399,7 +402,7 @@ Streaming device parameters can cause publishing significant amount of data.
 ```
 
 
-### Bot Errors Streaming
+## Bot Errors Streaming
 
 People Power's platform can stream error messages produced by bots during execution.
 
@@ -416,8 +419,8 @@ People Power's platform can stream error messages produced by bots during execut
     "type": byte,               // 7 - bot error
     "operation": byte,          // 1 – create
     "botError": {
-      "bundle": string,         // bot's bundle name
-      "version": string,        // bot's version
+      "bundle": string,         // bot bundle name
+      "version": string,        // bot version
       "appInstanceId": int,     // bot instance ID
       "locationId": int,        // location ID for location bots
       "organizationId": int,    // organization ID for organization bots
