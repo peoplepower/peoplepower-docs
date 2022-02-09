@@ -29,7 +29,7 @@ This document will capture information about some of the data formats of informa
   "cloudname": string,          // 'SBOX', 'Prod'
   "organizationId": int,        // Organization ID
   "parentOrganizationId": int,  // Parent Organization ID
-  "locationExternalId": int,    // Location external ID
+  "locationExternalId": string, // Location external ID
   "data" : { 
     "type": byte,               // data type
     "operation": byte,          // 1 – create, 2 – update, 4 – delete
@@ -69,7 +69,7 @@ See additional Narrative documentation here: https://iotapps.docs.apiary.io/#ref
   "cloudname": string,          // 'SBOX', 'Prod'
   "organizationId": int,        // Organization ID
   "parentOrganizationId": int,  // Parent Organization ID
-  "locationExternalId": int,    // Location external ID
+  "locationExternalId": string, // Location external ID
   "data" : { 
     "type": byte,               // 1 - location narrative, 2 - organization narrative
     "operation": byte,          // 1 – create, 2 – update, 4 – delete
@@ -115,7 +115,7 @@ See [Synthetic APIs](../synthetic_apis/README.md) for details.
   "cloudname": string,          // 'SBOX', 'Prod'
   "organizationId": int,        // Organization ID
   "parentOrganizationId": int,  // Parent Organization ID
-  "locationExternalId": int,    // Location external ID
+  "locationExternalId": string, // Location external ID
   "data" : { 
     "type": byte,               // 3 - Location State, 5 - Location Time-Series State
     "operation": byte,          // 1 – create, 2 – update, 4 – delete
