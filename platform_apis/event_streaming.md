@@ -10,12 +10,12 @@ This document will capture information about some of the data formats of informa
 | 2 | Organization Narrative |
 | 3 | Location State |
 | 4 | Paid Services Event |
-| 5 | Location Time State |
+| 5 | Location Time-Series State |
 | 6 | Device Parameters |
 | 7 | Bot Error |
 
 | Event Streaming Operation | Description |
-| ------------------------- | ----------- |
+| :-----------------------: | ----------- |
 | 1 | Create |
 | 2 | Update |
 | 4 | Delete |
@@ -41,6 +41,7 @@ This document will capture information about some of the data formats of informa
   }
 }
 ```
+
 
 ### Narrative Event Streaming
 
@@ -85,7 +86,7 @@ See additional Narrative documentation here: https://iotapps.docs.apiary.io/#ref
       "iconFont": string,       // 50 characters max 
       "title": string,          // 250 characters max 
       "description": string,    // 1000 characters max 
-      "target": {}              // flexible JSON structure with maximum serialized size of 10K characters 
+      "target": {},             // flexible JSON structure with maximum serialized size of 10K characters 
       "organizationId": int,    // organization ID for organization narratives 
       "userId": int             // deleted user ID, populated when user is removed and downstream consumers should also purge user data 
     }
@@ -93,3 +94,67 @@ See additional Narrative documentation here: https://iotapps.docs.apiary.io/#ref
 }
 ```
 
+
+### Location State Streaming
+
+Location State variables are named objects with flexible structure set by bots or user apps for specific location.
+
+Location Time-Series States are location states saved for specific timestamp.
+
+See [Synthetic APIs](../synthetic_apis/README.md) for details.
+
+
+
+#### Location State JSON Formatting
+
+```
+{ 
+  "timestamp": long int,        // current time in milliseconds
+  "cloudname": string,          // 'SBOX', 'Prod'
+  "organizationId": int,        // Organization ID
+  "parentOrganizationId": int,  // Parent Organization ID
+  "data" : { 
+    "type": byte,               // 3 - Location State, 5 - Location Time-Series State
+    "operation": byte,          // 1 – create, 2 – update, 4 – delete
+    "locationState": { 
+      "locationId": int,        // location ID 
+      "name": string,           // variable's name
+      "stateDateMs": long int,  // timestamp of time-series state
+      "value": {}               // flexible JSON structure
+    }
+  }
+}
+```
+
+
+### Device Parameters Streaming
+
+Streaming device parameters can cause publishing significant amount of data.
+
+
+#### Device Parameters JSON Formatting
+
+```
+{ 
+  "timestamp": long int,        // current time in milliseconds
+  "cloudname": string,          // 'SBOX', 'Prod'
+  "organizationId": int,        // Organization ID
+  "parentOrganizationId": int,  // Parent Organization ID
+  "data" : { 
+    "type": byte,               // 3 - Location State, 5 - Location Time-Series State
+    "operation": byte,          // 1 – create, 2 – update, 4 – delete
+    "locationId": int,          // location ID 
+    "params": [
+      {
+        "deviceId": string,     // device ID
+        "name": string,         // parameter's name
+        "index": string,        // optional index
+        "group": string,        // optional parameter's group
+        "value": string,        // measured or processed value
+        "time": long int,       // measuring timestamp
+        "updated": boolean      // flag if the value has been updated
+      }
+    ]
+  }
+}
+```
