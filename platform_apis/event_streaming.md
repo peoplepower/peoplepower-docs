@@ -358,7 +358,7 @@ See [Synthetic APIs](../synthetic_apis/README.md) for details.
         "endTime": 1625097600000,
         "endDate": "2021-08-13T00:00:00Z",
         "planId": 11,
-        "planName": "Quil Home",
+        "planName": "Home",
         "priceId": 12,
         "userPlanId": 56789,
         "locationId": 8901,
