@@ -218,6 +218,7 @@ Display information specific to this described Story.  All fields are optional.
 | inputs | Array | Array to describe story page inputs. See [Story Page Inputs](#story_page_inputs). |
 | deviceBundle | Key:Value | Key value list to describe the different components of this device bundle. See [Story Page Bundles](#story_page_bundles). |
 | pickers | Array | Array to describe story page picker sets. See [Story Page Picker Set](#story_page_picker_sets). |
+| settings | Array | Array to describe story page settings. See [Story Page Settings](#story_page_settings). |
 
 ##### Story Page Inputs
 
@@ -293,6 +294,33 @@ Describe individual story page picker elements.
 | iconName | String | Icon name. Optional |
 | iconFont | String | Icon font type. Optional |
 | iconColor | String | Icon hex color. Optional |
+
+##### Story Page Settings
+
+Describe configurable settings associated with each story page action
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| type | String | Type of setting. See [Story Page Setting Types](#story-page-setting-types). |
+| pageIndex | Int | Page index of the setting. |
+| configurations | Array | Action's setting definitions for this page. see [Story Page Setting Configurations](#story-page-setting-configurations). |
+
+###### Story Page Setting Types
+
+Describe the page setting type.
+
+| Setting Type | Description |
+| ------------ | ----------- |
+| deviceConfiguration | Device configuration for the current device. Setting must describe "configurations" with parameter names and values. |
+
+###### Story Page Setting Configurations
+
+Describe the configurations for this setting. The app must send a command to the device with the selecting configuration.
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| actionIndex | Int | Index of the page action associated with this configuration. |
+| parameters | Array | Parameter names, values and optional indexes associated with this configuration. e.g. `{"name": "state", "value": "on", "index": "0"}` |
 
 ## Diagrams
 
