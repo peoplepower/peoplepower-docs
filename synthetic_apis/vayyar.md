@@ -94,10 +94,10 @@ Applications should ensure subregion width and height are greater then or equal 
 | subregion_id | int | Optional - used primarily for modifying or deleting and for backwards compatibility. |
 | context_id | int | Context / behavior of this subregion - see the [Subregion Behavior Properties](#subregion-behavior-properties) |
 | name | String | Descriptive name of this subregion, default is the `title` of the subregion context that was selected. |
-| x_min_meters | Float | Required. Looking into the room from the device, this is the left-most side of the sub-region. Remember to the left of Vayyar Care is negative numbers on the x-axis. |
-| x_max_meters | Float | Required.Looking into the room from the device, this is the right-most side of the sub-region. |
-| y_min_meters | Float | Required. Distance from the Vayyar Care to the nearest side of the sub-region. Valid values are greater than or equal to `0.3` |
-| y_max_meters | Float | Required. Distance from the Vayyar Care to the farthest side of the sub-region. |
+| x_min_meters | Float | Required. For wall installs, looking into the room from the device, this is the left-most side of the sub-region. Remember to the left of Vayyar Care is negative numbers on the x-axis. For ceiling installs, standing at the cable side of the device and looking towards the device, this is the left-most side of the subregion. |
+| x_max_meters | Float | Required. For wall installs, looking into the room from the device, this is the right-most side of the sub-region. For ceiling installs, standing at the cable side of the device and looking towards the device, this is the right-most side of the subregion. |
+| y_min_meters | Float | Required. For wall installs, this is the distance from the Vayyar Care to the nearest side of the sub-region. Valid values are greater than or equal to `0.3`. For ceiling installs, standing at the cable side and looking towards the device, this is the rear side of the subregion. (e.g. distance from the device to your back) |
+| y_max_meters | Float | Required. For wall installs, this is the distance from the Vayyar Care to the farthest side of the sub-region. For ceiling installs, standing at the cable side and looking towards the device, this is the front side of the subregion. (e.g. distance from the device to your front) |
 | z_min_meters | Float | Optional. For 3D subregions, this is the minimum z-axis boundary. |
 | z_max_meters | Float | Optional. For 3D subregions, this is the maximum z-axis boundary. |
 | detect_falls | Boolean | Optional. True to detect falls in this room, False to avoid detecting fall (default is True). |
