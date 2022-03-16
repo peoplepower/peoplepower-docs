@@ -123,7 +123,8 @@ See [Synthetic APIs](../synthetic_apis/README.md) for details.
       "locationId": int,        // location ID 
       "name": string,           // variable's name
       "stateDateMs": long int,  // timestamp of time-series state
-      "value": {}               // flexible JSON structure
+      "value": {},              // flexible JSON structure
+      "deleted": string[]       // string array of deleted top level properties
     }
   }
 }
