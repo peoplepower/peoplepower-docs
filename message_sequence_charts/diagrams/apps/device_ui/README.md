@@ -321,6 +321,7 @@ Describe the configurations for this setting. The app must send a command to the
 | -------- | ---- | ----------- |
 | actionIndex | Int | Index of the page action associated with this configuration. |
 | parameters | Array | Parameter names, values and optional indexes associated with this configuration. e.g. `{"name": "state", "value": "on", "index": "0"}` |
+| datastreams | Array | Datastream messages to be sent for this setting. The application should include any additional required parameters for this message. e.g. `{"address": "notify_bot", "feed": {"key":"value"}}` |
 
 ## Diagrams
 
