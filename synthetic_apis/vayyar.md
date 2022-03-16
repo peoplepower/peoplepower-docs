@@ -93,7 +93,6 @@ Applications should ensure subregion width and height are greater then or equal 
 | unique_id | String | Some unique ID to add / edit / delete. If not defined, it will be assumed this is an add operation and will automatically generate a UUID4 unique ID for this new subregion. |
 | subregion_id | int | Optional - used primarily for modifying or deleting and for backwards compatibility. |
 | context_id | int | Context / behavior of this subregion - see the [Subregion Behavior Properties](#subregion-behavior-properties) |
-| unique_id | String | UUID to uniquely identify this subregion, auto-defined by the bot. |
 | name | String | Descriptive name of this subregion, default is the `title` of the subregion context that was selected. |
 | x_min_meters | Float | Required. Looking into the room from the device, this is the left-most side of the sub-region. Remember to the left of Vayyar Care is negative numbers on the x-axis. |
 | x_max_meters | Float | Required.Looking into the room from the device, this is the right-most side of the sub-region. |
