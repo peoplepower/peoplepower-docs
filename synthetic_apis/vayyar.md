@@ -41,9 +41,9 @@ Data Stream Address : `set_vayyar_room`
 | y_max_meters | Ceiling | Float | In a ceiling mount, this is the distance from the Vayyar Care to the wall toward the left of the cable. Positive numbers only. +2.5 meters maximum. |
 | z_min_meters | | Float | Optional. The minimum height to detect, usually 0.0 (the ground). |
 | z_max_meters | | Float | Optional. The maximum height to detect, default is 2.0 meters. If set too high, objects (like vent fans) in the ceiling can cause false positive presence detects. |
-| mounting_type | int | 0 (default) = wall; 1 = ceiling; 2 = 45-degree ceiling |
-| sensor_height_m | Float | 1.5 is the default for the wall; Ceiling-mounted devices require this to define the distance from the ceiling to the floor. |
-| near_exit | Boolean | True if this Vayyar Care device is located nearest to an exit door and can be used to determine occupancy of the living space. |
+| mounting_type | | int | 0 (default) = wall; 1 = ceiling; 2 = 45-degree ceiling |
+| sensor_height_m | | Float | 1.5 is the default for the wall; Ceiling-mounted devices require this to define the distance from the ceiling to the floor. |
+| near_exit | | Boolean | True if this Vayyar Care device is located nearest to an exit door and can be used to determine occupancy of the living space. |
 
 
 #### Set Room Boundary Example
