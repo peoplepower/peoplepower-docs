@@ -32,6 +32,13 @@
 | [Bot-driven Rules](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/rules.md) | | | Bot-driven rules engine. |
 | [Vayyar Home](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/vayyar.md) | `set_vayyar_room`, `set_vayyar_subregion`, `delete_vayyar_subregion`, `set_vayyar_config` | `vayyar_room`, `vayyar_subregions`, `vayyar_subregion_behaviors`| Fully manage Vayyar Home devices to detect falls and occupancy. |
 
+#### Command Centers
+
+| Synthetic API                                                                                             | Input Addresses | Output Address | Description                                                    |
+|-----------------------------------------------------------------------------------------------------------|-----------------|----------------|----------------------------------------------------------------|
+| [Location Summary](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/summary.md) | `set_badge`     | `summmary`     | Summary of the score and notification badges for each location |
+
+
 <!---
 #### Energy Management
 + [Demand Response](https://github.com/peoplepower/peoplepower-docs/blob/master/synthetic_apis/demandresponse.md)
