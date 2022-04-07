@@ -528,7 +528,15 @@ Here's an example of that data structure.
             "updated_ms": 1644935530825,
             "value": 80.0,
             "zscore": 0.0
-        }
+        },
+        "trend.wellness_score": {
+            "avg": 33.5,
+            "std": 0.0,
+            "trend_category": "category.summary",
+            "updated_ms": 1644944400000,
+            "value": 33.5,
+            "zscore": 0.0
+      }
     },
     "0": {
         "trend.bathroom_score": {
