@@ -91,11 +91,12 @@ Data Stream Address : `remove_trend`
 
 ## Output
 
-The output for trends is broken into 2 parts:
+The output for trends is broken into several parts:
 * Metadata: `trends_metadata`
 * Time-series daily trend information : `trends`
 * Average trends over the past 7 days: `trends_recently`
 * Time-series 7-day incremental trend information : `trends_weekly`
+* Highlights of top-level trends for history : `trends_highlights`
 
 The `trends_metadata` captures the configuration values that are like overhead and remain quite static, to optimize data usage by preventing duplicate data. 
 
@@ -487,3 +488,69 @@ Exactly the same as `trends_recently` but saved as time-series information many 
 }
 ```
 
+### `trends_highlights` Example
+
+The `trends_highlights` state summarizes the history of the top-level categories for graphing or rendering on a UI. 
+
+Here's an example of that data structure.
+
+```
+{
+    "now": {
+        "trend.bathroom_score": {
+            "avg": 0.0,
+            "std": 0.0,
+            "trend_category": "category.bathroom",
+            "updated_ms": 1644944400000,
+            "value": 0.0,
+            "zscore": 0.0
+        },
+        "trend.hygiene_score": {
+            "avg": 100.0,
+            "std": 0.0,
+            "trend_category": "category.bathroom",
+            "updated_ms": 1644940701216,
+            "value": 100.0,
+            "zscore": 0.0
+        },
+        "trend.mobility_score": {
+            "avg": 46.67,
+            "std": 0.0,
+            "trend_category": "category.activity",
+            "updated_ms": 1644944400000,
+            "value": 46.666666666666664,
+            "zscore": 0.0
+        },
+        "trend.sleep_score": {
+            "avg": 80.0,
+            "std": 0.0,
+            "trend_category": "category.sleep",
+            "updated_ms": 1644935530825,
+            "value": 80.0,
+            "zscore": 0.0
+        }
+    },
+    "0": {
+        "trend.bathroom_score": {
+            "avg": 0.0,
+            "n": 1,
+            "std": 0.0
+        },
+        "trend.hygiene_score": {
+            "avg": 0.0,
+            "n": 1,
+            "std": 0.0
+        },
+        "trend.mobility_score": {
+            "avg": 39.2,
+            "n": 1,
+            "std": 0.0
+        }
+    },
+    "15": {},
+    "30": {},
+    "45": {},
+    "60": {},
+    "90": {}
+}
+```
