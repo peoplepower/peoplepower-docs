@@ -141,6 +141,7 @@ Display information specific to this described Device Model.  All fields are opt
 | Property | Type | Description |
 | -------- | ---- | ----------- |
 | controllable | Bool | This device receives commands. Default `False`. |
+| removable | Bool | Apps should not allow this app to be deleted. Default `True`. |
 | bluetoothManager | String | Identifier for App's BLE manager to interface with this device. |
 | serialNumberPrefix | String | Used to identify input strings (e.g. QR Scanning) and map specific logic |
 | deviceListBindings | Array | Configure displacement and representation type for device parameter. See [Device List Bindings](#device-list-bindings) |
