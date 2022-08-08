@@ -11,6 +11,7 @@ Enable mobile apps and smart speakers to request assistance for the user.
 | `user_id` | int | Optional. User ID that is making the request, if available. |
 | `latitude` | String | Optional. Latitude for mobile alerts. |
 | `longitude` | String | Optional. Longitude for mobile alerts. |
+| `no_dispatch` | Bool | Optional. Declare that professional monitoring services should not dispatch. |
 
 #### Types
 
@@ -34,13 +35,26 @@ Data Stream Address: `request_assistance`
 
 #### Example content
 
+**Supernova**
 ```
 {
   "type": 0,
   "agent": 0,
-  "user_id": 123456789
+  "user_id": 123456789,
   "latitude": "44.062211",
   "longitude": "-79.500925"
+}
+```
+
+**Supernova without dispatch**
+```
+{
+  "type": 0,
+  "agent": 0,
+  "user_id": 123456789,
+  "latitude": "44.062211",
+  "longitude": "-79.500925",
+  "no_dispatch": true
 }
 ```
 
